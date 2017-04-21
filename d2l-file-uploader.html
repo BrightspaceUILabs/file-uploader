@@ -1,0 +1,44 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<dom-module id="d2l-file-uploader">
+
+	<template>
+		<style>
+		</style>
+
+		<p>I am a file uploader</p>
+		<div id="drop_area">
+			<div id="icon"></div>
+			<span>Drag and drop a file anywhere on this screen or </span>
+			<input type="file" id="file_upload" multiple on-change="_fileSelected"/>
+			<label htmlFor="file_upload">browse</label>
+		</div>
+	</template>
+
+	<script>
+		Polymer({
+			is: "d2l-file-uploader",
+			
+			properties: {
+
+			},
+
+			ready: function() {
+				//this.setupDropArea();
+				//this.setupFileSelect();
+			},
+
+
+			setupDropArea: function() {
+
+			},
+
+			_fileSelected(event) {
+				console.log(event);
+				console.log(event.target.files.length);
+				console.log(event.target.files[0]);
+			}
+		});
+	</script>
+
+</dom-module>

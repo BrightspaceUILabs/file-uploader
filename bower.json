@@ -1,0 +1,16 @@
+{
+  "name": "d2l-file-uploader",
+  "description": "Polymer-based web components for D2L file uploader",
+  "main": "d2l-file-uploader.html",
+  "license": "Apache-2.0",
+  "ignore": [
+    "test",
+    ".gitignore",
+    "package.json"
+  ],
+  "dependencies": {
+    "polymer": "^1.9.1"
+  },
+  "devDependencies": {
+  }
+}

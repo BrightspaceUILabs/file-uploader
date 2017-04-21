@@ -1,0 +1,25 @@
+{
+  "name": "d2l-file-uploader",
+  "description": "Polymer-based web components for D2L file uploader",
+  "private": true,
+  "scripts": {
+    "postinstall": "bower install",
+    "test:lint": "npm run test:lint:wc && npm run test:lint:html",
+    "test:lint:html": "eslint *.html",
+    "test:lint:wc": "polymer lint -i d2l-file-uploader.html",
+    "test": "npm run test:lint && polymer test --skip-plugin sauce"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Brightspace/file-uploader.git"
+  },
+  "author": "D2L Corporation",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "bower": "^1.8.0",
+    "eslint": "^3.19.0",
+    "eslint-config-brightspace": "^0.2.4",
+    "eslint-plugin-html": "^2.0.1",
+    "polymer-cli": "^0.17.0"
+  }
+}
