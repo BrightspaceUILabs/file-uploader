@@ -4,13 +4,17 @@
 
 	<template>
 		<style>
+			#drop_zone {
+				border: 2px dashed;
+				border-radius: 6px;
+				text-align: center;
+			}
 		</style>
 
-		<p>I am a file uploader</p>
-		<div id="drop_area">
+		<div id="drop_zone" on-drop="_fileDropHandler" on-dragover="_fileDragOverHandler" on-dragend="_fileDragEndHandler">
 			<div id="icon"></div>
 			<span>Drag and drop a file anywhere on this screen or </span>
-			<input type="file" id="file_upload" multiple on-change="_fileSelected"/>
+			<input type="file" id="file_upload" multiple on-change="_fileSelectHandler"/>
 			<label htmlFor="file_upload">browse</label>
 		</div>
 	</template>
@@ -20,6 +24,13 @@
 			is: "d2l-file-uploader",
 			
 			properties: {
+
+				files: {
+					type: Object,
+					value: null,
+					notify: true,
+					observer: '_fileChangeHandler'
+				}
 
 			},
 
@@ -33,10 +44,62 @@
 
 			},
 
-			_fileSelected(event) {
+			_fileSelectHandler: function(event) {
 				console.log(event);
 				console.log(event.target.files.length);
 				console.log(event.target.files[0]);
+
+				var files = []
+				for (var i=0; i< event.target.files.length; i++) {
+					files[i] = event.target.files[i];
+				}
+
+				this.files = files;
+
+			},
+
+			_fileDragOverHandler: function(event) {
+				event.preventDefault();
+			},
+
+			_fileDragEndHandler: function(event) {
+				var dataTransfer = event.dataTransfer;
+				if (dataTransfer.items) {
+					// Use DataTransferItemList interface to remove the drag data
+					for (var i = 0; i < dataTransfer.items.length; i++) {
+						dataTransfer.items.remove(i);
+					}
+				}
+				else {
+					// Use DataTransfer interface to remove the drag data
+					event.dataTransfer.clearData();
+				}	
+			},
+
+			_fileDropHandler: function(event) {
+				event.preventDefault();
+				var files = [];
+				var dataTransfer = event.dataTransfer;
+				if (dataTransfer.items) {
+				    // Use DataTransferItemList interface to access the file(s)
+				    for (var i=0; i < dataTransfer.items.length; i++) {
+				    	if (dataTransfer.items[i].kind == "file") {
+				    		files[i] = dataTransfer.items[i].getAsFile();
+				    	}
+				    }
+				} 
+				else {
+					// Use DataTransfer interface to access the file(s)
+					for (var i=0; i < dataTransfer.files.length; i++) {
+						files[i] = dataTransfer.files[i]
+					}  
+				}
+
+				this.files = files;
+			},
+
+			_fileChangeHandler: function(files) {			
+				this.fire('file-added', files);
 			}
 		});
 	</script>
