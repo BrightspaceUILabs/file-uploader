@@ -12,7 +12,7 @@
 		</style>
 
 		<div id="drop_zone" on-drop="_fileDropHandler" on-dragover="_fileDragOverHandler" on-dragend="_fileDragEndHandler">
-			<div id="icon"></div>
+			<div id="file_upload_icon"></div>
 			<span>Drag and drop a file anywhere on this screen or </span>
 			<input type="file" id="file_upload" multiple on-change="_fileSelectHandler"/>
 			<label htmlFor="file_upload">browse</label>
@@ -99,7 +99,7 @@
 			},
 
 			_fileChangeHandler: function(files) {			
-				this.fire('file-added', files);
+				this.fire('file-added-to-upload', files);
 			}
 		});
 	</script>
