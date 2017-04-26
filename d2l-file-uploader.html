@@ -1,6 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel='import' href="../d2l-icons/d2l-icon.html">
-<link rel='import' href="../d2l-icons/tier3-icons.html">
+<link rel="import" href="../d2l-colors/d2l-colors.html">
 
 <dom-module id="d2l-file-uploader">
 
@@ -10,25 +9,41 @@
 				border: 2px dashed;
 				border-radius: 6px;
 				text-align: center;
+				height: 9rem;
+				width: 27rem;
+				max-width: 27rem;
 			}
+
+			:host([file-drag-over]) #drop_zone {
+        		color: var(--d2l-color-celestine);
+				background-color: var(--d2l-color-celestine-light-1);
+      		}
 
 			#file_upload_icon {
 				padding-top: 1.5rem;
 				padding-bottom: 0.6rem;
 			}
 
+			#file_upload_icon::before {
+				content: url('uploadlarge.svg');
+			}
+
+			:host([file-drag-over]) #file_upload_icon::before {
+				fill: red;
+			}
+			
 			d2l-icon#file_upload_icon {
 				--d2l-icon-height: 3rem;
 				--d2l-icon-width: 3rem;
 			}
 
 			#file_upload_input {
-				width: 0.1px;
-				height: 0.1px;
+				/*width: 0.1px;
+				height: 0.1px;*/
 				opacity: 0;
 				overflow: hidden;
 				position: absolute;
-				z-index: -1;
+				/*z-index: -1;*/
 			}
 
 			#browse_label {
@@ -37,22 +52,21 @@
 				padding-right: 0px;
 				border: none;
 				background: none;
-				color: red;
+				color: var(--d2l-color-celestine);
 			}
 
 			#browse_label:hover, #file_upload_input:focus + label {
-				color: blue;
+				color: var(--d2l-color-celestuba);;
 				text-decoration: underline;
 			}
 		</style>
 
-		<div id="drop_zone" on-drop="_fileDropHandler" on-dragover="_fileDragOverHandler" on-dragend="_fileDragEndHandler">
-			<d2l-icon icon="d2l-tier3:upload" id="file_upload_icon"></d2l-icon>
+		<div id="drop_zone" on-drop="_fileDropHandler" on-dragover="_fileDragOverHandler" on-dragleave="_fileDragLeaveHandler" on-dragend="_fileDragEndHandler">
+			<div id="file_upload_icon"></div>
 			<div>
 				<span>Drag and drop a file anywhere on this screen or 
 				<input id="file_upload_input" type="file" multiple on-change="_fileSelectHandler"/>
-				<label id="browse_label" htmlFor="file_upload_input">browse</label>
-				.</span>
+				<label id="browse_label" for="file_upload_input">browse</label>.</span>
 			</div>
 		</div>
 	</template>
@@ -68,6 +82,13 @@
 					value: null,
 					notify: true,
 					observer: '_fileChangeHandler'
+				},
+
+				fileDragOver: {
+					type: Boolean,
+					value: false,
+					notify: true,
+					reflectToAttribute: true
 				}
 
 			},
@@ -92,9 +113,16 @@
 
 			_fileDragOverHandler: function(event) {
 				event.preventDefault();
+				this.fileDragOver = true;
+			},
+
+			_fileDragLeaveHandler: function(event) {
+				event.preventDefault();
+				this.fileDragOver = false;
 			},
 
 			_fileDragEndHandler: function(event) {
+				this.fileDragOver = false;
 				var dataTransfer = event.dataTransfer;
 				if (dataTransfer.items) {
 					// Use DataTransferItemList interface to remove the drag data
@@ -110,6 +138,7 @@
 
 			_fileDropHandler: function(event) {
 				event.preventDefault();
+				this.fileDragOver = false;				
 				var files = [];
 				var dataTransfer = event.dataTransfer;
 				if (dataTransfer.items) {
