@@ -67,7 +67,7 @@
 				</svg>
 			</div>
 			<div>
-				<span>Drag and drop a file anywhere on this screen or 
+				<span>Drag and drop <span hidden$="[[multiple]]">a file</span><span hidden$="[[!multiple]]">files</span> anywhere on this screen or 
 				<input id="file_upload_input" type="file" multiple="[[multiple]]" on-change="_fileSelectHandler"/>
 				<label id="browse_label" for="file_upload_input">browse</label></span>
 			</div>
@@ -88,7 +88,6 @@
 
 				files: {
 					type: Object,
-					value: null,
 					notify: true,
 					observer: '_fileChangeHandler'
 				},
@@ -101,7 +100,7 @@
 				}
 
 			},
-			
+
 			_fileSelectHandler: function(event) {
 				var files = [];
 				for (var i = 0; i < event.target.files.length; i++) {
@@ -138,7 +137,7 @@
 
 			_fileDropHandler: function(event) {
 				event.preventDefault();
-				this.fileDragOver = false;				
+				this.fileDragOver = false;
 				var files = [];
 				var dataTransfer = event.dataTransfer;
 				if (dataTransfer.items) {
