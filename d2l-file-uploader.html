@@ -82,20 +82,20 @@
 
 				multiple: {
 					type: Boolean,
-					value: false,
+					value: false,					
 					notify: false
 				},
 
 				files: {
 					type: Object,
-					notify: true,
+					notify: false,
 					observer: '_fileChangeHandler'
 				},
 
 				fileDragOver: {
 					type: Boolean,
 					value: false,
-					notify: true,
+					notify: false,
 					reflectToAttribute: true
 				}
 
