@@ -7,7 +7,7 @@
 		<style>
 			#drop_zone {
 				border: 2px dashed;
-				border-radius: 6px;
+				border-radius: 0.3rem;
 				text-align: center;
 				height: 9rem;
 				width: 27rem;
@@ -51,11 +51,31 @@
 			}
 
 			#browse_label:hover, #file_upload_input:focus + label {
-				color: var(--d2l-color-celestuba);;
+				color: var(--d2l-color-celestuba);
 				text-decoration: underline;
 			}
+
+			#error {
+				width: 26.65rem;
+				max-width: 26.65rem;
+				height: 2.9rem;
+				border: 1px solid;
+				border-color: var(--d2l-color-titanius);
+				border-radius: 0.3rem;
+				border-left-width: 0.5rem;
+				border-left-color: var(--d2l-color-citrine);
+				margin-bottom: 1.5rem;
+			}
+
+			#error div {
+				padding-top: 0.8rem;
+				padding-left: 1rem;
+			} 
 		</style>
 
+		<div id="error" hidden$="{{!error}}">
+			<div>{{errorMessage}}</div>
+		</div>
 		<div id="drop_zone" on-drop="_fileDropHandler" on-dragover="_fileDragOverHandler" on-dragleave="_fileDragLeaveHandler" on-dragend="_fileDragEndHandler">
 			<div id="file_upload_icon">
 				<svg width="78" height="78" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 78 78">
@@ -96,6 +116,17 @@
 					value: false,
 					notify: false,
 					reflectToAttribute: true
+				},
+
+				error: {
+					type: Boolean,
+					value: false,
+					notify: false
+				},
+
+				errorMessage: {
+					type: String,
+					value: ''
 				}
 
 			},
@@ -140,27 +171,29 @@
 				var files = [];
 				var dataTransfer = event.dataTransfer;
 				if (dataTransfer.items) {
-					// Use DataTransferItemList interface to access the file(s)
-					if (this.multiple) {
-						for (var i = 0; i < dataTransfer.items.length; i++) {
-							if (dataTransfer.items[ i ].kind === 'file') {
-								files[i] = dataTransfer.items[i].getAsFile();
-							}
-						}
+					if (!this.multiple && dataTransfer.items.length > 1) {
+						this.error = true;
+						this.errorMessage = 'Choose one file to upload';
+						return;
 					}
-					else {
-						files[0] = dataTransfer.items[0].getAsFile();
+
+					// Use DataTransferItemList interface to access the file(s)
+					for (var i = 0; i < dataTransfer.items.length; i++) {
+						if (dataTransfer.items[ i ].kind === 'file') {
+							files[i] = dataTransfer.items[i].getAsFile();
+						}
 					}
 				}
 				else {
-					// Use DataTransfer interface to access the file(s)
-					if (this.multiple) {
-						for (var j = 0; i < dataTransfer.files.length; j++) {
-							files[j] = dataTransfer.files[j];
-						}
+					if (!this.multiple && dataTransfer.files.length > 1) {
+						this.error = true;
+						this.errorMessage = 'Choose one file to upload';
+						return;
 					}
-					else {
-						files[0] = dataTransfer.files[0];
+
+					// Use DataTransfer interface to access the file(s)
+					for (var j = 0; i < dataTransfer.files.length; j++) {
+						files[j] = dataTransfer.files[j];
 					}
 				}
 
