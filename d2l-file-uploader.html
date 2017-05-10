@@ -9,8 +9,8 @@
 				border: 2px dashed;
 				border-radius: 0.3rem;
 				text-align: center;
-				height: 9rem;
-				width: 27rem;
+				height: auto;
+				width: auto;
 				max-width: 27rem;
 			}
 
@@ -20,8 +20,8 @@
       		}
 
 			#file_upload_icon {
-				padding-top: 1.5rem;
-				padding-bottom: 0.6rem;
+				padding-top: 1.3rem;
+				padding-bottom: 0.5rem;
 			}
 
 			:host([file-drag-over]) #file_upload_icon svg path {
@@ -55,8 +55,16 @@
 				text-decoration: underline;
 			}
 
+			#browse_button {
+				display: none;
+			}
+
+			#file_upload_text {
+				margin-bottom: 1.3rem;
+			}
+
 			#error {
-				width: 26.65rem;
+				width: auto;
 				max-width: 26.65rem;
 				height: 2.9rem;
 				border: 1px solid;
@@ -71,6 +79,39 @@
 				padding-top: 0.8rem;
 				padding-left: 1rem;
 			} 
+
+			@media (max-width: 550px) {
+				#browse_label {
+					display: none;
+				}
+
+				/* These rules are for mimicing the look and feel of d2l-button. d2l-button cannot be used here because placing a input element inside */
+				/* a button would not work on browsers other than Chrome */
+				#browse_button {
+					display: block;
+					width: 6rem;
+					border: 1px solid;
+					border-radius: 0.3rem;
+					border-color: var(--d2l-color-celestuba);
+					padding-left: 1.5rem;
+					padding-right: 1.5rem;
+					padding-top: 0.5rem;
+					padding-bottom: 0.5rem;
+					margin: auto;
+					margin-top: 1rem;
+					margin-bottom: 1rem;
+					color: var(--d2l-color-white);
+					background-color: var(--d2l-color-celestine);
+				}
+
+				#browse_button:hover {
+					background-color: var(--d2l-color-celestuba);	
+				}
+
+				#browse_button:focus {
+					box-shadow: 0 0 0 4px rgba(0, 111, 191, 0.3);
+				}
+			}
 		</style>
 
 		<div id="error" hidden$="{{!error}}">
@@ -85,10 +126,11 @@
 					<path fill="#565a5c" d="M78,36.139a17.519,17.519,0,0,1-17.5,17.5c-.17,0-1.33,0-1.5-.02l-12.51.02a1.333,1.333,0,0,1-.49-.09,1.494,1.494,0,0,1,0-2.82,1.386,1.386,0,0,1,.5-.09h14a14.5,14.5,0,0,0,1.58-28.92c-.52-.05-1.05-.08-1.58-.08h-.35a1.49,1.49,0,0,1-1-.4,2.258,2.258,0,0,1-.542-1.074c-.138-.462-.306-.916-.478-1.365a20.484,20.484,0,0,0-38.26,0q-.21.54-.39,1.08a3.353,3.353,0,0,1-.53,1.26,1.542,1.542,0,0,1-1.12.5H17.5c-.53,0-1.06.03-1.58.08a14.5,14.5,0,0,0,1.58,28.92H31.49a1.5,1.5,0,0,1,.01,3s-13.5,0-13.5-.02a4.176,4.176,0,0,1-.5.02,17.5,17.5,0,0,1-.77-34.98,23.489,23.489,0,0,1,44.54,0A17.519,17.519,0,0,1,78,36.139Z"/>
 				</svg>
 			</div>
-			<div>
+			<div id="file_upload_text">
 				<span>Drag and drop <span hidden$="[[multiple]]">a file</span><span hidden$="[[!multiple]]">files</span> anywhere on this screen or 
 				<input id="file_upload_input" type="file" multiple="[[multiple]]" on-change="_fileSelectHandler"/>
 				<label id="browse_label" for="file_upload_input">browse</label></span>
+				<label id="browse_button" for="file_upload_input">Browse Files</label>
 			</div>
 		</div>
 	</template>
