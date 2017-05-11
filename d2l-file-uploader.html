@@ -1,5 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../d2l-colors/d2l-colors.html">
+<link rel="import" href="../app-localize-behavior/app-localize-behavior.html">
 
 <dom-module id="d2l-file-uploader">
 
@@ -115,7 +116,7 @@
 		</style>
 
 		<div id="error" hidden$="{{!error}}">
-			<div>{{errorMessage}}</div>
+			<div role="alert">{{errorMessage}}</div>
 		</div>
 		<div id="drop_zone" on-drop="_fileDropHandler" on-dragover="_fileDragOverHandler" on-dragleave="_fileDragLeaveHandler" on-dragend="_fileDragEndHandler">
 			<div id="file_upload_icon">
@@ -127,10 +128,10 @@
 				</svg>
 			</div>
 			<div id="file_upload_text">
-				<span>Drag and drop <span hidden$="[[multiple]]">a file</span><span hidden$="[[!multiple]]">files</span> anywhere on this screen or 
+				<span>{{localize('drag_and_drop')}}<span hidden$="[[multiple]]">{{localize('a_file')}}</span><span hidden$="[[!multiple]]">{{localize('files')}}</span>{{localize('anywhere_on_this_screen_or')}}
 				<input id="file_upload_input" type="file" multiple="[[multiple]]" on-change="_fileSelectHandler"/>
-				<label id="browse_label" for="file_upload_input">browse</label></span>
-				<label id="browse_button" for="file_upload_input">Browse Files</label>
+				<label id="browse_label" for="file_upload_input">{{localize('browse')}}</label></span>
+				<label id="browse_button" for="file_upload_input">{{localize('browse_files')}}</label>
 			</div>
 		</div>
 	</template>
@@ -139,7 +140,17 @@
 		Polymer({
 			is: 'd2l-file-uploader',
 
+			/** @polymerBehavior */
+			behaviors: [
+				Polymer.AppLocalizeBehavior
+			],
+
 			properties: {
+				language: {
+					type: String,
+					value: 'en',
+					notify: false
+				},
 
 				multiple: {
 					type: Boolean,
@@ -172,6 +183,10 @@
 					notify: false
 				}
 
+			},
+
+			attached: function() {
+				this.loadResources(this.resolveUrl('locales.json'));
 			},
 
 			_fileSelectHandler: function(event) {
@@ -216,7 +231,7 @@
 				if (dataTransfer.items) {
 					if (!this.multiple && dataTransfer.items.length > 1) {
 						this.error = true;
-						this.errorMessage = 'Choose one file to upload';
+						this.errorMessage = this.localize('choose_one_file_to_upload');
 						return;
 					}
 
@@ -230,7 +245,7 @@
 				else {
 					if (!this.multiple && dataTransfer.files.length > 1) {
 						this.error = true;
-						this.errorMessage = 'Choose one file to upload';
+						this.errorMessage = this.localize('choose_one_file_to_upload');
 						return;
 					}
 
