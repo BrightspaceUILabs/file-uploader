@@ -66,8 +66,10 @@
 
 			#error {
 				width: auto;
-				max-width: 26.65rem;
-				height: 2.9rem;
+				max-width: 25.65rem;
+				padding-top: 1rem;
+				padding-bottom: 1rem;
+				padding-left: 1rem;
 				border: 1px solid;
 				border-color: var(--d2l-color-titanius);
 				border-radius: 0.3rem;
@@ -115,9 +117,10 @@
 			}
 		</style>
 
-		<div id="error" hidden$="{{!error}}">
-			<div role="alert">{{errorMessage}}</div>
+		<div>
+			<div id="error" role="alert" hidden$="{{!error}}">{{errorMessage}}</div>
 		</div>
+
 		<div id="drop_zone" on-drop="_fileDropHandler" on-dragover="_fileDragOverHandler" on-dragleave="_fileDragLeaveHandler" on-dragend="_fileDragEndHandler">
 			<div id="file_upload_icon">
 				<svg width="78" height="78" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 78 78">
