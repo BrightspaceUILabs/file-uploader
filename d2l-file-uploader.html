@@ -83,6 +83,29 @@
 				padding-left: 1rem;
 			} 
 
+			.error-anim {
+			  animation-name: errorIn;
+			  animation-duration: 0.6s;
+			}
+
+			@keyframes errorIn {
+			  	0% {
+			    	transform: translateY(-2em);
+			    	opacity: 0;
+			   		max-height: 0.1rem
+			  	}
+				20% {
+					opacity: 0;
+				}
+				50% {
+					transform: translateY(0%);
+					max-height: 3rem; 
+				}
+			  	100% {
+					opacity: 1;
+				} 
+			}
+
 			@media (max-width: 550px) {
 				#browse_label {
 					display: none;
@@ -118,7 +141,7 @@
 		</style>
 
 		<div>
-			<div id="error" role="alert" hidden$="{{!error}}">{{errorMessage}}</div>
+			<div id="error" class="error-anim" role="alert" hidden$="{{!error}}">{{errorMessage}}</div>
 		</div>
 
 		<div id="drop_zone" on-drop="_fileDropHandler" on-dragover="_fileDragOverHandler" on-dragleave="_fileDragLeaveHandler" on-dragend="_fileDragEndHandler">
