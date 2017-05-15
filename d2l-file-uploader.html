@@ -80,6 +80,20 @@
 				padding-left: 1rem;
 			} 
 
+			.error-anim {
+			  animation-name: errorIn;
+			  animation-duration: 0.5s;
+			}
+
+			@keyframes errorIn {
+			  0% {
+			    transform: scale(0.1); }
+			  70% {
+			    transform: scale(1.05); }
+			  100% {
+			    transform: scale(1); } 
+			}
+
 			@media (max-width: 550px) {
 				#browse_label {
 					display: none;
@@ -114,7 +128,7 @@
 			}
 		</style>
 
-		<div id="error" hidden$="{{!error}}">
+		<div id="error" class="error-anim" hidden$="{{!error}}">
 			<div>{{errorMessage}}</div>
 		</div>
 		<div id="drop_zone" on-drop="_fileDropHandler" on-dragover="_fileDragOverHandler" on-dragleave="_fileDragLeaveHandler" on-dragend="_fileDragEndHandler">
