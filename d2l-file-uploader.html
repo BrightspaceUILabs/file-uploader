@@ -82,16 +82,20 @@
 
 			.error-anim {
 			  animation-name: errorIn;
-			  animation-duration: 0.5s;
+			  animation-duration: 0.4s;
 			}
 
 			@keyframes errorIn {
 			  0% {
-			    transform: scale(0.1); }
-			  70% {
-			    transform: scale(1.05); }
+			    transform: translateY(-2em);
+			    opacity: 0;
+			    max-height: 0.1rem
+			  }
 			  100% {
-			    transform: scale(1); } 
+			    transform: translateY(0%); 
+				opacity: 1;
+				max-height: 3rem;
+				} 
 			}
 
 			@media (max-width: 550px) {
