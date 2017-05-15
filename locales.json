@@ -1,0 +1,20 @@
+{
+  "en": {
+    "drag_and_drop": "Drag and drop ",
+    "a_file": "a file",
+    "files": "files",
+    "anywhere_on_this_screen_or": " anywhere on this screen or ",
+    "browse": "browse",
+    "browse_files": "Browse Files",
+    "choose_one_file_to_upload": "Choose one file to upload"
+  },
+  "fr": {
+    "drag_and_drop": "Drag and drop French ",
+    "a_file": "a file French",
+    "files": "files French",
+    "anywhere_on_this_screen_or": " anywhere on this screen or French ",
+    "browse": "browse French",
+    "browse_files": "Browse Files French",
+    "choose_one_file_to_upload": "Choose one file to upload French"
+  }
+}
