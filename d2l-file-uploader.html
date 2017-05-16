@@ -34,7 +34,7 @@
 				--d2l-icon-width: 3rem;
 			}
 
-			#file_upload_input {
+			#file_upload_input_1, #file_upload_input_2 {
 				width: 0.1px;
 				height: 0.1px;
 				opacity: 0;
@@ -51,7 +51,7 @@
 				color: var(--d2l-color-celestine);
 			}
 
-			#browse_label:hover, #file_upload_input:focus + label {
+			#browse_label:hover, #file_upload_input_1:focus + label {
 				color: var(--d2l-color-celestuba);
 				text-decoration: underline;
 			}
@@ -134,7 +134,7 @@
 					background-color: var(--d2l-color-celestuba);	
 				}
 
-				#browse_button:focus {
+				#file_upload_input_2:focus + #browse_button  {
 					box-shadow: 0 0 0 4px rgba(0, 111, 191, 0.3);
 				}
 			}
@@ -155,9 +155,10 @@
 			</div>
 			<div id="file_upload_text">
 				<span>{{localize('drag_and_drop')}}<span hidden$="[[multiple]]">{{localize('a_file')}}</span><span hidden$="[[!multiple]]">{{localize('files')}}</span>{{localize('anywhere_on_this_screen_or')}}
-				<input id="file_upload_input" type="file" multiple="[[multiple]]" on-change="_fileSelectHandler"/>
-				<label id="browse_label" for="file_upload_input">{{localize('browse')}}</label></span>
-				<label id="browse_button" for="file_upload_input">{{localize('browse_files')}}</label>
+				<input id="file_upload_input_1" type="file" multiple="[[multiple]]" on-change="_fileSelectHandler"/>
+				<label id="browse_label" for="file_upload_input_1">{{localize('browse')}}</label></span>
+				<input id="file_upload_input_2" type="file" multiple="[[multiple]]" on-change="_fileSelectHandler"/>
+				<label id="browse_button" for="file_upload_input_2">{{localize('browse_files')}}</label>
 			</div>
 		</div>
 	</template>

@@ -1,6 +1,6 @@
 {
   "name": "d2l-file-uploader",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Polymer-based web components for D2L file uploader",
   "private": true,
   "scripts": {
