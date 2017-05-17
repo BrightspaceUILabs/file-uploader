@@ -164,7 +164,8 @@
 				</svg>
 			</div>
 			<div id="file_upload_text">
-				<span>{{localize('drag_and_drop')}}<span hidden$="[[multiple]]">{{localize('a_file')}}</span><span hidden$="[[!multiple]]">{{localize('files')}}</span>{{localize('anywhere_on_this_screen_or')}}
+				<span><span hidden$="[[multiple]]">{{localize('single_file_upload_text')}}</span>
+				<span hidden$="[[!multiple]]">{{localize('multiple_file_upload_text')}}</span>				
 				<input id="file_upload_input_1" type="file" multiple="[[multiple]]" on-change="_fileSelectHandler"/>
 				<label id="browse_label" for="file_upload_input_1">{{localize('browse')}}</label></span>
 				<input id="file_upload_input_2" type="file" multiple="[[multiple]]" on-change="_fileSelectHandler"/>
