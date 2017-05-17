@@ -34,12 +34,17 @@
 				--d2l-icon-width: 3rem;
 			}
 
-			#file_upload_input_1, #file_upload_input_2 {
+			#file_upload_input_1 {
+				display: block;
 				width: 0.1px;
 				height: 0.1px;
 				opacity: 0;
 				overflow: hidden;
 				position: absolute;
+			}
+
+			#file_upload_input_2 {
+				display: none;
 			}
 
 			#browse_label {
@@ -111,23 +116,28 @@
 					display: none;
 				}
 
+				#file_upload_input_1 {
+					display: none;
+				}
+
 				/* These rules are for mimicing the look and feel of d2l-button. d2l-button cannot be used here because placing a input element inside */
 				/* a button would not work on browsers other than Chrome */
 				#browse_button {
 					display: block;
-					width: 6rem;
+					width: 4rem;
 					border: 1px solid;
 					border-radius: 0.3rem;
 					border-color: var(--d2l-color-celestuba);
 					padding-left: 1.5rem;
 					padding-right: 1.5rem;
-					padding-top: 0.5rem;
-					padding-bottom: 0.5rem;
+					padding-top: 0.35rem;
+					padding-bottom: 0.35rem;
 					margin: auto;
-					margin-top: 1rem;
-					margin-bottom: 1rem;
+					margin-top: 0.8rem;
+					margin-bottom: 0.8rem;
 					color: var(--d2l-color-white);
 					background-color: var(--d2l-color-celestine);
+					font-size: 0.7rem;
 				}
 
 				#browse_button:hover {
@@ -277,7 +287,7 @@
 					}
 
 					// Use DataTransfer interface to access the file(s)
-					for (var j = 0; i < dataTransfer.files.length; j++) {
+					for (var j = 0; j < dataTransfer.files.length; j++) {
 						files[j] = dataTransfer.files[j];
 					}
 				}
