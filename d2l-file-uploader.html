@@ -36,11 +36,13 @@
 
 			#file_upload_input_1 {
 				display: block;
-				width: 0.1px;
-				height: 0.1px;
-				opacity: 0;
-				overflow: hidden;
+				width: 3.1rem;
+    			height: 0.9rem;
 				position: absolute;
+				opacity: 0;
+				top: 0;
+				left: 0;
+				z-index: -1;
 			}
 
 			#file_upload_input_2 {
@@ -69,7 +71,16 @@
 				margin-bottom: 1.3rem;
 			}
 
-			#input-container {
+			#input-container1 {
+				position: relative;
+				overflow: hidden;
+				padding-right: 0px;
+				border: none;
+				background: none;
+				display: inline;
+			}
+
+			#input-container2 {
 				position: relative;
 				margin:auto;
 				margin-top: 0.8rem;
@@ -186,10 +197,12 @@
 			<div id="file_upload_text">
 				<span><span hidden$="[[multiple]]">{{localize('single_file_upload_text')}}</span>
 				<span hidden$="[[!multiple]]">{{localize('multiple_file_upload_text')}}</span>				
-				<input id="file_upload_input_1" type="file" multiple="[[multiple]]" on-change="_fileSelectHandler"/>
-				<label id="browse_label" for="file_upload_input_1">{{localize('browse')}}</label>
+				<div id="input-container1">			
+					<input id="file_upload_input_1" type="file" multiple="[[multiple]]" on-change="_fileSelectHandler"/>
+					<label id="browse_label" for="file_upload_input_1">{{localize('browse')}}</label>
+				</div>
 				</span>
-				<div id="input-container">
+				<div id="input-container2">
 					<input id="file_upload_input_2" type="file" multiple="[[multiple]]" on-change="_fileSelectHandler"/>
 					<label id="browse_button" for="file_upload_input_2">{{localize('browse_files')}}</label>
 				</div>
