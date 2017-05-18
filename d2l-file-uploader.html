@@ -42,7 +42,6 @@
 				opacity: 0;
 				top: 0;
 				left: 0;
-				z-index: -1;
 			}
 
 			#file_upload_input_2 {
@@ -58,7 +57,7 @@
 				color: var(--d2l-color-celestine);
 			}
 
-			#browse_label:hover, #file_upload_input_1:focus + label {
+			#browse_label:hover, #file_upload_input_1:focus + label, #file_upload_input_1:hover + label {
 				color: var(--d2l-color-celestuba);
 				text-decoration: underline;
 			}
@@ -109,21 +108,19 @@
 
 			.error-anim {
 			  animation-name: errorIn;
-			  animation-duration: 0.6s;
+			  animation-duration: 0.7s;
 			}
 
 			@keyframes errorIn {
 			  	0% {
-			    	transform: translateY(-2em);
 			    	opacity: 0;
 			   		max-height: 0.1rem
 			  	}
 				20% {
 					opacity: 0;
 				}
-				50% {
-					transform: translateY(0%);
-					max-height: 3rem; 
+				80% {
+					max-height: 3rem;
 				}
 			  	100% {
 					opacity: 1;
@@ -148,7 +145,6 @@
 					opacity: 0;
 					top: 0;
 					left: 0;
-					z-index: -1;
 				}
 
 				/* These rules are for mimicing the look and feel of d2l-button. d2l-button cannot be used here because placing a input element inside */
@@ -171,7 +167,7 @@
 					font-size: 0.7rem;
 				}
 
-				#browse_button:hover {
+				#browse_button:hover, #file_upload_input_2:hover + #browse_button {
 					background-color: var(--d2l-color-celestuba);	
 				}
 
