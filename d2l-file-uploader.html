@@ -198,12 +198,12 @@
 				<span><span hidden$="[[multiple]]">{{localize('single_file_upload_text')}}</span>
 				<span hidden$="[[!multiple]]">{{localize('multiple_file_upload_text')}}</span>				
 				<div id="input-container1">			
-					<input id="file_upload_input_1" type="file" multiple="[[multiple]]" on-change="_fileSelectHandler"/>
+					<input id="file_upload_input_1" type="file" aria-label$="{{localize('browse')}}" multiple="[[multiple]]" on-change="_fileSelectHandler"/>
 					<label id="browse_label" for="file_upload_input_1">{{localize('browse')}}</label>
 				</div>
 				</span>
 				<div id="input-container2">
-					<input id="file_upload_input_2" type="file" multiple="[[multiple]]" on-change="_fileSelectHandler"/>
+					<input id="file_upload_input_2" type="file" aria-label$="{{localize('browse_files')}}" multiple="[[multiple]]" on-change="_fileSelectHandler"/>
 					<label id="browse_button" for="file_upload_input_2">{{localize('browse_files')}}</label>
 				</div>
 			</div>
