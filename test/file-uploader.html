@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>d2l-file-uploader basic tests</title>
+		<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+		<script src="../../web-component-tester/browser.js"></script>
+		<link rel="import" href="../d2l-file-uploader.html">
+	</head>
+	<body>
+		<test-fixture id="SingleFile">
+			<template>
+				<d2l-file-uploader id="test-uploader"></d2l-file-uploader>
+			</template>
+		</test-fixture>
+		<test-fixture id="MultipleFile">
+			<template>
+				<d2l-file-uploader id="test-uploader" multiple=true></d2l-file-uploader>
+			</template>
+		</test-fixture>
+		<script>
+			describe('single-file-upload', function() {
+        var fileUploader;
+				beforeEach(function() {
+					fileUploader = fixture('SingleFile');
+				});
+				it('not multiple', function(done) {
+					assert.isFalse(fileUploader.multiple);
+					done();
+				});
+				it('error', function(done) {
+          var event = document.createEvent('event');
+          event.dataTransfer = {files:[{},{}]};
+          fileUploader._fileDropHandler(event);
+					assert.isTrue(fileUploader.error);
+					done();
+				});
+		  });
+			describe('multiple-file-upload', function() {
+				var fileUploader;
+				beforeEach(function() {
+					fileUploader = fixture('MultipleFile');
+				});
+				it('multiple', function(done) {
+					assert.isTrue(fileUploader.multiple);
+					done();
+				});
+				it('no error', function(done) {
+          var event = document.createEvent('event');
+          event.dataTransfer = {files:[{},{}]};
+          fileUploader._fileDropHandler(event);
+					assert.isFalse(fileUploader.error);
+					done();
+				});
+		  });
+		</script>
+	</body>
+</html>
