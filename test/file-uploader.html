@@ -20,21 +20,24 @@
 		</test-fixture>
 		<script>
 			describe('single-file-upload', function() {
-        var fileUploader;
+				var fileUploader;
 				beforeEach(function() {
 					fileUploader = fixture('SingleFile');
 				});
+
 				it('not multiple', function(done) {
 					assert.isFalse(fileUploader.multiple);
 					done();
 				});
+
 				it('error', function(done) {
-          var errorEvent = document.createEvent('event');
-          errorEvent.dataTransfer = {files:[{},{}]};
-          fileUploader._fileDropHandler(errorEvent);
+					var errorEvent = document.createEvent('event');
+					errorEvent.dataTransfer = {files:[{},{}]};
+					fileUploader._fileDropHandler(errorEvent);
 					assert.isTrue(fileUploader.error);
 					done();
 				});
+
 				it('file length is 1', function(done) {
 					var event = document.createEvent('event');
 					event.dataTransfer = {files:[{}]};
@@ -42,23 +45,28 @@
 					assert.lengthOf(fileUploader.files, 1);
 					done();
 				});
-		  });
+			});
+
 			describe('multiple-file-upload', function() {
 				var fileUploader;
 				var event = document.createEvent('event');
 				event.dataTransfer = {files:[{},{}]};
+
 				beforeEach(function() {
 					fileUploader = fixture('MultipleFile');
 				});
+
 				it('multiple', function(done) {
 					assert.isTrue(fileUploader.multiple);
 					done();
 				});
+
 				it('no error', function(done) {
-          fileUploader._fileDropHandler(event);
+					fileUploader._fileDropHandler(event);
 					assert.isFalse(fileUploader.error);
 					done();
 				});
+				
 				it('file length is 2', function(done) {
 					fileUploader._fileDropHandler(event);
 					assert.lengthOf(fileUploader.files, 2);
