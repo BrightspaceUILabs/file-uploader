@@ -29,15 +29,24 @@
 					done();
 				});
 				it('error', function(done) {
-          var event = document.createEvent('event');
-          event.dataTransfer = {files:[{},{}]};
-          fileUploader._fileDropHandler(event);
+          var errorEvent = document.createEvent('event');
+          errorEvent.dataTransfer = {files:[{},{}]};
+          fileUploader._fileDropHandler(errorEvent);
 					assert.isTrue(fileUploader.error);
+					done();
+				});
+				it('file length is 1', function(done) {
+					var event = document.createEvent('event');
+					event.dataTransfer = {files:[{}]};
+					fileUploader._fileDropHandler(event);
+					assert.lengthOf(fileUploader.files, 1);
 					done();
 				});
 		  });
 			describe('multiple-file-upload', function() {
 				var fileUploader;
+				var event = document.createEvent('event');
+				event.dataTransfer = {files:[{},{}]};
 				beforeEach(function() {
 					fileUploader = fixture('MultipleFile');
 				});
@@ -46,10 +55,13 @@
 					done();
 				});
 				it('no error', function(done) {
-          var event = document.createEvent('event');
-          event.dataTransfer = {files:[{},{}]};
           fileUploader._fileDropHandler(event);
 					assert.isFalse(fileUploader.error);
+					done();
+				});
+				it('file length is 2', function(done) {
+					fileUploader._fileDropHandler(event);
+					assert.lengthOf(fileUploader.files, 2);
 					done();
 				});
 		  });
