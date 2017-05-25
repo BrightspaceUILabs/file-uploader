@@ -21,7 +21,6 @@
     "eslint": "^3.19.0",
     "eslint-config-brightspace": "^0.2.4",
     "eslint-plugin-html": "^2.0.1",
-    "polymer-cli": "^0.17.0",
-    "web-component-tester": "^6.0.0"
+    "polymer-cli": "^0.17.0"
   }
 }
