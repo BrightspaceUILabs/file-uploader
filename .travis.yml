@@ -1,5 +1,7 @@
 
 language: node_js
 node_js: stable
+addons:  
+  firefox: latest
 script:
 - npm run test
