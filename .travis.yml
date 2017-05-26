@@ -3,3 +3,8 @@ language: node_js
 node_js: stable
 script:
 - npm run test
+- wct --skip-plugin local
+addons:
+  sauce_connect:
+    username: "JennaZ"
+    access_key: "ded431ec-28c0-42e9-bdc7-b14f03e7ddc3"
