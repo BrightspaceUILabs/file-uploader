@@ -1,10 +1,11 @@
-
 language: node_js
 node_js: stable
 script:
 - npm run test
 - wct --skip-plugin local
 addons:
-  sauce_connect:
-    username: ""
-    access_key: ""
+  jwt:
+    secure: TseA+7BPPHNybXS+lWpwV05QciOVROmr6O3yB7XULQSoVBroPaNjiB0nHQEtvJTTYpvf9JBpDn5TY2nWc3lkvKf8KCeVzNrABu2a7LnW+JdcLXf72N6THQxRuFkBolEMsDjNvnQTGV+13H6XnC1dLQXUEDn5HqyR/YvI4XMrBzKN+LpwzuxP7OdFkpz2ENZeCo2LXu8NdHg9IwWja7Y5B9r8FGpXvIyXHbeDSxqcN33CJFRqcVeJcU4+R/VmcP24ALzcSlR0WmZ4qm0KJr2QKHL1I9VHeKrtuCywoEbrF9D6MStAHozIWqsoqGPzWOME/N54MBVxOqwxTD8E+41QsKYHypW+JrIwWsoLXRshUJtRSDPabnYWGkNgSLcKUgYDteL5ftdW1VVRLgLMRiILLnz7850A+wHsMiZbiBMdu7GJqBTKafZpZ3OEN/3MGz4w7i8FSZA1wLP8rmvzW+sYER8SIR/Tzz0R0iCoyZOP5nYAY1ZmBdLSPF2p/F+qDeYarL2HRWTYHIF5SINp4Waq7Hm85AqHk4sSDq2EeXHMikzja13XsTEe1Gsxsdq03ONfyD6k5ONmG4cBC9WTPvhvxsZACT6MwPscRJhG0DMBT3FnBXq5CrlQQ/AqPPwH9HEzJjtIuo+95v4DY3ErRt3peA3XS+z8XUp5+ga32HghVjY=
+env:
+  global:
+    SAUCE_USERNAME: Rodolfo-Landa
