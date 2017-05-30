@@ -61,14 +61,14 @@ _fileAdded( event ) {
 
 ## Tests
 
-For lint stuff, run
+For lint stuff, run:
 
 ```shell
 npm test
 ```
 
 
-For unit tests:
+For unit tests, run:
 
 ```shell
 wct
