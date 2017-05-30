@@ -38,7 +38,7 @@ Attributes:
 <d2l-file-uploader language='fr-CA'></d2l-file-uploader>
 ```
 
-The selected file(s) info is delivered as part of a custom event "file-added-to-upload", so a event listener is required to setup to listen to that event:
+The selected file(s) info is delivered as part of a custom event "file-added-to-upload", so an event listener is required to setup to listen to that event:
 
 ```shell
 document.querySelector('d2l-file-uploader').addEventListener('file-added-to-upload', this._fileAdded);
@@ -51,7 +51,7 @@ or
 <d2l-file-uploader on-file-added-to-upload="_fileAdded"></d2l-file-uploader>
 ```
 
-The JavaScript File inerface of the selected file(s) will be in the "detail" array of the "file-added-to-upload" event:
+The JavaScript File interface of the selected file(s) will be in the "detail" array of the "file-added-to-upload" event:
 
 ```shell
 _fileAdded( event ) {
