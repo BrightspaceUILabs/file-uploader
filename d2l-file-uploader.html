@@ -209,6 +209,28 @@
 	</template>
 
 	<script>
+		console.log("hi");
+
+		var dragOver = false;
+
+		document.addEventListener("dragover", function(event) {
+			console.log("HEEERREEEE drag over");
+			event.preventDefault();
+			dragOver = true;
+		}, false);
+
+		document.addEventListener("dragleave", function(event) {
+			console.log("HEEERREEEE leave");
+			event.preventDefault();
+			dragOver = false;
+		}, false);
+
+		document.addEventListener("drop", function(event) {
+			console.log("HEEERREEEE drop");
+			event.preventDefault();
+		}, false);
+
+
 		Polymer({
 			is: 'd2l-file-uploader',
 
@@ -250,9 +272,17 @@
 				}
 			},
 
+			listeners: {
+        		'click': 'justAClick'
+      		},
+
 			attached: function() {
 				this.loadResources(this.resolveUrl('locales.json'));
 			},
+
+			justAClick: function(e) {
+	      		console.log("this was a click");
+	      	},
 
 			_fileSelectHandler: function(event) {
 				var files = [];
