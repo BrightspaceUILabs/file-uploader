@@ -182,7 +182,7 @@
 				<div id="error" class="error-anim" role="alert" hidden$="{{!error}}">{{localize('choose_one_file_to_upload')}}</div>
 			</div>
 
-			<div id="drop_zone" on-drop="_fileDropHandler" on-dragover="_fileDragOverHandler" on-dragleave="_fileDragLeaveHandler" on-dragend="_fileDragEndHandler">
+			<div id="drop_zone">
 				<div id="file_upload_icon">
 					<svg width="78" height="78" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 78 78">
 						<path fill="#565a5c" d="M54.76,36A3.992,3.992,0,0,1,51,38.639H42v36a3,3,0,0,1-6,0v-36H27a4,4,0,0,1-2.56-7.07l12-10a3.988,3.988,0,0,1,5.12,0l12,10A4.007,4.007,0,0,1,54.76,36Z"/>
@@ -209,6 +209,7 @@
 	</template>
 
 	<script>
+
 		Polymer({
 			is: 'd2l-file-uploader',
 
@@ -252,6 +253,11 @@
 
 			attached: function() {
 				this.loadResources(this.resolveUrl('locales.json'));
+
+				document.addEventListener('dragover', this._fileDragOverHandler.bind(this));
+				document.addEventListener('dragleave', this._fileDragLeaveHandler.bind(this));
+				document.addEventListener('dragend', this._fileDragEndHandler.bind(this));
+				document.addEventListener('drop', this._fileDropHandler.bind(this));
 			},
 
 			_fileSelectHandler: function(event) {
