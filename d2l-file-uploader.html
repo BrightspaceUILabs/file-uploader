@@ -251,22 +251,14 @@
 				}
 			},
 
-			listeners: {
-        		'click': 'justAClick'
-      		},
-
 			attached: function() {
 				this.loadResources(this.resolveUrl('locales.json'));
 
-				document.addEventListener("dragover", this._fileDragOverHandler.bind(this));
-				document.addEventListener("dragleave", this._fileDragLeaveHandler.bind(this));
-				document.addEventListener("dragend", this._fileDragEndHandler.bind(this));
-				document.addEventListener("drop", this._fileDropHandler.bind(this));
+				document.addEventListener('dragover', this._fileDragOverHandler.bind(this));
+				document.addEventListener('dragleave', this._fileDragLeaveHandler.bind(this));
+				document.addEventListener('dragend', this._fileDragEndHandler.bind(this));
+				document.addEventListener('drop', this._fileDropHandler.bind(this));
 			},
-
-			justAClick: function(e) {
-	      		console.log("this was a click");
-	      	},
 
 			_fileSelectHandler: function(event) {
 				var files = [];
