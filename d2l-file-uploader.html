@@ -99,6 +99,7 @@
 				border-radius: 0.3rem;
 				border-left-width: 0.5rem;
 				border-left-color: var(--d2l-color-citrine);
+				/*border-left-color: var(--error-message-box-color);*/
 				margin-bottom: 1.5rem;
 			}
 
@@ -179,7 +180,7 @@
 
 		<div class="d2l-typography">
 			<div>
-				<div id="error" class="error-anim" role="alert" hidden$="{{!error}}">{{localize('choose_one_file_to_upload')}}</div>
+				<div id="error" class="error-anim" role="alert" hidden$="{{!error}}">{{errorMessage}}</div>
 			</div>
 
 			<div id="drop_zone">
@@ -248,6 +249,12 @@
 					type: Boolean,
 					value: false,
 					notify: false
+				},
+
+				errorMessage: {
+					type: String,
+					value: '',
+					notify: false
 				}
 			},
 
@@ -302,6 +309,7 @@
 				if (dataTransfer.items) {
 					if (!this.multiple && dataTransfer.items.length > 1) {
 						this.error = true;
+						this.errorMessage = this.localize('choose_one_file_to_upload');
 						return;
 					}
 
@@ -315,6 +323,7 @@
 				else {
 					if (!this.multiple && dataTransfer.files.length > 1) {
 						this.error = true;
+						this.errorMessage = this.localize('choose_one_file_to_upload');
 						return;
 					}
 
