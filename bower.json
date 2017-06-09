@@ -9,12 +9,29 @@
     "package.json"
   ],
   "dependencies": {
-    "polymer": "^1.9.1",
+    "polymer": "Polymer/polymer#^1.9.1 || ^2.0.0",
     "d2l-colors": "^2.2.3",
     "app-localize-behavior": "PolymerElements/app-localize-behavior#^1.0.2",
     "d2l-typography": "^5.4.0"
   },
   "devDependencies": {
     "web-component-tester": "^6.0.0"
+  },
+  "variants": {
+    "1.x": {
+      "dependencies": {
+        "d2l-colors": "^2.2.3",
+        "polymer": "Polymer/polymer#^1.0.0",
+        "app-localize-behavior": "PolymerElements/app-localize-behavior#^1.0.2",
+        "d2l-typography": "^5.4.0"
+      },
+      "devDependencies": {
+        "web-component-tester": "^4.0.0"
+      }
+    }
+  },
+  "resolutions": {
+    "webcomponentsjs": "^v1.0.0",
+    "polymer": "^2.0.0"
   }
 }
