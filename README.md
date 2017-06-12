@@ -38,6 +38,21 @@ Attributes:
 <d2l-file-uploader language='fr-CA'></d2l-file-uploader>
 ```
 
+* error - if this attribute is set, an error message box would show up with custom error message.
+
+```shell
+<d2l-file-uploader error error-message="There is an error"></d2l-file-uploader>
+```
+
+* error-message - a custom error message to show in the error message box, used with the "error" attribute.
+
+```shell
+<d2l-file-uploader error error-message="There is an error"></d2l-file-uploader>
+```
+
+Event:
+* file-added-to-upload
+
 The selected file(s) info is delivered as part of a custom event "file-added-to-upload", so an event listener is required to setup to listen to that event:
 
 ```shell
@@ -68,8 +83,8 @@ npm test
 ```
 
 
-For unit tests, run:
+For unit tests, need to install web-component-tester globally, and run:
 
 ```shell
-wct
+wct --skip-plugin sauce
 ```
