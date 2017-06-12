@@ -210,6 +210,10 @@
 	</template>
 
 	<script>
+		var fileDragOverHandler;
+		var fileDragLeaveHandler;
+		var fileDragEndHandler;
+		var fileDropHandler;
 
 		Polymer({
 			is: 'd2l-file-uploader',
@@ -261,10 +265,22 @@
 			attached: function() {
 				this.loadResources(this.resolveUrl('locales.json'));
 
-				document.addEventListener('dragover', this._fileDragOverHandler.bind(this));
-				document.addEventListener('dragleave', this._fileDragLeaveHandler.bind(this));
-				document.addEventListener('dragend', this._fileDragEndHandler.bind(this));
-				document.addEventListener('drop', this._fileDropHandler.bind(this));
+				fileDragOverHandler = this._fileDragOverHandler.bind(this);
+				fileDragLeaveHandler = this._fileDragLeaveHandler.bind(this);
+				fileDragEndHandler = this._fileDragEndHandler.bind(this);
+				fileDropHandler = this._fileDropHandler.bind(this);
+
+				document.addEventListener('dragover', fileDragOverHandler);
+				document.addEventListener('dragleave', fileDragLeaveHandler);
+				document.addEventListener('dragend', fileDragEndHandler);
+				document.addEventListener('drop', fileDropHandler);
+			},
+
+			detached: function() {
+				document.removeEventListener('dragover', fileDragOverHandler);
+				document.removeEventListener('dragleave', fileDragLeaveHandler);
+				document.removeEventListener('dragend', fileDragEndHandler);
+				document.removeEventListener('drop', fileDropHandler);
 			},
 
 			_fileSelectHandler: function(event) {
