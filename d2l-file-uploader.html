@@ -326,6 +326,7 @@
 					if (!this.multiple && dataTransfer.items.length > 1) {
 						this.error = true;
 						this.errorMessage = this.localize('choose_one_file_to_upload');
+			        	this.fire('error-fired');
 						return;
 					}
 
