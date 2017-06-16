@@ -91,8 +91,8 @@
 			#error {
 				width: auto;
 				max-width: 25.65rem;
-				padding-top: 1rem;
-				padding-bottom: 1rem;
+				padding-top: 0.7rem;
+				padding-bottom: 0.7rem;
 				padding-left: 1rem;
 				border: 1px solid;
 				border-color: var(--d2l-color-titanius);
@@ -252,7 +252,7 @@
 				error: {
 					type: Boolean,
 					value: false,
-					notify: false
+					notify: true
 				},
 
 				errorMessage: {
@@ -326,7 +326,6 @@
 					if (!this.multiple && dataTransfer.items.length > 1) {
 						this.error = true;
 						this.errorMessage = this.localize('choose_one_file_to_upload');
-			        	this.fire('error-fired');
 						return;
 					}
 
