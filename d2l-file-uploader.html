@@ -18,7 +18,7 @@
 
 			:host([file-drag-over]) #drop_zone {
         		color: var(--d2l-color-celestine);
-				background-color: var(--d2l-color-celestine-light-1);
+				background-color: var(--d2l-color-celestine-plus-2);
       		}
 
 			#file_upload_icon {
@@ -29,7 +29,7 @@
 			:host([file-drag-over]) #file_upload_icon svg path {
 				fill: var(--d2l-color-celestine);
 			}
-			
+
 			d2l-icon#file_upload_icon {
 				--d2l-icon-height: 3rem;
 				--d2l-icon-width: 3rem;
@@ -59,7 +59,7 @@
 			}
 
 			#browse_label:hover, #file_upload_input_1:focus + label, #file_upload_input_1:hover + label {
-				color: var(--d2l-color-celestuba);
+				color: var(--d2l-color-celestine-minus-1);
 				text-decoration: underline;
 			}
 
@@ -95,7 +95,7 @@
 				padding-bottom: 0.7rem;
 				padding-left: 1rem;
 				border: 1px solid;
-				border-color: var(--d2l-color-titanius);
+				border-color: var(--d2l-color-mica);
 				border-radius: 0.3rem;
 				border-left-width: 0.5rem;
 				border-left-color: var(--d2l-color-citrine);
@@ -106,7 +106,7 @@
 			#error div {
 				padding-top: 0.8rem;
 				padding-left: 1rem;
-			} 
+			}
 
 			.error-anim {
 			  animation-name: errorIn;
@@ -126,7 +126,7 @@
 				}
 			  	100% {
 					opacity: 1;
-				} 
+				}
 			}
 
 			@media (max-width: 992px) {
@@ -156,20 +156,20 @@
 					width: auto;
 					border: 1px solid;
 					border-radius: 0.3rem;
-					border-color: var(--d2l-color-celestuba);
+					border-color: var(--d2l-color-celestine-minus-1);
 					padding-left: 1.5rem;
 					padding-right: 1.5rem;
 					padding-top: 0.35rem;
 					padding-bottom: 0.35rem;
 					margin: auto;
 					margin-bottom: 0.4rem;
-					color: var(--d2l-color-white);
+					color: #ffffff;
 					background-color: var(--d2l-color-celestine);
 					font-size: 0.7rem;
 				}
 
 				#browse_button:hover, #file_upload_input_2:hover + #browse_button {
-					background-color: var(--d2l-color-celestuba);	
+					background-color: var(--d2l-color-celestine-minus-1);
 				}
 
 				#file_upload_input_2:focus + #browse_button  {
@@ -194,8 +194,8 @@
 				</div>
 				<div id="file_upload_text">
 					<span><span hidden$="[[multiple]]">{{localize('single_file_upload_text')}}</span>
-					<span hidden$="[[!multiple]]">{{localize('multiple_file_upload_text')}}</span>				
-					<div id="input-container1">			
+					<span hidden$="[[!multiple]]">{{localize('multiple_file_upload_text')}}</span>
+					<div id="input-container1">
 						<input id="file_upload_input_1" type="file" aria-label$="{{localize('browse')}}" multiple="[[multiple]]" on-change="_fileSelectHandler"/>
 						<label id="browse_label" for="file_upload_input_1">{{localize('browse')}}</label>
 					</div>
