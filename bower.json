@@ -15,8 +15,9 @@
     "d2l-typography": "^5.4.0 || ^6.0.0"
   },
   "devDependencies": {
+    "d2l-demo-template": "^1.0.0",
     "web-component-tester": "^6.0.0",
-     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0 || ^1.0.0"
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0 || ^1.0.0"
   },
   "variants": {
     "1.x": {
@@ -28,6 +29,7 @@
       },
       "devDependencies": {
         "d2l-demo-template": "^1.0.0",
+        "web-component-tester": "^4.0.0",
         "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
       },
       "resolutions": {
