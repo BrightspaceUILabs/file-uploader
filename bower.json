@@ -9,12 +9,36 @@
     "package.json"
   ],
   "dependencies": {
-    "polymer": "^1.9.1",
-    "d2l-colors": "^2.4.0",
+    "polymer": "Polymer/polymer#^1.9.1 || ^2.0.0",
+    "d2l-colors": "^2.4.0 || ^3.1.0",
     "app-localize-behavior": "PolymerElements/app-localize-behavior#^1.0.2",
-    "d2l-typography": "^5.4.0"
+    "d2l-typography": "^5.4.0 || ^6.0.0"
   },
   "devDependencies": {
-    "web-component-tester": "^6.0.0"
+    "d2l-demo-template": "^1.0.0",
+    "web-component-tester": "^6.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0 || ^1.0.0"
+  },
+  "variants": {
+    "1.x": {
+      "dependencies": {
+        "polymer": "Polymer/polymer#^1.9.1",
+        "d2l-colors": "^2.4.0",
+        "app-localize-behavior": "PolymerElements/app-localize-behavior#^1.0.2",
+        "d2l-typography": "^5.4.0"
+      },
+      "devDependencies": {
+        "d2l-demo-template": "^1.0.0",
+        "web-component-tester": "^4.0.0",
+        "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+      },
+      "resolutions": {
+        "web-component-tester": "^4.0.0",
+        "webcomponentsjs": "^v0.7.0"
+      }
+    }
+  },
+  "resolutions": {
+    "webcomponentsjs": "^v1.0.0"
   }
 }
