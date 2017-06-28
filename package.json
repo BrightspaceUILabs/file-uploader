@@ -1,6 +1,6 @@
 {
   "name": "d2l-file-uploader",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "description": "Polymer-based web components for D2L file uploader",
   "private": true,
   "scripts": {
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Brightspace/file-uploader.git"
+    "url": "https://github.com/BrightspaceUI/file-uploader.git"
   },
   "author": "D2L Corporation",
   "license": "Apache-2.0",
