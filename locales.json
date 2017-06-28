@@ -6,6 +6,27 @@
     "browse_files": "Browse Files",
     "choose_one_file_to_upload": "Choose one file to upload"
   },
+  "en-US": {
+    "single_file_upload_text": "Drag and drop a file anywhere on this screen or ",
+    "multiple_file_upload_text": "Drag and drop files anywhere on this screen or ",
+    "browse": "browse",
+    "browse_files": "Browse Files",
+    "choose_one_file_to_upload": "Choose one file to upload"
+  },
+  "en-CA": {
+    "single_file_upload_text": "Drag and drop a file anywhere on this screen or ",
+    "multiple_file_upload_text": "Drag and drop files anywhere on this screen or ",
+    "browse": "browse",
+    "browse_files": "Browse Files",
+    "choose_one_file_to_upload": "Choose one file to upload"
+  },
+  "en-GB": {
+    "single_file_upload_text": "Drag and drop a file anywhere on this screen or ",
+    "multiple_file_upload_text": "Drag and drop files anywhere on this screen or ",
+    "browse": "browse",
+    "browse_files": "Browse Files",
+    "choose_one_file_to_upload": "Choose one file to upload"
+  },
   "ar-SA": {
     "single_file_upload_text": "اسحب ملفًا وافلته في أي مكان على هذه الشاشة أو ",
     "multiple_file_upload_text": "اسحب ملفات وافلتها في أي مكان على هذه الشاشة أو ",
