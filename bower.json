@@ -4,9 +4,13 @@
   "main": "d2l-file-uploader.html",
   "license": "Apache-2.0",
   "ignore": [
-    "test",
+    ".editorconfig",
+    ".eslintrc",
     ".gitignore",
-    "package.json"
+    ".travis.yml",
+    "package.json",
+    "wct.config.json",
+    "test"
   ],
   "dependencies": {
     "polymer": "Polymer/polymer#^1.9.1 || ^2.0.0",
