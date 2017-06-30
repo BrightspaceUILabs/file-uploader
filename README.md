@@ -1,5 +1,8 @@
 # file-uploader
-A polymer component for file uploader with drag and drop capability. This component does not perform the actual uploading work, it would just provide you an array of the selected file(s) in JavaScript File interface (https://developer.mozilla.org/en/docs/Web/API/File). 
+[![Bower version][bower-image]][bower-url]
+[![Build status][ci-image]][ci-url]
+
+A polymer component for file uploader with drag and drop capability. This component does not perform the actual uploading work, it would just provide you an array of the selected file(s) in JavaScript File interface (https://developer.mozilla.org/en/docs/Web/API/File).
 
 ## Installation
 'd2l-file-uploader' can be installed from Bower:
@@ -32,7 +35,7 @@ Attributes:
 <d2l-file-uploader multiple></d2l-file-uploader>
 ```
 
-* language - to specify what language the file uploader is in. Currently it supports: en, ar-SA, de-DE, es-MX, fr-CA, ja-JP, ko-KR, nb-NO, nl-NL, pt-BR, sv-SE, tr-TR, zh-CN, zh-TW. If the language attribute is not present, it will default to english. 
+* language - to specify what language the file uploader is in. Currently it supports: en, ar-SA, de-DE, es-MX, fr-CA, ja-JP, ko-KR, nb-NO, nl-NL, pt-BR, sv-SE, tr-TR, zh-CN, zh-TW. If the language attribute is not present, it will default to english.
 
 ```shell
 <d2l-file-uploader language='fr-CA'></d2l-file-uploader>
@@ -59,7 +62,7 @@ The selected file(s) info is delivered as part of a custom event "file-added-to-
 document.querySelector('d2l-file-uploader').addEventListener('file-added-to-upload', this._fileAdded);
 ```
 
-or 
+or
 
 ```shell
 // Adding event listener declaratively does not work well when the component is used in React
@@ -71,7 +74,7 @@ The JavaScript File interface of the selected file(s) will be in the "detail" ar
 ```shell
 _fileAdded( event ) {
 	console.log( event.detail[0] );
-} 
+}
 ```
 
 ## Tests
@@ -79,12 +82,16 @@ _fileAdded( event ) {
 For lint stuff, run:
 
 ```shell
-npm test
+npm run lint
 ```
 
-
-For unit tests, need to install web-component-tester globally, and run:
+For linting and unit tests, run:
 
 ```shell
-wct --skip-plugin sauce
+npm run test
 ```
+
+[bower-url]: http://bower.io/search/?q=d2l-file-uploader
+[bower-image]: https://img.shields.io/bower/v/d2l-file-uploader.svg
+[ci-url]: https://travis-ci.org/BrightspaceUI/file-uploader
+[ci-image]: https://travis-ci.org/BrightspaceUI/file-uploader.svg?branch=master

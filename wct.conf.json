@@ -1,10 +1,10 @@
 {
-  "plugins": {
-    "local": {
-        "browsers": ["firefox"]
-    },
-    "sauce": {
-		"browsers": [
+	"plugins": {
+		"local": {
+			"browsers": ["chrome"]
+		},
+		"sauce": {
+			"browsers": [
 				{
 					"browserName": "chrome",
 					"platform": "OS X 10.12",

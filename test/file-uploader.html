@@ -30,16 +30,6 @@
 					done();
 				});
 
-				/*
-				it('error', function(done) {
-					var errorEvent = document.createEvent('event');
-					errorEvent.dataTransfer = {files:[{},{}]};
-					fileUploader._fileDropHandler(errorEvent);
-					assert.isTrue(fileUploader.error);
-					done();
-				});
-				*/
-				
 				it('file length is 1', function(done) {
 					var event = document.createEvent('event');
 					event.dataTransfer = {files:[{}]};
@@ -52,7 +42,7 @@
 			describe('multiple-file-upload', function() {
 				var fileUploader;
 				var event = document.createEvent('event');
-				event.dataTransfer = {files:[{},{}]};
+				event.dataTransfer = {files:[{}, {}]};
 
 				beforeEach(function() {
 					fileUploader = fixture('MultipleFile');
@@ -68,13 +58,13 @@
 					assert.isFalse(fileUploader.error);
 					done();
 				});
-				
+
 				it('file length is 2', function(done) {
 					fileUploader._fileDropHandler(event);
 					assert.lengthOf(fileUploader.files, 2);
 					done();
 				});
-		  });
+			});
 		</script>
 	</body>
 </html>
