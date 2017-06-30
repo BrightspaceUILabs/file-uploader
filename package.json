@@ -3,11 +3,11 @@
   "description": "Polymer-based web components for D2L file uploader",
   "private": true,
   "scripts": {
-    "postinstall": "bower install",
-    "test:lint": "npm run test:lint:wc && npm run test:lint:html",
-    "test:lint:html": "eslint *.html",
-    "test:lint:wc": "polymer lint -i d2l-file-uploader.html",
-    "test": "npm run test:lint"
+    "postinstall": "polymer install --variants",
+    "lint": "npm run lint:wc && npm run lint:html",
+    "lint:html": "eslint *.html demo/*.html test/*.html",
+    "lint:wc": "polymer lint",
+    "test": "npm run lint && polymer test --skip-plugin sauce"
   },
   "repository": {
     "type": "git",
@@ -16,12 +16,9 @@
   "author": "D2L Corporation",
   "license": "Apache-2.0",
   "devDependencies": {
-    "bower": "^1.8.0",
-    "eslint": "^3.19.0",
-    "eslint-config-brightspace": "^0.2.4",
-    "eslint-plugin-html": "^2.0.1",
-    "polymer-cli": "^0.17.0",
-    "sauce-connect-launcher": "^1.2.2",
-    "sauceconnect-runner": "git+https://github.com/Brightspace/sauceconnect-runner.git#v0.3.0"
+    "eslint": "^4.1.1",
+    "eslint-config-brightspace": "^0.3.1",
+    "eslint-plugin-html": "^3.0.0",
+    "polymer-cli": "^1.2.0"
   }
-} 
+}
