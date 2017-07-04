@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+		<title>d2l-file-uploader demo</title>
+		<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+		<link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+		<link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+		<link rel="import" href="../d2l-file-uploader.html">
+		<custom-style>
+			<style is="custom-style" include="demo-pages-shared-styles"></style>
+		</custom-style>
+	</head>
+	<body unresolved>
+		<div class="vertical-section-container centered">
+
+			<h2>Basic Uploader</h2>
+			<demo-snippet>
+				<template>
+					<d2l-file-uploader></d2l-file-uploader>
+				</template>
+			</demo-snippet>
+
+			<h2>Customized Language</h2>
+			<demo-snippet>
+				<template>
+					<d2l-file-uploader language="fr-CA"></d2l-file-uploader>
+				</template>
+			</demo-snippet>
+
+			<h2>Error Message</h2>
+			<demo-snippet>
+				<template>
+					<d2l-file-uploader error error-message="A terrible error has occurred."></d2l-file-uploader>
+				</template>
+			</demo-snippet>
+
+		</div>
+	</body>
+</html>
