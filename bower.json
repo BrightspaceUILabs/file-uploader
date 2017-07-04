@@ -1,6 +1,6 @@
 {
   "name": "d2l-file-uploader",
-  "description": "Polymer-based web components for D2L file uploader",
+  "description": "Polymer-based web component for D2L file uploader",
   "main": "d2l-file-uploader.html",
   "license": "Apache-2.0",
   "ignore": [
