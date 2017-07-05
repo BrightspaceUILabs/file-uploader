@@ -15,7 +15,6 @@
   "dependencies": {
     "app-localize-behavior": "PolymerElements/app-localize-behavior#^1.0.2 || ^2.0.0",
     "d2l-colors": "^2.4.0 || ^3.1.0",
-    "d2l-typography": "^5.4.0 || ^6.0.0",
     "polymer": "Polymer/polymer#^1.9.1 || ^2.0.0"
   },
   "devDependencies": {
@@ -30,7 +29,6 @@
       "dependencies": {
         "app-localize-behavior": "PolymerElements/app-localize-behavior#^1.0.2",
         "d2l-colors": "^2.4.0",
-        "d2l-typography": "^5.4.0",
         "polymer": "Polymer/polymer#^1.9.1"
       },
       "devDependencies": {
