@@ -10,115 +10,101 @@
 <dom-module id="d2l-file-uploader">
 	<template strip-whitespace>
 		<style include="d2l-typography">
-			#drop_zone {
+			.d2l-file-uploader-drop-zone {
 				border: 2px dashed;
 				border-radius: 0.3rem;
-				text-align: center;
 				height: auto;
-				width: auto;
 				max-width: 27rem;
+				text-align: center;
+				width: auto;
 			}
 
-			:host([_file-drag-over]) #drop_zone {
+			:host([_file-drag-over]) .d2l-file-uploader-drop-zone {
 				color: var(--d2l-color-celestine);
 				background-color: var(--d2l-color-celestine-plus-2);
 			}
 
-			#file_upload_icon {
+			.d2l-file-uploader-icon {
 				padding-top: 1.3rem;
 				padding-bottom: 0.5rem;
 			}
 
-			:host([_file-drag-over]) #file_upload_icon svg path {
+			:host([_file-drag-over]) .d2l-file-uploader-icon svg path {
 				fill: var(--d2l-color-celestine);
-			}
-
-			d2l-icon#file_upload_icon {
-				--d2l-icon-height: 3rem;
-				--d2l-icon-width: 3rem;
 			}
 
 			#file_upload_input_1 {
 				display: block;
-				width: 3.1rem;
-    			height: 0.9rem;
-				position: absolute;
-				opacity: 0;
-				top: 0;
+				height: 0.9rem;
 				left: 0;
+				opacity: 0;
+				position: absolute;
+				top: 0;
+				width: 3.1rem;
 			}
 
 			#file_upload_input_2 {
 				display: none;
 			}
 
-			#browse_label {
-				position: relative;
-				overflow: hidden;
-				padding-right: 0px;
-				border: none;
+			.d2l-file-uploader-browse-label {
 				background: none;
+				border: none;
 				color: var(--d2l-color-celestine);
+				overflow: hidden;
+				padding-right: 0;
+				position: relative;
 			}
 
-			#browse_label:hover, #file_upload_input_1:focus + label, #file_upload_input_1:hover + label {
+			.d2l-file-uploader-browse-label:hover, #file_upload_input_1:focus + label, #file_upload_input_1:hover + label {
 				color: var(--d2l-color-celestine-minus-1);
 				text-decoration: underline;
 			}
 
-			#browse_button {
+			.d2l-file-uploader-browse-button {
 				display: none;
 			}
 
-			#file_upload_text {
+			.d2l-file-uploader-text {
 				margin-bottom: 1.3rem;
 			}
 
-			#input-container1 {
-				position: relative;
-				overflow: hidden;
-				padding-right: 0px;
-				border: none;
+			.d2l-file-uploader-input-container1 {
 				background: none;
+				border: none;
 				display: inline;
+				overflow: hidden;
+				padding-right: 0;
+				position: relative;
 			}
 
-			#input-container2 {
+			.d2l-file-uploader-input-container2 {
+				display: table;
 				position: relative;
 				margin:auto;
 				margin-top: 0.8rem;
 				margin-bottom: 0.8rem;
-				display:table;
 			}
 
-			#error {
-				width: auto;
-				max-width: 25.65rem;
-				padding-top: 0.7rem;
-				padding-bottom: 0.7rem;
-				padding-left: 1rem;
-				border: 1px solid;
-				border-color: var(--d2l-color-mica);
-				border-radius: 0.3rem;
+			.d2l-file-uploader-error {
+				-webkit-animation-name: errorIn;
+				animation-name: errorIn;
+				-webkit-animation-duration: 0.7s;
+				animation-duration: 0.7s;
+				border: 1px solid var(--d2l-color-mica);
 				border-left-width: 0.5rem;
 				border-left-color: var(--d2l-color-citrine);
+				border-radius: 0.3rem;
 				margin-bottom: 1.5rem;
-			}
-
-			#error div {
-				padding-top: 0.8rem;
-				padding-left: 1rem;
-			}
-
-			.error-anim {
-				animation-name: errorIn;
-				animation-duration: 0.7s;
+				max-width: 25.65rem;
+				padding: 0.7rem 0 0.7rem 1rem;
+				width: auto;
 			}
 
 			@keyframes errorIn {
 				0% {
+					max-height: 0.1rem;
 					opacity: 0;
-					max-height: 0.1rem
 				}
 				20% {
 					opacity: 0;
@@ -132,7 +118,7 @@
 			}
 
 			@media (max-width: 992px) {
-				#browse_label {
+				.d2l-file-uploader-browse-label {
 					display: none;
 				}
 
@@ -142,39 +128,36 @@
 
 				#file_upload_input_2 {
 					display: block;
-					width: 7rem;
 					height: 2.1rem;
-					margin-left: 0.5rem;
-					position: absolute;
-					opacity: 0;
-					top: 0;
 					left: 0;
+					margin-left: 0.5rem;
+					opacity: 0;
+					position: absolute;
+					top: 0;
+					width: 7rem;
 				}
 
 				/* These rules are for mimicing the look and feel of d2l-button. d2l-button cannot be used here because placing a input element inside */
 				/* a button would not work on browsers other than Chrome */
-				#browse_button {
-					display: block;
-					width: auto;
+				.d2l-file-uploader-browse-button {
+					background-color: var(--d2l-color-celestine);
 					border: 1px solid;
 					border-radius: 0.3rem;
 					border-color: var(--d2l-color-celestine-minus-1);
-					padding-left: 1.5rem;
-					padding-right: 1.5rem;
-					padding-top: 0.35rem;
-					padding-bottom: 0.35rem;
+					color: #ffffff;
+					display: block;
+					font-size: 0.7rem;
+					padding: 0.35rem 1.5rem;
 					margin: auto;
 					margin-bottom: 0.4rem;
-					color: #ffffff;
-					background-color: var(--d2l-color-celestine);
-					font-size: 0.7rem;
+					width: auto;
 				}
 
-				#browse_button:hover, #file_upload_input_2:hover + #browse_button {
+				.d2l-file-uploader-browse-button:hover, #file_upload_input_2:hover + .d2l-file-uploader-browse-button {
 					background-color: var(--d2l-color-celestine-minus-1);
 				}
 
-				#file_upload_input_2:focus + #browse_button  {
+				#file_upload_input_2:focus + .d2l-file-uploader-browse-button  {
 					box-shadow: 0 0 0 4px rgba(0, 111, 191, 0.3);
 				}
 			}
@@ -182,11 +165,11 @@
 
 		<div class="d2l-typography">
 			<div>
-				<div id="error" class="error-anim" role="alert" hidden$="{{!error}}">{{errorMessage}}</div>
+				<div class="d2l-file-uploader-error" role="alert" hidden$="{{!error}}">{{errorMessage}}</div>
 			</div>
 
-			<div id="drop_zone">
-				<div id="file_upload_icon">
+			<div class="d2l-file-uploader-drop-zone">
+				<div class="d2l-file-uploader-icon">
 					<svg width="78" height="78" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 78 78">
 						<path fill="#565a5c" d="M54.76,36A3.992,3.992,0,0,1,51,38.639H42v36a3,3,0,0,1-6,0v-36H27a4,4,0,0,1-2.56-7.07l12-10a3.988,3.988,0,0,1,5.12,0l12,10A4.007,4.007,0,0,1,54.76,36Z"/>
 						<path fill="#565a5c" d="M46,53.549a1.333,1.333,0,0,0,.49.09"/>
@@ -194,17 +177,17 @@
 						<path fill="#565a5c" d="M78,36.139a17.519,17.519,0,0,1-17.5,17.5c-.17,0-1.33,0-1.5-.02l-12.51.02a1.333,1.333,0,0,1-.49-.09,1.494,1.494,0,0,1,0-2.82,1.386,1.386,0,0,1,.5-.09h14a14.5,14.5,0,0,0,1.58-28.92c-.52-.05-1.05-.08-1.58-.08h-.35a1.49,1.49,0,0,1-1-.4,2.258,2.258,0,0,1-.542-1.074c-.138-.462-.306-.916-.478-1.365a20.484,20.484,0,0,0-38.26,0q-.21.54-.39,1.08a3.353,3.353,0,0,1-.53,1.26,1.542,1.542,0,0,1-1.12.5H17.5c-.53,0-1.06.03-1.58.08a14.5,14.5,0,0,0,1.58,28.92H31.49a1.5,1.5,0,0,1,.01,3s-13.5,0-13.5-.02a4.176,4.176,0,0,1-.5.02,17.5,17.5,0,0,1-.77-34.98,23.489,23.489,0,0,1,44.54,0A17.519,17.519,0,0,1,78,36.139Z"/>
 					</svg>
 				</div>
-				<div id="file_upload_text">
+				<div class="d2l-file-uploader-text">
 					<span><span hidden$="[[multiple]]">{{localize('single_file_upload_text')}}</span>
 					<span hidden$="[[!multiple]]">{{localize('multiple_file_upload_text')}}</span>
-					<div id="input-container1">
+					<div class="d2l-file-uploader-input-container1">
 						<input id="file_upload_input_1" type="file" aria-label$="{{localize('browse')}}" multiple="[[multiple]]" on-change="_fileSelectHandler"/>
-						<label id="browse_label" for="file_upload_input_1">{{localize('browse')}}</label>
+						<label class="d2l-file-uploader-browse-label" for="file_upload_input_1">{{localize('browse')}}</label>
 					</div>
 					</span>
-					<div id="input-container2">
+					<div class="d2l-file-uploader-input-container2">
 						<input id="file_upload_input_2" type="file" aria-label$="{{localize('browse_files')}}" multiple="[[multiple]]" on-change="_fileSelectHandler"/>
-						<label id="browse_button" for="file_upload_input_2">{{localize('browse_files')}}</label>
+						<label class="d2l-file-uploader-browse-button" for="file_upload_input_2">{{localize('browse_files')}}</label>
 					</div>
 				</div>
 			</div>
