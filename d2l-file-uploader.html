@@ -2,10 +2,13 @@
 <link rel="import" href="../d2l-colors/d2l-colors.html">
 <link rel="import" href="../app-localize-behavior/app-localize-behavior.html">
 <link rel="import" href="../d2l-typography/d2l-typography.html">
+<!--
+`d2l-file-uploader` is a web component for uploading files.
 
+@demo demo/index.html
+-->
 <dom-module id="d2l-file-uploader">
-
-	<template>
+	<template strip-whitespace>
 		<style include="d2l-typography">
 			#drop_zone {
 				border: 2px dashed;
@@ -16,17 +19,17 @@
 				max-width: 27rem;
 			}
 
-			:host([file-drag-over]) #drop_zone {
-        		color: var(--d2l-color-celestine);
+			:host([_file-drag-over]) #drop_zone {
+				color: var(--d2l-color-celestine);
 				background-color: var(--d2l-color-celestine-plus-2);
-      		}
+			}
 
 			#file_upload_icon {
 				padding-top: 1.3rem;
 				padding-bottom: 0.5rem;
 			}
 
-			:host([file-drag-over]) #file_upload_icon svg path {
+			:host([_file-drag-over]) #file_upload_icon svg path {
 				fill: var(--d2l-color-celestine);
 			}
 
@@ -99,7 +102,6 @@
 				border-radius: 0.3rem;
 				border-left-width: 0.5rem;
 				border-left-color: var(--d2l-color-citrine);
-				/*border-left-color: var(--error-message-box-color);*/
 				margin-bottom: 1.5rem;
 			}
 
@@ -109,22 +111,22 @@
 			}
 
 			.error-anim {
-			  animation-name: errorIn;
-			  animation-duration: 0.7s;
+				animation-name: errorIn;
+				animation-duration: 0.7s;
 			}
 
 			@keyframes errorIn {
-			  	0% {
-			    	opacity: 0;
-			   		max-height: 0.1rem
-			  	}
+				0% {
+					opacity: 0;
+					max-height: 0.1rem
+				}
 				20% {
 					opacity: 0;
 				}
 				80% {
 					max-height: 3rem;
 				}
-			  	100% {
+				100% {
 					opacity: 1;
 				}
 			}
@@ -210,77 +212,85 @@
 	</template>
 
 	<script>
-		var fileDragOverHandler;
-		var fileDragLeaveHandler;
-		var fileDragEndHandler;
-		var fileDropHandler;
-
 		Polymer({
 			is: 'd2l-file-uploader',
 
-			/** @polymerBehavior */
 			behaviors: [
 				Polymer.AppLocalizeBehavior
 			],
 
 			properties: {
-				language: {
-					type: String,
-					value: 'en',
-					notify: false
-				},
+				/**
+				 * Fired when files have been added to the uploaded.
+				 *
+				 * @event file-added-to-upload
+				 * @param {Array<File>} files Array of [File](https://developer.mozilla.org/en-US/docs/Web/API/File) objects.
+				 */
 
-				multiple: {
-					type: Boolean,
-					value: false,
-					notify: false
-				},
-
-				files: {
-					type: Object,
-					notify: false,
-					observer: '_fileChangeHandler'
-				},
-
-				fileDragOver: {
-					type: Boolean,
-					value: false,
-					notify: false,
-					reflectToAttribute: true
-				},
-
+				/**
+				 * Indicates whether the uploader is in an error state.
+				 */
 				error: {
 					type: Boolean,
 					value: false,
 					notify: true
 				},
-
+				/**
+				 * Custom error message. Displayed when `error` is `true`.
+				 */
 				errorMessage: {
 					type: String,
-					value: '',
-					notify: false
+					value: ''
+				},
+				/**
+				 * Language of the page. Should correspond to one of the supported language codes in `locales.json`.
+				 */
+				language: {
+					type: String,
+					value: 'en'
+				},
+				/**
+				 * Whether multiple files can be uploaded.
+				 */
+				multiple: {
+					type: Boolean,
+					value: false
+				},
+				/**
+				 * Collection of uploaded files, as [File](https://developer.mozilla.org/en-US/docs/Web/API/File) objects.
+				 */
+				_files: {
+					type: Object,
+					observer: '_fileChangeHandler'
+				},
+				/**
+				 * Whether a file is currently being dragged over the document.
+				 */
+				_fileDragOver: {
+					type: Boolean,
+					value: false,
+					reflectToAttribute: true
 				}
 			},
 
 			attached: function() {
+
 				this.loadResources(this.resolveUrl('locales.json'));
 
-				fileDragOverHandler = this._fileDragOverHandler.bind(this);
-				fileDragLeaveHandler = this._fileDragLeaveHandler.bind(this);
-				fileDragEndHandler = this._fileDragEndHandler.bind(this);
-				fileDropHandler = this._fileDropHandler.bind(this);
+				Polymer.RenderStatus.afterNextRender(this, function() {
+					this.listen(document, 'dragover', '__onDragOver');
+					this.listen(document, 'dragleave', '__onDragLeave');
+					this.listen(document, 'dragend', '__onDragEnd');
+					this.listen(document, 'drop', '__onDrop');
+				}.bind(this));
 
-				document.addEventListener('dragover', fileDragOverHandler);
-				document.addEventListener('dragleave', fileDragLeaveHandler);
-				document.addEventListener('dragend', fileDragEndHandler);
-				document.addEventListener('drop', fileDropHandler);
 			},
 
 			detached: function() {
-				document.removeEventListener('dragover', fileDragOverHandler);
-				document.removeEventListener('dragleave', fileDragLeaveHandler);
-				document.removeEventListener('dragend', fileDragEndHandler);
-				document.removeEventListener('drop', fileDropHandler);
+				this.unlisten(document, 'dragover', '__onDragOver');
+				this.unlisten(document, 'dragleave', '__onDragLeave');
+				this.unlisten(document, 'dragend', '__onDragEnd');
+				this.unlisten(document, 'drop', '__onDrop');
 			},
 
 			_fileSelectHandler: function(event) {
@@ -288,38 +298,36 @@
 				for (var i = 0; i < event.target.files.length; i++) {
 					files[i] = event.target.files[i];
 				}
-
-				this.files = files;
+				this._files = files;
 			},
 
-			_fileDragOverHandler: function(event) {
+			__onDragOver: function(event) {
 				event.preventDefault();
-				this.fileDragOver = true;
+				this._fileDragOver = true;
 			},
 
-			_fileDragLeaveHandler: function(event) {
+			__onDragLeave: function(event) {
 				event.preventDefault();
-				this.fileDragOver = false;
+				this._fileDragOver = false;
 			},
 
-			_fileDragEndHandler: function(event) {
-				this.fileDragOver = false;
+			__onDragEnd: function(event) {
+				this._fileDragOver = false;
 				var dataTransfer = event.dataTransfer;
 				if (dataTransfer.items) {
 					// Use DataTransferItemList interface to remove the drag data
 					for (var i = 0; i < dataTransfer.items.length; i++) {
 						dataTransfer.items.remove(i);
 					}
-				}
-				else {
+				} else {
 					// Use DataTransfer interface to remove the drag data
 					event.dataTransfer.clearData();
 				}
 			},
 
-			_fileDropHandler: function(event) {
+			__onDrop: function(event) {
 				event.preventDefault();
-				this.fileDragOver = false;
+				this._fileDragOver = false;
 				var files = [];
 				var dataTransfer = event.dataTransfer;
 				if (dataTransfer.items) {
@@ -335,8 +343,7 @@
 							files[i] = dataTransfer.items[i].getAsFile();
 						}
 					}
-				}
-				else {
+				} else {
 					if (!this.multiple && dataTransfer.files.length > 1) {
 						this.error = true;
 						this.errorMessage = this.localize('choose_one_file_to_upload');
@@ -349,7 +356,7 @@
 					}
 				}
 
-				this.files = files;
+				this._files = files;
 			},
 
 			_fileChangeHandler: function(files) {

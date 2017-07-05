@@ -1,6 +1,6 @@
 {
   "name": "d2l-file-uploader",
-  "description": "Polymer-based web components for D2L file uploader",
+  "description": "Polymer-based web component for D2L file uploader",
   "main": "d2l-file-uploader.html",
   "license": "Apache-2.0",
   "ignore": [
@@ -19,7 +19,9 @@
     "polymer": "Polymer/polymer#^1.9.1 || ^2.0.0"
   },
   "devDependencies": {
-    "d2l-demo-template": "^1.0.0",
+    "iron-component-page": "PolymerElements/iron-component-page#1 - 2",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#1 - 2",
+    "iron-test-helpers": "^2.0.0",
     "web-component-tester": "^6.0.0",
     "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
   },
@@ -32,8 +34,10 @@
         "polymer": "Polymer/polymer#^1.9.1"
       },
       "devDependencies": {
-        "d2l-demo-template": "^0.0.12",
-        "web-component-tester": "^4.0.0",
+        "iron-component-page": "PolymerElements/iron-component-page#^1.1.9",
+        "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.2.6",
+        "iron-test-helpers": "^1.4.1",
+        "web-component-tester": "^6.0.0",
         "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
       },
       "resolutions": {
