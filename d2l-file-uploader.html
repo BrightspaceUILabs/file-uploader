@@ -14,6 +14,7 @@
 				border-radius: 0.3rem;
 				height: auto;
 				max-width: 27rem;
+				padding: 1.5rem;
 				text-align: center;
 				width: auto;
 			}
@@ -24,11 +25,10 @@
 			}
 
 			.d2l-file-uploader-icon {
-				padding-top: 1.3rem;
 				padding-bottom: 0.5rem;
 			}
 
-			:host([_file-drag-over]) .d2l-file-uploader-icon svg path {
+			:host([_file-drag-over]) svg path {
 				fill: var(--d2l-color-celestine);
 			}
 
@@ -40,10 +40,6 @@
 				position: absolute;
 				top: 0;
 				width: 3.1rem;
-			}
-
-			#file_upload_input_2 {
-				display: none;
 			}
 
 			.d2l-file-uploader-browse-label {
@@ -60,29 +56,15 @@
 				text-decoration: underline;
 			}
 
-			.d2l-file-uploader-browse-button {
-				display: none;
-			}
-
-			.d2l-file-uploader-text {
-				margin-bottom: 1.3rem;
-			}
-
 			.d2l-file-uploader-input-container1 {
-				background: none;
-				border: none;
-				display: inline;
-				overflow: hidden;
-				padding-right: 0;
 				position: relative;
 			}
 
 			.d2l-file-uploader-input-container2 {
-				display: table;
+				display: none;
 				position: relative;
 				margin:auto;
 				margin-top: 0.8rem;
-				margin-bottom: 0.8rem;
 			}
 
 			.d2l-file-uploader-error {
@@ -117,12 +99,14 @@
 			}
 
 			@media (max-width: 992px) {
-				.d2l-file-uploader-browse-label {
+
+				.d2l-file-uploader-browse-label,
+				#file_upload_input_1 {
 					display: none;
 				}
 
-				#file_upload_input_1 {
-					display: none;
+				.d2l-file-uploader-input-container2 {
+					display: table;
 				}
 
 				#file_upload_input_2 {
@@ -136,7 +120,7 @@
 					width: 7rem;
 				}
 
-				/* These rules are for mimicing the look and feel of d2l-button. d2l-button cannot be used here because placing a input element inside */
+				/* These rules are for mimicking the look and feel of d2l-button. d2l-button cannot be used here because placing a input element inside */
 				/* a button would not work on browsers other than Chrome */
 				.d2l-file-uploader-browse-button {
 					background-color: var(--d2l-color-celestine);
@@ -161,33 +145,23 @@
 				}
 			}
 		</style>
-
-		<div>
+		<div class="d2l-file-uploader-error" role="alert" hidden$="{{!error}}">{{errorMessage}}</div>
+		<div class="d2l-file-uploader-drop-zone">
+			<svg width="78" height="78" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 78 78" class="d2l-file-uploader-icon">
+				<path fill="#565a5c" d="M54.76,36A3.992,3.992,0,0,1,51,38.639H42v36a3,3,0,0,1-6,0v-36H27a4,4,0,0,1-2.56-7.07l12-10a3.988,3.988,0,0,1,5.12,0l12,10A4.007,4.007,0,0,1,54.76,36Z"/>
+				<path fill="#565a5c" d="M46,53.549a1.333,1.333,0,0,0,.49.09"/>
+				<path fill="#565a5c" d="M46.5,50.639a1.386,1.386,0,0,0-.5.09"/>
+				<path fill="#565a5c" d="M78,36.139a17.519,17.519,0,0,1-17.5,17.5c-.17,0-1.33,0-1.5-.02l-12.51.02a1.333,1.333,0,0,1-.49-.09,1.494,1.494,0,0,1,0-2.82,1.386,1.386,0,0,1,.5-.09h14a14.5,14.5,0,0,0,1.58-28.92c-.52-.05-1.05-.08-1.58-.08h-.35a1.49,1.49,0,0,1-1-.4,2.258,2.258,0,0,1-.542-1.074c-.138-.462-.306-.916-.478-1.365a20.484,20.484,0,0,0-38.26,0q-.21.54-.39,1.08a3.353,3.353,0,0,1-.53,1.26,1.542,1.542,0,0,1-1.12.5H17.5c-.53,0-1.06.03-1.58.08a14.5,14.5,0,0,0,1.58,28.92H31.49a1.5,1.5,0,0,1,.01,3s-13.5,0-13.5-.02a4.176,4.176,0,0,1-.5.02,17.5,17.5,0,0,1-.77-34.98,23.489,23.489,0,0,1,44.54,0A17.519,17.519,0,0,1,78,36.139Z"/>
+			</svg>
 			<div>
-				<div class="d2l-file-uploader-error" role="alert" hidden$="{{!error}}">{{errorMessage}}</div>
-			</div>
-
-			<div class="d2l-file-uploader-drop-zone">
-				<div class="d2l-file-uploader-icon">
-					<svg width="78" height="78" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 78 78">
-						<path fill="#565a5c" d="M54.76,36A3.992,3.992,0,0,1,51,38.639H42v36a3,3,0,0,1-6,0v-36H27a4,4,0,0,1-2.56-7.07l12-10a3.988,3.988,0,0,1,5.12,0l12,10A4.007,4.007,0,0,1,54.76,36Z"/>
-						<path fill="#565a5c" d="M46,53.549a1.333,1.333,0,0,0,.49.09"/>
-						<path fill="#565a5c" d="M46.5,50.639a1.386,1.386,0,0,0-.5.09"/>
-						<path fill="#565a5c" d="M78,36.139a17.519,17.519,0,0,1-17.5,17.5c-.17,0-1.33,0-1.5-.02l-12.51.02a1.333,1.333,0,0,1-.49-.09,1.494,1.494,0,0,1,0-2.82,1.386,1.386,0,0,1,.5-.09h14a14.5,14.5,0,0,0,1.58-28.92c-.52-.05-1.05-.08-1.58-.08h-.35a1.49,1.49,0,0,1-1-.4,2.258,2.258,0,0,1-.542-1.074c-.138-.462-.306-.916-.478-1.365a20.484,20.484,0,0,0-38.26,0q-.21.54-.39,1.08a3.353,3.353,0,0,1-.53,1.26,1.542,1.542,0,0,1-1.12.5H17.5c-.53,0-1.06.03-1.58.08a14.5,14.5,0,0,0,1.58,28.92H31.49a1.5,1.5,0,0,1,.01,3s-13.5,0-13.5-.02a4.176,4.176,0,0,1-.5.02,17.5,17.5,0,0,1-.77-34.98,23.489,23.489,0,0,1,44.54,0A17.519,17.519,0,0,1,78,36.139Z"/>
-					</svg>
-				</div>
-				<div class="d2l-file-uploader-text">
-					<span><span hidden$="[[multiple]]">{{localize('single_file_upload_text')}}</span>
-					<span hidden$="[[!multiple]]">{{localize('multiple_file_upload_text')}}</span>
-					<div class="d2l-file-uploader-input-container1">
-						<input id="file_upload_input_1" type="file" aria-label$="{{localize('browse')}}" multiple="[[multiple]]" on-change="_fileSelectHandler"/>
-						<label class="d2l-file-uploader-browse-label" for="file_upload_input_1">{{localize('browse')}}</label>
-					</div>
-					</span>
-					<div class="d2l-file-uploader-input-container2">
-						<input id="file_upload_input_2" type="file" aria-label$="{{localize('browse_files')}}" multiple="[[multiple]]" on-change="_fileSelectHandler"/>
-						<label class="d2l-file-uploader-browse-button" for="file_upload_input_2">{{localize('browse_files')}}</label>
-					</div>
+				<span>{{_message}}&nbsp;</span>
+				<span class="d2l-file-uploader-input-container1">
+					<input id="file_upload_input_1" type="file" aria-label$="{{localize('browse')}}" multiple="[[multiple]]" on-change="_fileSelectHandler"/>
+					<label class="d2l-file-uploader-browse-label" for="file_upload_input_1">{{localize('browse')}}</label>
+				</span>
+				<div class="d2l-file-uploader-input-container2">
+					<input id="file_upload_input_2" type="file" aria-label$="{{localize('browse_files')}}" multiple="[[multiple]]" on-change="_fileSelectHandler"/>
+					<label class="d2l-file-uploader-browse-button" for="file_upload_input_2">{{localize('browse_files')}}</label>
 				</div>
 			</div>
 		</div>
@@ -252,6 +226,13 @@
 					type: Boolean,
 					value: false,
 					reflectToAttribute: true
+				},
+				/**
+				 * Message to display to the user.
+				 */
+				_message: {
+					type: String,
+					computed: '_computeMessage(localize, multiple)'
 				}
 			},
 
@@ -273,6 +254,11 @@
 				this.unlisten(document, 'dragleave', '__onDragLeave');
 				this.unlisten(document, 'dragend', '__onDragEnd');
 				this.unlisten(document, 'drop', '__onDrop');
+			},
+
+			_computeMessage: function(localize, multiple) {
+				var term = multiple ? 'multiple_file_upload_text' : 'single_file_upload_text';
+				return localize(term);
 			},
 
 			_fileSelectHandler: function(event) {
