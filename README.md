@@ -42,7 +42,7 @@ To allow for multiple files to be uploaded, add the `multiple` attribute:
 
 ### Setting the Language
 
-To specify what language the file uploader should use. Currently supported values: `en`, `ar-SA`, `de-DE`, `es-MX`, `fr-CA`, `ja-JP`, `ko-KR`, `nb-NO`, `nl-NL`, `pt-BR`, `sv-SE`, `tr-TR`, `zh-CN`, `zh-TW`.
+The `language` attribute sets the language the file uploader should use. Currently supported values are: `en`, `ar-SA`, `de-DE`, `es-MX`, `fr-CA`, `ja-JP`, `ko-KR`, `nb-NO`, `nl-NL`, `pt-BR`, `sv-SE`, `tr-TR`, `zh-CN`, `zh-TW`.
 
 If the language attribute is not present, it will default to English.
 
@@ -66,13 +66,12 @@ If you encounter an error scenario, an error message can be shown to the user. A
 
 When the user uploads one or more files, a `file-added-to-upload` event is fired. To listen for this event, wire up an event listener to the `<d2l-file-uploader>` element. The listener will be passed an event with an array of [File](https://developer.mozilla.org/en-US/docs/Web/API/File) objects from the [File API](https://developer.mozilla.org/en/docs/Web/API/File).
 
-Plain JavaScript:
+Vanilla JavaScript:
 
 ```html
 <d2l-file-uploader id="my-uploader" ...></d2l-file-uploader>
 <script>
-document
-	.getElementById('my-uploader')
+document.getElementById('my-uploader')
 	.addEventListener('file-added-to-upload', function(evt) {
 		var files = evt.detail;
 		console.log(files);
