@@ -1,6 +1,7 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../d2l-colors/d2l-colors.html">
 <link rel="import" href="../app-localize-behavior/app-localize-behavior.html">
+<link rel="import" href="../d2l-offscreen/d2l-offscreen-shared-styles.html">
 <!--
 `d2l-file-uploader` is a web component for uploading files.
 
@@ -8,7 +9,7 @@
 -->
 <dom-module id="d2l-file-uploader">
 	<template strip-whitespace>
-		<style>
+		<style include="d2l-offscreen-shared-styles">
 			:host {
 				box-sizing: border-box;
 				display: block;
@@ -33,6 +34,10 @@
 
 			:host([_file-drag-over]) svg path {
 				fill: var(--d2l-color-celestine);
+			}
+
+			#d2l-file-uploader-offscreen {
+				@apply --d2l-offscreen;
 			}
 
 			.d2l-file-uploader-input {
@@ -139,8 +144,10 @@
 			<div>
 				<span>{{_message}}&nbsp;</span>
 				<span class="d2l-file-uploader-input-container">
+					<span id="d2l-file-uploader-offscreen">[[label]]</span>
 					<label class="d2l-file-uploader-browse-label">
 						<input class="d2l-file-uploader-input" type="file"
+							aria-describedby="d2l-file-uploader-offscreen"
 							multiple="[[multiple]]"
 							on-change="_fileSelectHandler"
 							on-focus="__onInputFocus"
@@ -183,6 +190,13 @@
 				errorMessage: {
 					type: String,
 					value: ''
+				},
+				/**
+				 * A descriptive label to associate with the file input. Should
+				 * be unique enough to distinguish the input from others on the page.
+				 */
+				label: {
+					type: String
 				},
 				/**
 				 * Language of the page. Should correspond to one of the supported language codes in `locales.json`.
