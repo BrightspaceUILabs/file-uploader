@@ -24,15 +24,13 @@ Include the [webcomponents.js](http://webcomponents.org/polyfills/) "lite" polyf
 </head>
 ```
 
-Basic usage:
+### Basic Usage with Accessible Label
+
+It's important to always provide an accessible label which describes the purpose of the uploader using the `label` attribute. The label will be hidden visually but associated with the upload input for those using assistive technologies such as a screen reader.
 
 ```html
 <d2l-file-uploader label="profile picture"></d2l-file-uploader>
 ```
-
-### Provide an Accessible Label
-
-It's important to always provide a label which describes the purpose of the uploader. The label will be hidden visually but associated with the upload input for those using assistive technologies such as a screen reader.
 
 ### Multi-file Uploads
 
