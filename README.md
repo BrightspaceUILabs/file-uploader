@@ -4,7 +4,7 @@
 
 A [Polymer](https://www.polymer-project.org) component for uploading files with drag and drop capability. This component does not perform the actual uploading work, it simply provides visual cues and exposes an event when files have been uploaded.
 
-![screenshot of file uploader](/screenshots/file-uploader.png?raw=true)
+![screenshot of file uploader](/screenshots/file-uploader.gif?raw=true)
 
 ## Installation
 `d2l-file-uploader` can be installed from [Bower][bower-url]:
