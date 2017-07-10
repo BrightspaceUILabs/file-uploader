@@ -1,6 +1,7 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../d2l-colors/d2l-colors.html">
 <link rel="import" href="../app-localize-behavior/app-localize-behavior.html">
+<link rel="import" href="../d2l-link/d2l-link-shared-styles.html">
 <!--
 `d2l-file-uploader` is a web component for uploading files.
 
@@ -43,17 +44,12 @@
 			}
 
 			.d2l-file-uploader-browse-label {
-				background: none;
-				border: none;
-				color: var(--d2l-color-celestine);
-				overflow: hidden;
-				padding-right: 0;
+				@apply --d2l-link;
 				position: relative;
 			}
 			.d2l-file-uploader-browse-label:hover,
 			.d2l-file-uploader-browse-label-focus {
-				color: var(--d2l-color-celestine-minus-1);
-				text-decoration: underline;
+				@apply --d2l-link-hover;
 			}
 
 			.d2l-file-uploader-browse-files {
