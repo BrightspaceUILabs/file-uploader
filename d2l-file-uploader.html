@@ -9,14 +9,17 @@
 <dom-module id="d2l-file-uploader">
 	<template strip-whitespace>
 		<style>
+			:host {
+				box-sizing: border-box;
+				display: block;
+				max-width: 27rem;
+			}
+
 			.d2l-file-uploader-drop-zone {
 				border: 2px dashed var(--d2l-color-ferrite);
 				border-radius: 0.3rem;
-				height: auto;
-				max-width: 27rem;
 				padding: 1.5rem;
 				text-align: center;
-				width: auto;
 			}
 
 			:host([_file-drag-over]) .d2l-file-uploader-drop-zone {
@@ -70,9 +73,7 @@
 				border-left-color: var(--d2l-color-citrine);
 				border-radius: 0.3rem;
 				margin-bottom: 1.5rem;
-				max-width: 25.65rem;
 				padding: 0.7rem 0 0.7rem 1rem;
-				width: auto;
 			}
 
 			@keyframes errorIn {
