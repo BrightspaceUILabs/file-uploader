@@ -32,14 +32,14 @@
 				fill: var(--d2l-color-celestine);
 			}
 
-			#file_upload_input_1 {
-				display: block;
-				height: 0.9rem;
+			.d2l-file-uploader-input {
+				display: inline-block;
+				height: 100%;
 				left: 0;
 				opacity: 0;
 				position: absolute;
 				top: 0;
-				width: 3.1rem;
+				width: 100%;
 			}
 
 			.d2l-file-uploader-browse-label {
@@ -50,21 +50,14 @@
 				padding-right: 0;
 				position: relative;
 			}
-
-			.d2l-file-uploader-browse-label:hover, #file_upload_input_1:focus + label, #file_upload_input_1:hover + label {
+			.d2l-file-uploader-browse-label:hover,
+			.d2l-file-uploader-browse-label-focus {
 				color: var(--d2l-color-celestine-minus-1);
 				text-decoration: underline;
 			}
 
-			.d2l-file-uploader-input-container1 {
-				position: relative;
-			}
-
-			.d2l-file-uploader-input-container2 {
+			.d2l-file-uploader-browse-files {
 				display: none;
-				position: relative;
-				margin:auto;
-				margin-top: 0.8rem;
 			}
 
 			.d2l-file-uploader-error {
@@ -100,49 +93,40 @@
 
 			@media (max-width: 992px) {
 
-				.d2l-file-uploader-browse-label,
-				#file_upload_input_1 {
+				.d2l-file-uploader-input-container {
+					display: block;
+					margin-top: 0.8rem;
+				}
+
+				.d2l-file-uploader-browse-files {
+					display: inline;
+				}
+
+				.d2l-file-uploader-browse {
 					display: none;
 				}
 
-				.d2l-file-uploader-input-container2 {
-					display: table;
-				}
-
-				#file_upload_input_2 {
-					display: block;
-					height: 2.1rem;
-					left: 0;
-					margin-left: 0.5rem;
-					opacity: 0;
-					position: absolute;
-					top: 0;
-					width: 7rem;
-				}
-
-				/* These rules are for mimicking the look and feel of d2l-button. d2l-button cannot be used here because placing a input element inside */
-				/* a button would not work on browsers other than Chrome */
-				.d2l-file-uploader-browse-button {
+				.d2l-file-uploader-browse-label {
 					background-color: var(--d2l-color-celestine);
 					border: 1px solid;
 					border-radius: 0.3rem;
 					border-color: var(--d2l-color-celestine-minus-1);
 					color: #ffffff;
-					display: block;
+					display: inline-block;
 					font-size: 0.7rem;
 					padding: 0.35rem 1.5rem;
-					margin: auto;
-					margin-bottom: 0.4rem;
-					width: auto;
 				}
 
-				.d2l-file-uploader-browse-button:hover, #file_upload_input_2:hover + .d2l-file-uploader-browse-button {
+				.d2l-file-uploader-browse-label:hover,
+				.d2l-file-uploader-browse-label-focus {
 					background-color: var(--d2l-color-celestine-minus-1);
+					color: #ffffff;
+					text-decoration: none;
 				}
-
-				#file_upload_input_2:focus + .d2l-file-uploader-browse-button  {
+				.d2l-file-uploader-browse-label-focus {
 					box-shadow: 0 0 0 4px rgba(0, 111, 191, 0.3);
 				}
+
 			}
 		</style>
 		<div class="d2l-file-uploader-error" role="alert" hidden$="{{!error}}">{{errorMessage}}</div>
@@ -153,14 +137,17 @@
 			</svg>
 			<div>
 				<span>{{_message}}&nbsp;</span>
-				<span class="d2l-file-uploader-input-container1">
-					<input id="file_upload_input_1" type="file" aria-label$="{{localize('browse')}}" multiple="[[multiple]]" on-change="_fileSelectHandler"/>
-					<label class="d2l-file-uploader-browse-label" for="file_upload_input_1">{{localize('browse')}}</label>
+				<span class="d2l-file-uploader-input-container">
+					<label class="d2l-file-uploader-browse-label">
+						<input class="d2l-file-uploader-input" type="file"
+							multiple="[[multiple]]"
+							on-change="_fileSelectHandler"
+							on-focus="__onInputFocus"
+							on-blur="__onInputBlur" />
+						<span class="d2l-file-uploader-browse">{{localize('browse')}}</span>
+						<span class="d2l-file-uploader-browse-files">{{localize('browse_files')}}</span>
+					</label>
 				</span>
-				<div class="d2l-file-uploader-input-container2">
-					<input id="file_upload_input_2" type="file" aria-label$="{{localize('browse_files')}}" multiple="[[multiple]]" on-change="_fileSelectHandler"/>
-					<label class="d2l-file-uploader-browse-button" for="file_upload_input_2">{{localize('browse_files')}}</label>
-				</div>
 			</div>
 		</div>
 	</template>
@@ -323,6 +310,14 @@
 				}
 
 				this._files = files;
+			},
+
+			__onInputFocus: function() {
+				this.$$('.d2l-file-uploader-browse-label').classList.add('d2l-file-uploader-browse-label-focus');
+			},
+
+			__onInputBlur: function() {
+				this.$$('.d2l-file-uploader-browse-label').classList.remove('d2l-file-uploader-browse-label-focus');
 			},
 
 			_fileChangeHandler: function(files) {
