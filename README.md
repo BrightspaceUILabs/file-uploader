@@ -126,4 +126,4 @@ npm test
 [bower-url]: http://bower.io/search/?q=d2l-file-uploader
 [bower-image]: https://img.shields.io/bower/v/d2l-file-uploader.svg
 [ci-url]: https://travis-ci.org/BrightspaceUI/file-uploader
-[ci-image]: https://travis-ci.org/BrightspaceUI/file-uploader.svg?branch=master
+[ci-image]: https://travis-ci.org/BrightspaceUI/file-uploader.svg
