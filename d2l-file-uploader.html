@@ -182,14 +182,15 @@
 				error: {
 					type: Boolean,
 					value: false,
-					notify: true
+					notify: true,
+					reflectToAttribute: true
 				},
 				/**
 				 * Custom error message. Displayed when `error` is `true`.
 				 */
 				errorMessage: {
 					type: String,
-					value: ''
+					reflectToAttribute: true
 				},
 				/**
 				 * A descriptive label to associate with the file input. Should
@@ -210,7 +211,8 @@
 				 */
 				multiple: {
 					type: Boolean,
-					value: false
+					value: false,
+					reflectToAttribute: true
 				},
 				/**
 				 * Collection of uploaded files, as [File](https://developer.mozilla.org/en-US/docs/Web/API/File) objects.
@@ -240,12 +242,10 @@
 
 				this.loadResources(this.resolveUrl('locales.json'));
 
-				Polymer.RenderStatus.afterNextRender(this, function() {
-					this.listen(document, 'dragover', '__onDragOver');
-					this.listen(document, 'dragleave', '__onDragLeave');
-					this.listen(document, 'dragend', '__onDragEnd');
-					this.listen(document, 'drop', '__onDrop');
-				}.bind(this));
+				this.listen(document, 'dragover', '__onDragOver');
+				this.listen(document, 'dragleave', '__onDragLeave');
+				this.listen(document, 'dragend', '__onDragEnd');
+				this.listen(document, 'drop', '__onDrop');
 
 			},
 
@@ -306,9 +306,11 @@
 					}
 
 					// Use DataTransferItemList interface to access the file(s)
+					var count = 0;
 					for (var i = 0; i < dataTransfer.items.length; i++) {
 						if (dataTransfer.items[ i ].kind === 'file') {
-							files[i] = dataTransfer.items[i].getAsFile();
+							files[count] = dataTransfer.items[i].getAsFile();
+							count++;
 						}
 					}
 				} else {
