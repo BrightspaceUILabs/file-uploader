@@ -242,12 +242,10 @@
 
 				this.loadResources(this.resolveUrl('locales.json'));
 
-				Polymer.RenderStatus.afterNextRender(this, function() {
-					this.listen(document, 'dragover', '__onDragOver');
-					this.listen(document, 'dragleave', '__onDragLeave');
-					this.listen(document, 'dragend', '__onDragEnd');
-					this.listen(document, 'drop', '__onDrop');
-				}.bind(this));
+				this.listen(document, 'dragover', '__onDragOver');
+				this.listen(document, 'dragleave', '__onDragLeave');
+				this.listen(document, 'dragend', '__onDragEnd');
+				this.listen(document, 'drop', '__onDrop');
 
 			},
 
