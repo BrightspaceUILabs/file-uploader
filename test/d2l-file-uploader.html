@@ -1,69 +1,440 @@
 <!doctype html>
 <html>
 	<head>
-		<meta charset="UTF-8">
-		<title>d2l-file-uploader basic tests</title>
+		<meta charset="utf-8">
+		<title>d2l-file-uploader tests</title>
 		<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
 		<script src="../../web-component-tester/browser.js"></script>
 		<link rel="import" href="../d2l-file-uploader.html">
 	</head>
 	<body>
-		<test-fixture id="SingleFile">
+		<test-fixture id="single">
 			<template>
-				<d2l-file-uploader id="test-uploader"></d2l-file-uploader>
+				<d2l-file-uploader></d2l-file-uploader>
 			</template>
 		</test-fixture>
-		<test-fixture id="MultipleFile">
+		<test-fixture id="multiple">
 			<template>
-				<d2l-file-uploader id="test-uploader" multiple=true></d2l-file-uploader>
+				<d2l-file-uploader multiple></d2l-file-uploader>
+			</template>
+		</test-fixture>
+		<test-fixture id="label">
+			<template>
+				<d2l-file-uploader label="file uploader label"></d2l-file-uploader>
+			</template>
+		</test-fixture>
+		<test-fixture id="language">
+			<template>
+				<d2l-file-uploader language="fr-CA"></d2l-file-uploader>
+			</template>
+		</test-fixture>
+		<test-fixture id="error">
+			<template>
+				<d2l-file-uploader error error-message="terrible error"></d2l-file-uploader>
 			</template>
 		</test-fixture>
 		<script>
-			describe('single-file-upload', function() {
-				var fileUploader;
-				beforeEach(function() {
-					fileUploader = fixture('SingleFile');
+			describe('d2l-file-uploader', function() {
+
+				var elem;
+
+				function fixtureAndWaitForLocalization(name) {
+					return function(done) {
+						elem = fixture(name);
+						elem.addEventListener('app-localize-resources-loaded', function() {
+							done();
+						});
+					};
+				}
+
+				describe('basic', function() {
+
+					beforeEach(function() {
+						elem = fixture('single');
+					});
+
+					it('should instantiate the element', function() {
+						expect(elem.is).to.equal('d2l-file-uploader');
+					});
+
+					it('should default "language" to "en"', function() {
+						expect(elem.language).to.equal('en');
+					});
+
 				});
 
-				it('not multiple', function(done) {
-					assert.isFalse(fileUploader.multiple);
-					done();
+				describe('multiple', function() {
+
+					describe('multiple-false', function() {
+
+						beforeEach(
+							fixtureAndWaitForLocalization('single')
+						);
+
+						it('should default "multiple" to false', function() {
+							expect(elem.multiple).to.be.false;
+							expect(elem.hasAttribute('multiple')).to.be.false;
+							expect(elem.$$('input').multiple).to.be.false;
+						});
+
+						it('should reflect "multiple" property change to attribute and input', function() {
+							elem.multiple = true;
+							expect(elem.hasAttribute('multiple')).to.be.true;
+							expect(elem.$$('input').multiple).to.be.true;
+						});
+
+						it('should reflect "multiple" attribute change to property and input', function() {
+							elem.setAttribute('multiple', 'multiple');
+							expect(elem.multiple).to.be.true;
+							expect(elem.$$('input').multiple).to.be.true;
+						});
+
+					});
+
+					describe('multiple-true', function() {
+
+						beforeEach(
+							fixtureAndWaitForLocalization('multiple')
+						);
+
+						it('should default "multiple" to true', function() {
+							expect(elem.multiple).to.be.true;
+							expect(elem.hasAttribute('multiple')).to.be.true;
+							expect(elem.$$('input').multiple).to.be.true;
+						});
+
+						it('should reflect "multiple" property change to attribute and input', function() {
+							elem.multiple = false;
+							expect(elem.hasAttribute('multiple')).to.be.false;
+							expect(elem.$$('input').multiple).to.be.false;
+						});
+
+						it('should reflect "multiple" attribute change to property and input', function() {
+							elem.removeAttribute('multiple');
+							expect(elem.multiple).to.be.false;
+							expect(elem.$$('input').multiple).to.be.false;
+						});
+
+					});
+
 				});
 
-				it('file length is 1', function(done) {
-					var event = document.createEvent('event');
-					event.dataTransfer = {files:[{}]};
-					fileUploader.__onDrop(event);
-					assert.lengthOf(fileUploader._files, 1);
-					done();
-				});
-			});
+				describe('label', function() {
 
-			describe('multiple-file-upload', function() {
-				var fileUploader;
-				var event = document.createEvent('event');
-				event.dataTransfer = {files:[{}, {}]};
+					beforeEach(
+						fixtureAndWaitForLocalization('label')
+					);
 
-				beforeEach(function() {
-					fileUploader = fixture('MultipleFile');
-				});
+					it('should have the "label" set', function() {
+						expect(elem.label).to.equal('file uploader label');
+						expect(elem.getAttribute('label')).to.equal('file uploader label');
+					});
 
-				it('multiple', function(done) {
-					assert.isTrue(fileUploader.multiple);
-					done();
-				});
+					it('should apply label to offscreen text', function() {
+						expect(elem.$$('#d2l-file-uploader-offscreen').innerText)
+							.to.equal('file uploader label');
+					});
 
-				it('no error', function(done) {
-					fileUploader.__onDrop(event);
-					assert.isFalse(fileUploader.error);
-					done();
+					it('should associate offscreen text with input', function() {
+						expect(elem.$$('input').getAttribute('aria-describedby'))
+							.to.equal('d2l-file-uploader-offscreen');
+					});
+
 				});
 
-				it('file length is 2', function(done) {
-					fileUploader.__onDrop(event);
-					assert.lengthOf(fileUploader._files, 2);
-					done();
+				describe('language', function() {
+
+					beforeEach(
+						fixtureAndWaitForLocalization('language')
+					);
+
+					it('should have language of "fr-CA"', function() {
+						expect(elem.language).to.equal('fr-CA');
+						expect(elem._message).to.equal('Glissez-déposez un fichier n\'importe où dans cet écran ou');
+					});
+
 				});
+
+				describe('errors', function() {
+
+					describe('error-false', function() {
+
+						beforeEach(
+							fixtureAndWaitForLocalization('single')
+						);
+
+						it('should default "error" to false', function() {
+							expect(elem.error).to.be.false;
+							expect(elem.hasAttribute('error')).to.be.false;
+						});
+
+						it('should default "error-message" to undefined', function() {
+							expect(elem.errorMessage).to.be.undefined;
+							expect(elem.hasAttribute('error-message')).to.be.false;
+						});
+
+						it('should reflect "error" property change to attribute', function() {
+							elem.error = true;
+							expect(elem.hasAttribute('error')).to.be.true;
+						});
+
+						it('should reflect "error-message" property change to attribute', function() {
+							elem.errorMessage = 'oh no';
+							expect(elem.getAttribute('error-message')).to.equal('oh no');
+						});
+
+						it('should reflect "error" attribute change to property', function() {
+							elem.setAttribute('error', 'error');
+							expect(elem.error).to.be.true;
+						});
+
+						it('should reflect "error-message" attribute change to property', function() {
+							elem.setAttribute('error-message', 'oh no');
+							expect(elem.errorMessage).to.equal('oh no');
+						});
+
+						it('should fire "error-changed" event when "error" property changes', function(done) {
+							elem.addEventListener('error-changed', function(evt) {
+								expect(evt.detail.value).to.be.true;
+								done();
+							});
+							elem.error = true;
+						});
+
+						it('should fire "error-changed" event when "error" attribute changes', function(done) {
+							elem.addEventListener('error-changed', function(evt) {
+								expect(evt.detail.value).to.be.true;
+								done();
+							});
+							elem.setAttribute('error', 'error');
+						});
+
+					});
+
+					describe('error-true', function() {
+
+						beforeEach(
+							fixtureAndWaitForLocalization('error')
+						);
+
+						it('should default "error" to true', function() {
+							expect(elem.error).to.be.true;
+							expect(elem.hasAttribute('error')).to.be.true;
+						});
+
+						it('should default "errorMessage" to "terrible error"', function() {
+							expect(elem.errorMessage).to.equal('terrible error');
+							expect(elem.getAttribute('error-message')).to.equal('terrible error');
+						});
+
+						it('should reflect "error" property change to attribute', function() {
+							elem.error = false;
+							expect(elem.hasAttribute('error')).to.be.false;
+						});
+
+						it('should reflect "errorMessage" property change to attribute', function() {
+							elem.errorMessage = 'oh no';
+							expect(elem.getAttribute('error-message')).to.equal('oh no');
+						});
+
+						it('should reflect "errorMessage" property removal to attribute', function() {
+							elem.errorMessage = null;
+							expect(elem.hasAttribute('error-message')).to.be.false;
+						});
+
+						it('should reflect "error" attribute change to property', function() {
+							elem.removeAttribute('error');
+							expect(elem.error).to.be.false;
+						});
+
+						it('should reflect "error-message" attribute change to property', function() {
+							elem.setAttribute('error-message', 'oh no');
+							expect(elem.errorMessage).to.equal('oh no');
+						});
+
+						it('should reflect "error-message" attribute removal to property', function() {
+							elem.removeAttribute('error-message');
+							expect(elem.errorMessage).to.be.null;
+						});
+
+						it('should fire "error-changed" event when "error" property changes', function(done) {
+							elem.addEventListener('error-changed', function(evt) {
+								expect(evt.detail.value).to.be.false;
+								done();
+							});
+							elem.error = false;
+						});
+
+						it('should fire "error-changed" event when "error" attribute changes', function(done) {
+							elem.addEventListener('error-changed', function(evt) {
+								expect(evt.detail.value).to.be.false;
+								done();
+							});
+							elem.removeAttribute('error');
+						});
+
+					});
+
+				});
+
+				describe('file uploading', function() {
+
+					beforeEach(
+						fixtureAndWaitForLocalization('multiple')
+					);
+
+					describe('drag end', function() {
+
+						it('should remove items from item list on drag-end (DataTransferItemList)', function() {
+
+							var items = [{}, {}];
+							items.remove = function() {};
+							var removeSpy = sinon.spy(items, 'remove');
+
+							var event = new CustomEvent('dragend');
+							event.dataTransfer = { items: items };
+							document.dispatchEvent( event );
+
+							expect(removeSpy.calledWith(0)).to.be.true;
+							expect(removeSpy.calledWith(1)).to.be.true;
+
+						});
+
+						it('should remove items from file list on drag-end (DataTransfer)', function() {
+
+							var event = new CustomEvent('dragend');
+							event.dataTransfer = { clearData: function() {} };
+							var removeSpy = sinon.spy(event.dataTransfer, 'clearData');
+							document.dispatchEvent( event );
+
+							expect(removeSpy.calledOnce).to.be.true;
+
+						});
+
+					});
+
+					describe('drop', function() {
+
+						describe('DataTransferItemList interface', function() {
+
+							it('should fire "file-added-to-upload" event when files are dropped', function(done) {
+
+								var file1 = {};
+								var file2 = {};
+								var item1 = { kind: 'file', getAsFile: function() { return file1; } };
+								var item2 = { kind: 'file', getAsFile: function() { return file2; } };
+
+								var event = new CustomEvent('drop');
+								event.dataTransfer = { items: [item1, item2] };
+
+								elem.addEventListener('file-added-to-upload', function(evt) {
+									expect( evt.detail.length ).to.equal(2);
+									expect( evt.detail[0] ).to.equal(file1);
+									expect( evt.detail[1] ).to.equal(file2);
+									done();
+								});
+								document.dispatchEvent( event );
+
+							});
+
+							it('should ignore files that do not have "kind" of "file"', function(done) {
+
+								var file1 = {};
+								var item1 = { kind: 'file', getAsFile: function() { return file1; } };
+								var item2 = { kind: 'imposter' };
+
+								var event = new CustomEvent('drop');
+								event.dataTransfer = { items: [item1, item2] };
+
+								elem.addEventListener('file-added-to-upload', function(evt) {
+									expect( evt.detail.length ).to.equal(1);
+									expect( evt.detail[0] ).to.equal(file1);
+									done();
+								});
+								document.dispatchEvent( event );
+
+							});
+
+							it('should go into error state for single-file uploaders', function() {
+								elem.multiple = false;
+								var event = new CustomEvent('drop');
+								event.dataTransfer = { items: [{}, {}] };
+								document.dispatchEvent( event );
+								expect(elem.error).to.be.true;
+								expect(elem.errorMessage).to.equal('Choose one file to upload');
+							});
+
+							it('should not go into error state for multi-file uploaders', function() {
+								var event = new CustomEvent('drop');
+								event.dataTransfer = { items: [{}, {}] };
+								document.dispatchEvent( event );
+								expect(elem.error).to.be.false;
+							});
+
+						});
+
+						describe('DataTransfer interface', function() {
+
+							it('should fire "file-added-to-upload" event when files are dropped', function(done) {
+
+								var file1 = {};
+								var file2 = {};
+
+								var event = new CustomEvent('drop');
+								event.dataTransfer = { files: [file1, file2] };
+
+								elem.addEventListener('file-added-to-upload', function(evt) {
+									expect( evt.detail.length ).to.equal(2);
+									expect( evt.detail[0] ).to.equal(file1);
+									expect( evt.detail[1] ).to.equal(file2);
+									done();
+								});
+								document.dispatchEvent( event );
+
+							});
+
+							it('should go into error state for single-file uploaders', function() {
+								elem.multiple = false;
+								var event = new CustomEvent('drop');
+								event.dataTransfer = { files: [{}, {}] };
+								document.dispatchEvent( event );
+								expect(elem.error).to.be.true;
+								expect(elem.errorMessage).to.equal('Choose one file to upload');
+							});
+
+							it('should not go into error state for multi-file uploaders', function() {
+								var event = new CustomEvent('drop');
+								event.dataTransfer = { files: [{}, {}] };
+								document.dispatchEvent( event );
+								expect(elem.error).to.be.false;
+							});
+
+						});
+
+					});
+
+					describe('input change', function() {
+
+						it('should fire "file-added-to-upload" event when files are uploaded via input', function(done) {
+
+							var file1 = {};
+							var file2 = {};
+
+							elem.addEventListener('file-added-to-upload', function(evt) {
+								expect( evt.detail.length ).to.equal(2);
+								expect( evt.detail[0] ).to.equal(file1);
+								expect( evt.detail[1] ).to.equal(file2);
+								done();
+							});
+
+							elem._fileSelectHandler( { target: { files: [file1, file2] } } );
+
+						});
+
+					});
+
+				});
+
 			});
 		</script>
 	</body>
