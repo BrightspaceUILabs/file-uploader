@@ -306,9 +306,11 @@
 					}
 
 					// Use DataTransferItemList interface to access the file(s)
+					var count = 0;
 					for (var i = 0; i < dataTransfer.items.length; i++) {
 						if (dataTransfer.items[ i ].kind === 'file') {
-							files[i] = dataTransfer.items[i].getAsFile();
+							files[count] = dataTransfer.items[i].getAsFile();
+							count++;
 						}
 					}
 				} else {
