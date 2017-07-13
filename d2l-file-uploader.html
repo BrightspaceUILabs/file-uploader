@@ -338,7 +338,11 @@
 			},
 
 			_fileChangeHandler: function(files) {
-				this.fire('file-added-to-upload', files);
+				var evt = new CustomEvent(
+					'd2l-file-uploader-files-added',
+					{detail: {files: files}}
+				);
+				this.dispatchEvent( evt );
 			}
 		});
 	</script>
