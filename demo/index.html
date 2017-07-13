@@ -27,28 +27,33 @@
 			<h2>Single-File Uploader</h2>
 			<demo-snippet>
 				<template>
-					<d2l-file-uploader label="single"></d2l-file-uploader>
+					<d2l-file-uploader></d2l-file-uploader>
 				</template>
 			</demo-snippet>
 
 			<h2>Multiple-File Uploader</h2>
 			<demo-snippet>
 				<template>
-					<d2l-file-uploader label="multiple" multiple></d2l-file-uploader>
+					<d2l-file-uploader multiple></d2l-file-uploader>
 				</template>
 			</demo-snippet>
 
 			<h2>Customized Language</h2>
 			<demo-snippet>
 				<template>
-					<d2l-file-uploader label="francais" language="fr-CA"></d2l-file-uploader>
+					<d2l-file-uploader language="fr-CA"></d2l-file-uploader>
 				</template>
 			</demo-snippet>
 
-			<h2>Error Message</h2>
+			<h2>Feedback</h2>
 			<demo-snippet>
 				<template>
-					<d2l-file-uploader label="error" error error-message="A terrible error has occurred."></d2l-file-uploader>
+					<d2l-file-uploader feedback="Something might be wrong."></d2l-file-uploader>
+				</template>
+			</demo-snippet>
+			<demo-snippet>
+				<template>
+					<d2l-file-uploader feedback="A terrible error has occurred." feedback-type="error"></d2l-file-uploader>
 				</template>
 			</demo-snippet>
 
