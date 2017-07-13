@@ -28,9 +28,9 @@
 				<d2l-file-uploader language="fr-CA"></d2l-file-uploader>
 			</template>
 		</test-fixture>
-		<test-fixture id="error">
+		<test-fixture id="feedback">
 			<template>
-				<d2l-file-uploader error error-message="terrible error"></d2l-file-uploader>
+				<d2l-file-uploader feedback="terrible error" feedback-type="error"></d2l-file-uploader>
 			</template>
 		</test-fixture>
 		<script>
@@ -155,122 +155,143 @@
 
 				});
 
-				describe('errors', function() {
+				describe('feedback', function() {
 
-					describe('error-false', function() {
+					describe('no feedback', function() {
 
 						beforeEach(
 							fixtureAndWaitForLocalization('single')
 						);
 
-						it('should default "error" to false', function() {
-							expect(elem.error).to.be.false;
-							expect(elem.hasAttribute('error')).to.be.false;
+						it('should default "feedback-type" to "warning"', function() {
+							expect(elem.feedbackType).to.equal('warning');
+							expect(elem.getAttribute('feedback-type')).to.equal('warning');
 						});
 
-						it('should default "error-message" to undefined', function() {
-							expect(elem.errorMessage).to.be.undefined;
-							expect(elem.hasAttribute('error-message')).to.be.false;
+						it('should default "feedback" to undefined', function() {
+							expect(elem.feedback).to.be.undefined;
+							expect(elem.hasAttribute('feedback')).to.be.false;
 						});
 
-						it('should reflect "error" property change to attribute', function() {
-							elem.error = true;
-							expect(elem.hasAttribute('error')).to.be.true;
+						it('should reflect "feedback-type" property change to attribute', function() {
+							elem.feedbackType = 'error';
+							expect(elem.getAttribute('feedback-type')).to.be.equal('error');
 						});
 
-						it('should reflect "error-message" property change to attribute', function() {
-							elem.errorMessage = 'oh no';
-							expect(elem.getAttribute('error-message')).to.equal('oh no');
+						it('should reflect "feedback" property change to attribute', function() {
+							elem.feedback = 'oh no';
+							expect(elem.getAttribute('feedback')).to.equal('oh no');
 						});
 
-						it('should reflect "error" attribute change to property', function() {
-							elem.setAttribute('error', 'error');
-							expect(elem.error).to.be.true;
+						it('should reflect "feedback-type" attribute change to property', function() {
+							elem.setAttribute('feedback-type', 'error');
+							expect(elem.feedbackType).to.equal('error');
 						});
 
-						it('should reflect "error-message" attribute change to property', function() {
-							elem.setAttribute('error-message', 'oh no');
-							expect(elem.errorMessage).to.equal('oh no');
+						it('should reflect "feedback" attribute change to property', function() {
+							elem.setAttribute('feedback', 'oh no');
+							expect(elem.feedback).to.equal('oh no');
 						});
 
-						it('should fire "error-changed" event when "error" property changes', function(done) {
-							elem.addEventListener('error-changed', function(evt) {
-								expect(evt.detail.value).to.be.true;
+						it('should fire "feedback-changed" event when "feedback" property changes', function(done) {
+							elem.addEventListener('feedback-changed', function(evt) {
+								expect(evt.detail.value).to.equal('oh no');
 								done();
 							});
-							elem.error = true;
+							elem.feedback = 'oh no';
 						});
 
-						it('should fire "error-changed" event when "error" attribute changes', function(done) {
-							elem.addEventListener('error-changed', function(evt) {
-								expect(evt.detail.value).to.be.true;
+						it('should fire "feedback-changed" event when "feedback" attribute changes', function(done) {
+							elem.addEventListener('feedback-changed', function(evt) {
+								expect(evt.detail.value).to.equal('oh no');
 								done();
 							});
-							elem.setAttribute('error', 'error');
+							elem.setAttribute('feedback', 'oh no');
 						});
 
 					});
 
-					describe('error-true', function() {
+					describe('has feedback', function() {
 
 						beforeEach(
-							fixtureAndWaitForLocalization('error')
+							fixtureAndWaitForLocalization('feedback')
 						);
 
-						it('should default "error" to true', function() {
-							expect(elem.error).to.be.true;
-							expect(elem.hasAttribute('error')).to.be.true;
+						it('should default "feedback-type" to "error"', function() {
+							expect(elem.feedbackType).to.be.equal('error');
+							expect(elem.getAttribute('feedback-type')).to.equal('error');
 						});
 
-						it('should default "errorMessage" to "terrible error"', function() {
-							expect(elem.errorMessage).to.equal('terrible error');
-							expect(elem.getAttribute('error-message')).to.equal('terrible error');
+						it('should default "feedback" to "terrible error"', function() {
+							expect(elem.feedback).to.equal('terrible error');
+							expect(elem.getAttribute('feedback')).to.equal('terrible error');
 						});
 
-						it('should reflect "error" property change to attribute', function() {
-							elem.error = false;
-							expect(elem.hasAttribute('error')).to.be.false;
+						it('should reflect "feedback-type" property change to attribute', function() {
+							elem.feedbackType = 'warning';
+							expect(elem.getAttribute('feedback-type')).to.equal('warning');
 						});
 
-						it('should reflect "errorMessage" property change to attribute', function() {
-							elem.errorMessage = 'oh no';
-							expect(elem.getAttribute('error-message')).to.equal('oh no');
+						it('should reflect "feedback" property change to attribute', function() {
+							elem.feedback = 'oh no';
+							expect(elem.getAttribute('feedback')).to.equal('oh no');
 						});
 
-						it('should reflect "errorMessage" property removal to attribute', function() {
-							elem.errorMessage = null;
-							expect(elem.hasAttribute('error-message')).to.be.false;
+						it('should reflect "feedback" property removal to attribute', function() {
+							elem.feedback = null;
+							expect(elem.hasAttribute('feedback')).to.be.false;
 						});
 
-						it('should reflect "error" attribute change to property', function() {
-							elem.removeAttribute('error');
-							expect(elem.error).to.be.false;
+						it('should reflect "feedback-type" attribute change to property', function() {
+							elem.setAttribute('feedback-type', 'warning');
+							expect(elem.feedbackType).to.equal('warning');
 						});
 
-						it('should reflect "error-message" attribute change to property', function() {
-							elem.setAttribute('error-message', 'oh no');
-							expect(elem.errorMessage).to.equal('oh no');
+						it('should reflect "feedback-type" attribute removal to property', function() {
+							elem.removeAttribute('feedback-type');
+							expect(elem.feedbackType).to.be.null;
 						});
 
-						it('should reflect "error-message" attribute removal to property', function() {
-							elem.removeAttribute('error-message');
-							expect(elem.errorMessage).to.be.null;
+						it('should reflect "feedback" attribute change to property', function() {
+							elem.setAttribute('feedback', 'oh no');
+							expect(elem.feedback).to.equal('oh no');
 						});
 
-						it('should fire "error-changed" event when "error" property changes', function(done) {
-							elem.addEventListener('error-changed', function(evt) {
-								expect(evt.detail.value).to.be.false;
+						it('should reflect "feedback" attribute removal to property', function() {
+							elem.removeAttribute('feedback');
+							expect(elem.feedback).to.be.null;
+						});
+
+						it('should fire "feedback-changed" event when "feedback" property changes', function(done) {
+							elem.addEventListener('feedback-changed', function(evt) {
+								expect(evt.detail.value).to.equal('new feedback');
 								done();
 							});
-							elem.error = false;
+							elem.feedback = 'new feedback';
 						});
 
-						it('should fire "error-changed" event when "error" attribute changes', function(done) {
-							elem.addEventListener('error-changed', function(evt) {
-								expect(evt.detail.value).to.be.false;
+						it('should fire "feedback-changed" event when "feedback" property is removed', function(done) {
+							elem.addEventListener('feedback-changed', function(evt) {
+								expect(evt.detail.value).to.be.null;
 								done();
 							});
-							elem.removeAttribute('error');
+							elem.feedback = null;
+						});
+
+						it('should fire "feedback-changed" event when "feedback" attribute changes', function(done) {
+							elem.addEventListener('feedback-changed', function(evt) {
+								expect(evt.detail.value).to.equal('new feedback');
+								done();
+							});
+							elem.setAttribute('feedback', 'new feedback');
+						});
+
+						it('should fire "feedback-changed" event when "feedback" attribute is removed', function(done) {
+							elem.addEventListener('feedback-changed', function(evt) {
+								expect(evt.detail.value).to.be.null;
+								done();
+							});
+							elem.removeAttribute('feedback');
 						});
 
 					});
@@ -360,15 +381,14 @@
 								var event = new CustomEvent('drop');
 								event.dataTransfer = { items: [{}, {}] };
 								document.dispatchEvent( event );
-								expect(elem.error).to.be.true;
-								expect(elem.errorMessage).to.equal('Choose one file to upload');
+								expect(elem.feedback).to.equal('Choose one file to upload');
 							});
 
 							it('should not go into error state for multi-file uploaders', function() {
 								var event = new CustomEvent('drop');
 								event.dataTransfer = { items: [{}, {}] };
 								document.dispatchEvent( event );
-								expect(elem.error).to.be.false;
+								expect(elem.feedback).to.be.null;
 							});
 
 						});
@@ -398,15 +418,14 @@
 								var event = new CustomEvent('drop');
 								event.dataTransfer = { files: [{}, {}] };
 								document.dispatchEvent( event );
-								expect(elem.error).to.be.true;
-								expect(elem.errorMessage).to.equal('Choose one file to upload');
+								expect(elem.feedback).to.equal('Choose one file to upload');
 							});
 
 							it('should not go into error state for multi-file uploaders', function() {
 								var event = new CustomEvent('drop');
 								event.dataTransfer = { files: [{}, {}] };
 								document.dispatchEvent( event );
-								expect(elem.error).to.be.false;
+								expect(elem.feedback).to.be.null;
 							});
 
 						});

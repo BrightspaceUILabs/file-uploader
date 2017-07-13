@@ -15,6 +15,12 @@
 				display: block;
 				max-width: 27rem;
 			}
+			:host([feedback-type="warning"]) {
+				--d2l-file-uploader-feedback-color: var(--d2l-color-feedback-warning);
+			}
+			:host([feedback-type="error"]) {
+				--d2l-file-uploader-feedback-color: var(--d2l-color-feedback-error);
+			}
 
 			.d2l-file-uploader-drop-zone {
 				border: 2px dashed var(--d2l-color-ferrite);
@@ -68,20 +74,30 @@
 				display: none;
 			}
 
-			.d2l-file-uploader-error {
-				-webkit-animation-name: errorIn;
-				animation-name: errorIn;
+			.d2l-file-uploader-feedback {
+				-webkit-animation-name: feedbackIn;
+				animation-name: feedbackIn;
 				-webkit-animation-duration: 0.7s;
 				animation-duration: 0.7s;
 				border: 1px solid var(--d2l-color-mica);
 				border-left-width: 0.5rem;
-				border-left-color: var(--d2l-color-citrine);
+				border-left-color: var(--d2l-file-uploader-feedback-color);
 				border-radius: 0.3rem;
+				display: none;
 				margin-bottom: 1.5rem;
-				padding: 0.7rem 0 0.7rem 1rem;
+				padding: 0.7rem 1rem 0.7rem;
+			}
+			:host-context([dir="rtl"]) > .d2l-file-uploader-feedback {
+				border-left-width: 1px;
+				border-left-color: var(--d2l-color-mica);
+				border-right-width: 0.5rem;
+				border-right-color: var(--d2l-file-uploader-feedback-color);
+			}
+			:host([feedback]) > .d2l-file-uploader-feedback {
+				display: block;
 			}
 
-			@keyframes errorIn {
+			@keyframes feedbackIn {
 				0% {
 					max-height: 0.1rem;
 					opacity: 0;
@@ -135,7 +151,7 @@
 
 			}
 		</style>
-		<div class="d2l-file-uploader-error" role="alert" hidden$="{{!error}}">{{errorMessage}}</div>
+		<div class="d2l-file-uploader-feedback" role="alert">{{feedback}}</div>
 		<div class="d2l-file-uploader-drop-zone">
 			<svg width="78" height="78" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 78 78" class="d2l-file-uploader-icon">
 				<path fill="#565a5c" d="M54.76 36A3.992 3.992 0 0 1 51 38.64h-9v36a3 3 0 0 1-6 0v-36h-9a4 4 0 0 1-2.56-7.07l12-10a3.988 3.988 0 0 1 5.12 0l12 10a4.007 4.007 0 0 1 1.2 4.43zM46 53.55a1.333 1.333 0 0 0 .49.09M46.5 50.64a1.386 1.386 0 0 0-.5.09"/>
@@ -177,20 +193,20 @@
 				 */
 
 				/**
-				 * Indicates whether the uploader is in an error state.
+				 * When set, displays a feedback message to the user. Used in conjunction with `feedback-type`.
 				 */
-				error: {
-					type: Boolean,
-					value: false,
+				feedback: {
+					type: String,
 					notify: true,
 					reflectToAttribute: true
 				},
 				/**
-				 * Custom error message. Displayed when `error` is `true`.
+				 * The type of feedback to display. One of: "error", "warning"
 				 */
-				errorMessage: {
+				feedbackType: {
 					type: String,
-					reflectToAttribute: true
+					reflectToAttribute: true,
+					value: 'warning'
 				},
 				/**
 				 * A descriptive label to associate with the file input. Should
@@ -300,10 +316,11 @@
 				var dataTransfer = event.dataTransfer;
 				if (dataTransfer.items) {
 					if (!this.multiple && dataTransfer.items.length > 1) {
-						this.error = true;
-						this.errorMessage = this.localize('choose_one_file_to_upload');
+						this.feedback = this.localize('choose_one_file_to_upload');
+						this.feedbackType = 'warning';
 						return;
 					}
+					this.feedback = null;
 
 					// Use DataTransferItemList interface to access the file(s)
 					var count = 0;
@@ -315,10 +332,11 @@
 					}
 				} else {
 					if (!this.multiple && dataTransfer.files.length > 1) {
-						this.error = true;
-						this.errorMessage = this.localize('choose_one_file_to_upload');
+						this.feedback = this.localize('choose_one_file_to_upload');
+						this.feedbackType = 'warning';
 						return;
 					}
+					this.feedback = null;
 
 					// Use DataTransfer interface to access the file(s)
 					for (var j = 0; j < dataTransfer.files.length; j++) {

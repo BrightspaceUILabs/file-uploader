@@ -52,15 +52,55 @@ If the language attribute is not present, it will default to English.
 
 ![screenshot of file uploader localized](/screenshots/localized.png?raw=true)
 
-### Displaying Errors
+### Feedback Messages
 
-If you encounter an error scenario, an error message can be shown to the user. Add the `error` attribute (boolean) and set the `error-message` attribute to a custom error message to display in the message box.
+If you encounter a scenario where you'd like to display feedback about the uploaded file(s) -- like a warning or an error -- use the `feedback` and `feedback-type` attributes.
+
+The `feedback-type` defaults to "warning":
+```html
+<d2l-file-uploader
+	feedback="Sorry, we cannot upload files larger than 1GB.">
+</d2l-file-uploader>
+```
+
+![screenshot of file uploader in warning state](/screenshots/warning.png?raw=true)
+
+But `feedback-type` can also be set to "error":
 
 ```html
-<d2l-file-uploader error error-message="An error has occurred with your upload."></d2l-file-uploader>
+<d2l-file-uploader
+	feedback="An error occurred occurred processing the upload."
+	feedback-type="error"></d2l-file-uploader>
 ```
 
 ![screenshot of file uploader in error state](/screenshots/error.png?raw=true)
+
+#### Feedback Changed Event
+
+To listen for when feedback changes within the uploader, register for the `feedback-changed` event.
+
+Vanilla JavaScript:
+
+```html
+<d2l-file-uploader id="my-uploader" ...></d2l-file-uploader>
+<script>
+document.getElementById('my-uploader')
+	.addEventListener('feedback-changed', function(evt) {
+		var feedbackMessage = evt.detail.value;
+		console.log(feedbackMessage);
+	});
+</script>
+```
+
+From within another Polymer element you can use [Polymer's annotated event listeners](https://www.polymer-project.org/2.0/docs/devguide/events#annotated-listeners):
+
+```html
+<dom-module id="my-element">
+	<template>
+		<d2l-file-uploader on-feedback-changed="handleFeedback"></d2l-file-uploader>
+	</template>
+</dom-module>
+```
 
 ### Handling Uploaded Files
 
@@ -73,7 +113,7 @@ Vanilla JavaScript:
 <script>
 document.getElementById('my-uploader')
 	.addEventListener('d2l-file-uploader-files-added', function(evt) {
-		var files = evt.detail;
+		var files = evt.detail.files;
 		console.log(files);
 	});
 </script>
