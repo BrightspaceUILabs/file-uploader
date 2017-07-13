@@ -64,7 +64,7 @@ If you encounter an error scenario, an error message can be shown to the user. A
 
 ### Handling Uploaded Files
 
-When the user uploads one or more files, a `file-added-to-upload` event is fired. To listen for this event, wire up an event listener to the `<d2l-file-uploader>` element. The listener will be passed an event with an array of [File](https://developer.mozilla.org/en-US/docs/Web/API/File) objects from the [File API](https://developer.mozilla.org/en/docs/Web/API/File).
+When the user uploads one or more files, a `d2l-file-uploader-files-added` event is fired. To listen for this event, wire up an event listener to the `<d2l-file-uploader>` element. The listener will be passed an event with an array of [File](https://developer.mozilla.org/en-US/docs/Web/API/File) objects from the [File API](https://developer.mozilla.org/en/docs/Web/API/File).
 
 Vanilla JavaScript:
 
@@ -72,7 +72,7 @@ Vanilla JavaScript:
 <d2l-file-uploader id="my-uploader" ...></d2l-file-uploader>
 <script>
 document.getElementById('my-uploader')
-	.addEventListener('file-added-to-upload', function(evt) {
+	.addEventListener('d2l-file-uploader-files-added', function(evt) {
 		var files = evt.detail;
 		console.log(files);
 	});
@@ -84,7 +84,7 @@ From within another Polymer element you can use [Polymer's annotated event liste
 ```html
 <dom-module id="my-element">
 	<template>
-		<d2l-file-uploader on-file-added-to-upload="handleFileAdded"></d2l-file-uploader>
+		<d2l-file-uploader on-d2l-file-uploader-files-added="handleFileAdded"></d2l-file-uploader>
 	</template>
 </dom-module>
 ```
