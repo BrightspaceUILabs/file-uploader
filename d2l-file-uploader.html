@@ -231,6 +231,20 @@
 					reflectToAttribute: true
 				},
 				/**
+				 * Whether a file can be dropped anywhere on the screen or just on the dropzone.
+				 */
+				dropZoneOnly: {
+					type: Boolean,
+					value: false,
+					reflectToAttribute: true
+				},
+				/**
+				 * A localized message that will override _message.
+				 */
+				message: {
+					type: String
+				},
+				/**
 				 * Collection of uploaded files, as [File](https://developer.mozilla.org/en-US/docs/Web/API/File) objects.
 				 */
 				_files: {
@@ -250,7 +264,13 @@
 				 */
 				_message: {
 					type: String,
-					computed: '_computeMessage(localize, multiple)'
+					computed: '_computeMessage(localize, multiple, message)'
+				},
+				/**
+				 * The element that is being used as the drop zone.
+				 */
+				_dropZone: {
+					type: Object
 				}
 			},
 
@@ -258,23 +278,27 @@
 
 				this.loadResources(this.resolveUrl('locales.json'));
 
-				this.listen(document, 'dragover', '__onDragOver');
-				this.listen(document, 'dragleave', '__onDragLeave');
-				this.listen(document, 'dragend', '__onDragEnd');
-				this.listen(document, 'drop', '__onDrop');
+				this._dropZone = document;
+				if (this.dropZoneOnly) {
+					this._dropZone = this.querySelector('.d2l-file-uploader-drop-zone');
+				}
 
+				this.listen(this._dropZone, 'dragover', '__onDragOver');
+				this.listen(this._dropZone, 'dragleave', '__onDragLeave');
+				this.listen(this._dropZone, 'dragend', '__onDragEnd');
+				this.listen(this._dropZone, 'drop', '__onDrop');
 			},
 
 			detached: function() {
-				this.unlisten(document, 'dragover', '__onDragOver');
-				this.unlisten(document, 'dragleave', '__onDragLeave');
-				this.unlisten(document, 'dragend', '__onDragEnd');
-				this.unlisten(document, 'drop', '__onDrop');
+				this.unlisten(this._dropZone, 'dragover', '__onDragOver');
+				this.unlisten(this._dropZone, 'dragleave', '__onDragLeave');
+				this.unlisten(this._dropZone, 'dragend', '__onDragEnd');
+				this.unlisten(this._dropZone, 'drop', '__onDrop');
 			},
 
-			_computeMessage: function(localize, multiple) {
+			_computeMessage: function(localize, multiple, message) {
 				var term = multiple ? 'multiple_file_upload_text' : 'single_file_upload_text';
-				return localize(term);
+				return message || localize(term);
 			},
 
 			_fileSelectHandler: function(event) {
