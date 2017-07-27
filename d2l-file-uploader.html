@@ -258,7 +258,7 @@
 				 */
 				_message: {
 					type: String,
-					computed: '_computeMessage(localize, multiple)'
+					computed: '_computeMessage(localize, multiple, dropZoneOnly)'
 				},
 				/**
 				 * The element that is being used as the drop zone.
@@ -287,8 +287,11 @@
 				this.unlisten(this._dropZone, 'drop', '__onDrop');
 			},
 
-			_computeMessage: function(localize, multiple) {
+			_computeMessage: function(localize, multiple, dropZoneOnly) {
 				var term = multiple ? 'multiple_file_upload_text' : 'single_file_upload_text';
+				if (dropZoneOnly) {
+					term = multiple ? 'multiple_file_upload_text_drop_zone' : 'single_file_upload_text_drop_zone';
+				}
 				return localize(term);
 			},
 
