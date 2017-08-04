@@ -1,4 +1,5 @@
 # file-uploader
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/BrightspaceUI/file-uploader)
 [![Bower version][bower-image]][bower-url]
 [![Build status][ci-image]][ci-url]
 
@@ -164,6 +165,6 @@ npm test
 ```
 
 [bower-url]: http://bower.io/search/?q=d2l-file-uploader
-[bower-image]: https://img.shields.io/bower/v/d2l-file-uploader.svg
+[bower-image]: https://badge.fury.io/bo/d2l-file-uploader.svg
 [ci-url]: https://travis-ci.org/BrightspaceUI/file-uploader
 [ci-image]: https://travis-ci.org/BrightspaceUI/file-uploader.svg
