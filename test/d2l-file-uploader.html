@@ -38,15 +38,6 @@
 
 				var elem;
 
-				function fixtureAndWaitForLocalization(name) {
-					return function(done) {
-						elem = fixture(name);
-						elem.addEventListener('app-localize-resources-loaded', function() {
-							done();
-						});
-					};
-				}
-
 				describe('basic', function() {
 
 					beforeEach(function() {
@@ -66,10 +57,6 @@
 				describe('multiple', function() {
 
 					describe('multiple-false', function() {
-
-						beforeEach(
-							fixtureAndWaitForLocalization('single')
-						);
 
 						it('should default "multiple" to false', function() {
 							expect(elem.multiple).to.be.false;
@@ -92,10 +79,6 @@
 					});
 
 					describe('multiple-true', function() {
-
-						beforeEach(
-							fixtureAndWaitForLocalization('multiple')
-						);
 
 						it('should default "multiple" to true', function() {
 							expect(elem.multiple).to.be.true;
@@ -121,10 +104,6 @@
 
 				describe('label', function() {
 
-					beforeEach(
-						fixtureAndWaitForLocalization('label')
-					);
-
 					it('should have the "label" set', function() {
 						expect(elem.label).to.equal('file uploader label');
 						expect(elem.getAttribute('label')).to.equal('file uploader label');
@@ -144,10 +123,6 @@
 
 				describe('language', function() {
 
-					beforeEach(
-						fixtureAndWaitForLocalization('language')
-					);
-
 					it('should have language of "fr-CA"', function() {
 						expect(elem.language).to.equal('fr-CA');
 						expect(elem._message).to.equal('Glissez-déposez un fichier n\'importe où dans cet écran ou');
@@ -158,10 +133,6 @@
 				describe('feedback', function() {
 
 					describe('no feedback', function() {
-
-						beforeEach(
-							fixtureAndWaitForLocalization('single')
-						);
 
 						it('should default "feedback-type" to "warning"', function() {
 							expect(elem.feedbackType).to.equal('warning');
@@ -212,10 +183,6 @@
 					});
 
 					describe('has feedback', function() {
-
-						beforeEach(
-							fixtureAndWaitForLocalization('feedback')
-						);
 
 						it('should default "feedback-type" to "error"', function() {
 							expect(elem.feedbackType).to.be.equal('error');
@@ -299,10 +266,6 @@
 				});
 
 				describe('file uploading', function() {
-
-					beforeEach(
-						fixtureAndWaitForLocalization('multiple')
-					);
 
 					describe('drag end', function() {
 
