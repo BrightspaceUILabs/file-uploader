@@ -18,6 +18,16 @@
 				<d2l-file-uploader multiple></d2l-file-uploader>
 			</template>
 		</test-fixture>
+		<test-fixture id="dropZoneOnly">
+			<template>
+				<d2l-file-uploader drop-zone-only></d2l-file-uploader>
+			</template>
+		</test-fixture>
+		<test-fixture id="dropZoneOnlyMultiple">
+			<template>
+				<d2l-file-uploader drop-zone-only multiple></d2l-file-uploader>
+			</template>
+		</test-fixture>
 		<test-fixture id="label">
 			<template>
 				<d2l-file-uploader label="file uploader label"></d2l-file-uploader>
@@ -113,6 +123,58 @@
 							elem.removeAttribute('multiple');
 							expect(elem.multiple).to.be.false;
 							expect(elem.$$('input').multiple).to.be.false;
+						});
+
+					});
+
+				});
+
+				describe('dropZoneOnly', function() {
+
+					describe('dropZoneOnly-false', function() {
+
+						beforeEach(
+							fixtureAndWaitForLocalization('single')
+						);
+
+						it('should default "dropZoneOnly" to false', function() {
+							expect(elem.dropZoneOnly).to.be.false;
+							expect(elem.hasAttribute('drop-zone-only')).to.be.false;
+							expect(elem._dropZone).to.equal(document);
+							expect(elem._message).to.equal('Drag and drop a file anywhere on this screen or');
+						});
+
+					});
+
+					describe('dropZoneOnly-true', function() {
+
+						beforeEach(
+							fixtureAndWaitForLocalization('dropZoneOnly')
+						);
+
+						it('should default "dropZoneOnly" to true', function() {
+							expect(elem.dropZoneOnly).to.be.true;
+							expect(elem.hasAttribute('drop-zone-only')).to.be.true;
+							expect(elem._dropZone).to.equal(elem.querySelector('.d2l-file-uploader-drop-zone'));
+							expect(elem._message).to.equal('Drag and drop a file anywhere in this area or');
+						});
+
+					});
+
+					describe('dropZoneOnly-true multiple-true', function() {
+
+						beforeEach(
+							fixtureAndWaitForLocalization('dropZoneOnlyMultiple')
+						);
+
+						it('should default "dropZoneOnly" to true and "multiple" to true', function() {
+							expect(elem.multiple).to.be.true;
+							expect(elem.hasAttribute('multiple')).to.be.true;
+							expect(elem.$$('input').multiple).to.be.true;
+							expect(elem.dropZoneOnly).to.be.true;
+							expect(elem.hasAttribute('drop-zone-only')).to.be.true;
+							expect(elem._dropZone).to.equal(elem.querySelector('.d2l-file-uploader-drop-zone'));
+							expect(elem._message).to.equal('Drag and drop files anywhere in this area or');
 						});
 
 					});
