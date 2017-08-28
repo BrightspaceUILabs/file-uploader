@@ -45,7 +45,7 @@ To allow for multiple files to be uploaded, add the `multiple` attribute:
 
 ### Setting the Language
 
-The `language` attribute sets the language the file uploader should use. Currently supported values are: `en`, `ar-SA`, `de-DE`, `es-MX`, `fr-CA`, `ja-JP`, `ko-KR`, `nb-NO`, `nl-NL`, `pt-BR`, `sv-SE`, `tr-TR`, `zh-CN`, `zh-TW`.
+The `language` attribute sets the language the file uploader should use. Currently supported values are: `en`, `ar-SA`, `de-DE`, `es-MX`, `fr-CA`, `ja`, `ko-KR`, `nb-NO`, `nl-NL`, `pt-BR`, `sv-SE`, `tr-TR`, `zh-CN`, `zh-TW`.
 
 If the language attribute is not present, it will default to English.
 
