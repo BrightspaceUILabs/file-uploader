@@ -58,6 +58,10 @@
 
 					describe('multiple-false', function() {
 
+						beforeEach(function() {
+							elem = fixture('single');
+						});
+
 						it('should default "multiple" to false', function() {
 							expect(elem.multiple).to.be.false;
 							expect(elem.hasAttribute('multiple')).to.be.false;
@@ -104,6 +108,10 @@
 
 				describe('label', function() {
 
+					beforeEach( function() {
+						elem = fixture('label');
+					});
+
 					it('should have the "label" set', function() {
 						expect(elem.label).to.equal('file uploader label');
 						expect(elem.getAttribute('label')).to.equal('file uploader label');
@@ -123,8 +131,12 @@
 
 				describe('language', function() {
 
-					it('should have language of "fr-CA"', function() {
-						expect(elem.language).to.equal('fr-CA');
+					beforeEach(function() {
+						elem = fixture('language');
+					});
+
+					it('should have language of "fr-ca"', function() {
+						expect(elem.language).to.equal('fr-ca');
 						expect(elem._message).to.equal('Glissez-déposez un fichier n\'importe où dans cet écran ou');
 					});
 
@@ -133,6 +145,10 @@
 				describe('feedback', function() {
 
 					describe('no feedback', function() {
+
+						beforeEach(function() {
+							elem = fixture('single');
+						});
 
 						it('should default "feedback-type" to "warning"', function() {
 							expect(elem.feedbackType).to.equal('warning');
@@ -183,6 +199,10 @@
 					});
 
 					describe('has feedback', function() {
+
+						beforeEach(function() {
+							elem = fixture('feedback');
+						});
 
 						it('should default "feedback-type" to "error"', function() {
 							expect(elem.feedbackType).to.be.equal('error');
@@ -266,6 +286,10 @@
 				});
 
 				describe('file uploading', function() {
+
+					beforeEach(function() {
+						elem = fixture('multiple');
+					});
 
 					describe('drag end', function() {
 
