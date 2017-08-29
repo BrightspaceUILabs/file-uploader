@@ -16,7 +16,7 @@
     "app-localize-behavior": "PolymerElements/app-localize-behavior#^1.0.2 || ^2.0.0",
     "d2l-colors": "^2.4.0 || ^3.1.0",
     "d2l-offscreen": "^3.0.1 || ^2.2.5",
-    "polymer": "Polymer/polymer#^1.9.1 || ^2.0.0"
+    "polymer": "Polymer/polymer#^1.9.3 || ^2.0.2"
   },
   "devDependencies": {
     "d2l-typography": "^6.0.0 || ^5.4.0",
@@ -24,7 +24,7 @@
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#1 - 2",
     "iron-test-helpers": "^2.0.0",
     "web-component-tester": "^6.0.0",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.5"
   },
   "variants": {
     "1.x": {
@@ -32,7 +32,7 @@
         "app-localize-behavior": "PolymerElements/app-localize-behavior#^1.0.2",
         "d2l-colors": "^2.4.0",
         "d2l-offscreen": "^2.2.5",
-        "polymer": "Polymer/polymer#^1.9.1"
+        "polymer": "Polymer/polymer#^1.9.3"
       },
       "devDependencies": {
         "d2l-typography": "^5.4.0",
@@ -40,14 +40,14 @@
         "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.2.6",
         "iron-test-helpers": "^1.4.1",
         "web-component-tester": "^6.0.0",
-        "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+        "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.24"
       },
       "resolutions": {
-        "webcomponentsjs": "^v0.7.0"
+        "webcomponentsjs": "^v0.7.24"
       }
     }
   },
   "resolutions": {
-    "webcomponentsjs": "^v1.0.0"
+    "webcomponentsjs": "^v1.0.5"
   }
 }
