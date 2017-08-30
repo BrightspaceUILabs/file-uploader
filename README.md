@@ -1,10 +1,13 @@
 # file-uploader
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/BrightspaceUI/file-uploader)
 [![Bower version][bower-image]][bower-url]
 [![Build status][ci-image]][ci-url]
 
-A [Polymer](https://www.polymer-project.org) component for uploading files with drag and drop capability. This component does not perform the actual uploading work, it simply provides visual cues and exposes an event when files have been uploaded.
+[Polymer](https://www.polymer-project.org) component for uploading files with drag and drop capability. This component does not perform the actual uploading work, it simply provides visual cues and exposes an event when files have been uploaded.
 
 ![screenshot of file uploader](/screenshots/file-uploader.gif?raw=true)
+
+For further information on this and other Brightspace UI components, see the docs at [ui.developers.brightspace.com](http://ui.developers.brightspace.com).
 
 ## Installation
 `d2l-file-uploader` can be installed from [Bower][bower-url]:
@@ -42,7 +45,7 @@ To allow for multiple files to be uploaded, add the `multiple` attribute:
 
 ### Setting the Language
 
-The `language` attribute sets the language the file uploader should use. Currently supported values are: `en`, `ar-SA`, `de-DE`, `es-MX`, `fr-CA`, `ja-JP`, `ko-KR`, `nb-NO`, `nl-NL`, `pt-BR`, `sv-SE`, `tr-TR`, `zh-CN`, `zh-TW`.
+The `language` attribute sets the language the file uploader should use. Currently supported values are: `en`, `ar-SA`, `de-DE`, `es-MX`, `fr-CA`, `ja`, `ko-KR`, `nb-NO`, `nl-NL`, `pt-BR`, `sv-SE`, `tr-TR`, `zh-CN`, `zh-TW`.
 
 If the language attribute is not present, it will default to English.
 
@@ -164,6 +167,6 @@ npm test
 ```
 
 [bower-url]: http://bower.io/search/?q=d2l-file-uploader
-[bower-image]: https://img.shields.io/bower/v/d2l-file-uploader.svg
+[bower-image]: https://badge.fury.io/bo/d2l-file-uploader.svg
 [ci-url]: https://travis-ci.org/BrightspaceUI/file-uploader
 [ci-image]: https://travis-ci.org/BrightspaceUI/file-uploader.svg
