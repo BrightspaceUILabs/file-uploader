@@ -150,7 +150,7 @@
 
 					it('should have language of "fr-CA"', function() {
 						expect(elem.language).to.equal('fr-CA');
-						expect(elem._message).to.equal('Glissez-déposez un fichier n\'importe où dans cet écran ou');
+						expect(elem.$$('.d2l-file-uploader-drop-zone > div > span:first-child').innerHTML).to.equal('Glissez-déposez ou&nbsp;');
 					});
 
 				});

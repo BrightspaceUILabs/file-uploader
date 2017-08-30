@@ -158,7 +158,7 @@
 				<path fill="#565a5c" d="M78 36.14a17.52 17.52 0 0 1-17.5 17.5c-.17 0-1.33 0-1.5-.02l-12.51.02a1.333 1.333 0 0 1-.49-.09 1.494 1.494 0 0 1 0-2.82 1.386 1.386 0 0 1 .5-.09h14a14.5 14.5 0 0 0 1.58-28.92c-.52-.05-1.05-.08-1.58-.08h-.35a1.49 1.49 0 0 1-1-.4 2.258 2.258 0 0 1-.542-1.075c-.138-.462-.306-.916-.478-1.365a20.484 20.484 0 0 0-38.26 0q-.21.54-.39 1.08a3.353 3.353 0 0 1-.53 1.26 1.542 1.542 0 0 1-1.12.5h-.33c-.53 0-1.06.03-1.58.08a14.5 14.5 0 0 0 1.58 28.92h13.99a1.5 1.5 0 0 1 .01 3s-13.5 0-13.5-.02a4.176 4.176 0 0 1-.5.02 17.5 17.5 0 0 1-.77-34.98 23.49 23.49 0 0 1 44.54 0A17.52 17.52 0 0 1 78 36.14z"/>
 			</svg>
 			<div>
-				<span>{{_message}}&nbsp;</span>
+				<span>{{localize('file_upload_text')}}&nbsp;</span>
 				<span class="d2l-file-uploader-input-container">
 					<span id="d2l-file-uploader-offscreen">[[label]]</span>
 					<label class="d2l-file-uploader-browse-label">
@@ -244,13 +244,6 @@
 					type: Boolean,
 					value: false,
 					reflectToAttribute: true
-				},
-				/**
-				 * Message to display to the user.
-				 */
-				_message: {
-					type: String,
-					computed: '_computeMessage(localize, multiple)'
 				}
 			},
 
@@ -270,11 +263,6 @@
 				this.unlisten(document, 'dragleave', '__onDragLeave');
 				this.unlisten(document, 'dragend', '__onDragEnd');
 				this.unlisten(document, 'drop', '__onDrop');
-			},
-
-			_computeMessage: function(localize, multiple) {
-				var term = multiple ? 'multiple_file_upload_text' : 'single_file_upload_text';
-				return localize(term);
 			},
 
 			_fileSelectHandler: function(event) {
