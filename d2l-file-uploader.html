@@ -1,12 +1,13 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../d2l-colors/d2l-colors.html">
-<link rel="import" href="../app-localize-behavior/app-localize-behavior.html">
 <link rel="import" href="../d2l-offscreen/d2l-offscreen-shared-styles.html">
+<link rel="import" href="localize-behavior.html">
 <!--
 `d2l-file-uploader` is a web component for uploading files.
 
 @demo demo/index.html
 -->
+
 <dom-module id="d2l-file-uploader">
 	<template strip-whitespace>
 		<style include="d2l-offscreen-shared-styles">
@@ -181,7 +182,7 @@
 			is: 'd2l-file-uploader',
 
 			behaviors: [
-				Polymer.AppLocalizeBehavior
+				window.D2L.PolymerBehaviors.FileUploader.LocalizeBehavior
 			],
 
 			properties: {
@@ -216,13 +217,6 @@
 					type: String
 				},
 				/**
-				 * Language of the page. Should correspond to one of the supported language codes in `locales.json`.
-				 */
-				language: {
-					type: String,
-					value: 'en'
-				},
-				/**
 				 * Whether multiple files can be uploaded.
 				 */
 				multiple: {
@@ -248,14 +242,10 @@
 			},
 
 			attached: function() {
-
-				this.loadResources(this.resolveUrl('locales.json'));
-
 				this.listen(document, 'dragover', '__onDragOver');
 				this.listen(document, 'dragleave', '__onDragLeave');
 				this.listen(document, 'dragend', '__onDragEnd');
 				this.listen(document, 'drop', '__onDrop');
-
 			},
 
 			detached: function() {

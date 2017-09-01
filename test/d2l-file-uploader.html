@@ -28,6 +28,11 @@
 				<d2l-file-uploader language="fr-CA"></d2l-file-uploader>
 			</template>
 		</test-fixture>
+		<test-fixture id="language-fallback">
+			<template>
+				<d2l-file-uploader language="fr-ZZ"></d2l-file-uploader>
+			</template>
+		</test-fixture>
 		<test-fixture id="feedback">
 			<template>
 				<d2l-file-uploader feedback="terrible error" feedback-type="error"></d2l-file-uploader>
@@ -37,15 +42,6 @@
 			describe('d2l-file-uploader', function() {
 
 				var elem;
-
-				function fixtureAndWaitForLocalization(name) {
-					return function(done) {
-						elem = fixture(name);
-						elem.addEventListener('app-localize-resources-loaded', function() {
-							done();
-						});
-					};
-				}
 
 				describe('basic', function() {
 
@@ -67,9 +63,9 @@
 
 					describe('multiple-false', function() {
 
-						beforeEach(
-							fixtureAndWaitForLocalization('single')
-						);
+						beforeEach(function() {
+							elem = fixture('single');
+						});
 
 						it('should default "multiple" to false', function() {
 							expect(elem.multiple).to.be.false;
@@ -93,9 +89,9 @@
 
 					describe('multiple-true', function() {
 
-						beforeEach(
-							fixtureAndWaitForLocalization('multiple')
-						);
+						beforeEach(function() {
+							elem = fixture('multiple');
+						});
 
 						it('should default "multiple" to true', function() {
 							expect(elem.multiple).to.be.true;
@@ -121,9 +117,9 @@
 
 				describe('label', function() {
 
-					beforeEach(
-						fixtureAndWaitForLocalization('label')
-					);
+					beforeEach(function() {
+						elem = fixture('label');
+					});
 
 					it('should have the "label" set', function() {
 						expect(elem.label).to.equal('file uploader label');
@@ -144,24 +140,34 @@
 
 				describe('language', function() {
 
-					beforeEach(
-						fixtureAndWaitForLocalization('language')
-					);
-
-					it('should have language of "fr-CA"', function() {
-						expect(elem.language).to.equal('fr-CA');
-						expect(elem.$$('.d2l-file-uploader-drop-zone > div > span:first-child').innerHTML).to.equal('Glissez-déposez ou&nbsp;');
+					beforeEach(function() {
+						elem = fixture('language');
 					});
 
+					it('should have language of "fr-CA"', function() {
+						expect(elem.language).to.equal('fr-ca');
+						expect(elem.$$('.d2l-file-uploader-drop-zone > div > span:first-child').innerHTML).to.equal('Glissez-déposez ou&nbsp;');
+					});
+				});
+
+				describe('language fallback', function() {
+					beforeEach(function() {
+						elem = fixture('language-fallback');
+					});
+
+					it('should have language of "fr"', function() {
+						expect(elem.language).to.equal('fr');
+						expect(elem.$$('.d2l-file-uploader-drop-zone > div > span:first-child').innerHTML).to.equal('Glissez-déposez ou&nbsp;');
+					});
 				});
 
 				describe('feedback', function() {
 
 					describe('no feedback', function() {
 
-						beforeEach(
-							fixtureAndWaitForLocalization('single')
-						);
+						beforeEach(function() {
+							elem = fixture('single');
+						});
 
 						it('should default "feedback-type" to "warning"', function() {
 							expect(elem.feedbackType).to.equal('warning');
@@ -213,9 +219,9 @@
 
 					describe('has feedback', function() {
 
-						beforeEach(
-							fixtureAndWaitForLocalization('feedback')
-						);
+						beforeEach(function() {
+							elem = fixture('feedback');
+						});
 
 						it('should default "feedback-type" to "error"', function() {
 							expect(elem.feedbackType).to.be.equal('error');
@@ -300,9 +306,9 @@
 
 				describe('file uploading', function() {
 
-					beforeEach(
-						fixtureAndWaitForLocalization('multiple')
-					);
+					beforeEach(function() {
+						elem = fixture('multiple');
+					});
 
 					describe('drag end', function() {
 
