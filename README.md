@@ -43,15 +43,9 @@ To allow for multiple files to be uploaded, add the `multiple` attribute:
 <d2l-file-uploader multiple ...></d2l-file-uploader>
 ```
 
-### Setting the Language
+### Localization
 
-The `language` attribute sets the language the file uploader should use. Currently supported values are: `en`, `ar-SA`, `de-DE`, `es-MX`, `fr-CA`, `ja`, `ko-KR`, `nb-NO`, `nl-NL`, `pt-BR`, `sv-SE`, `tr-TR`, `zh-CN`, `zh-TW`.
-
-If the language attribute is not present, it will default to English.
-
-```html
-<d2l-file-uploader language="fr-CA" ...></d2l-file-uploader>
-```
+The file uploader will automatically render using the language found on the HTML element -- i.e. `<html lang="fr">`. If the language attribute is not present or isn't supported, the uploader will render in English.
 
 ![screenshot of file uploader localized](/screenshots/localized.png?raw=true)
 
