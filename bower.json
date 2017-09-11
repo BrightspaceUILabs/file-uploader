@@ -13,8 +13,8 @@
     "test"
   ],
   "dependencies": {
-    "app-localize-behavior": "PolymerElements/app-localize-behavior#^1.0.2 || ^2.0.0",
     "d2l-colors": "^2.4.0 || ^3.1.0",
+    "d2l-localize-behavior": "^1.0.0",
     "d2l-offscreen": "^3.0.1 || ^2.2.5",
     "polymer": "Polymer/polymer#^1.9.3 || ^2.0.2"
   },
@@ -29,7 +29,6 @@
   "variants": {
     "1.x": {
       "dependencies": {
-        "app-localize-behavior": "PolymerElements/app-localize-behavior#^1.0.2",
         "d2l-colors": "^2.4.0",
         "d2l-offscreen": "^2.2.5",
         "polymer": "Polymer/polymer#^1.9.3"

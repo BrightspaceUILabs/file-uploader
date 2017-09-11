@@ -25,12 +25,7 @@
 		</test-fixture>
 		<test-fixture id="language">
 			<template>
-				<d2l-file-uploader language="fr-CA"></d2l-file-uploader>
-			</template>
-		</test-fixture>
-		<test-fixture id="language-fallback">
-			<template>
-				<d2l-file-uploader language="fr-ZZ"></d2l-file-uploader>
+				<d2l-file-uploader></d2l-file-uploader>
 			</template>
 		</test-fixture>
 		<test-fixture id="feedback">
@@ -41,7 +36,12 @@
 		<script>
 			describe('d2l-file-uploader', function() {
 
-				var elem;
+				var elem, htmlElem;
+
+				beforeEach(function() {
+					htmlElem = window.document.getElementsByTagName('html')[0];
+					htmlElem.removeAttribute('lang');
+				});
 
 				describe('basic', function() {
 
@@ -141,24 +141,15 @@
 				describe('language', function() {
 
 					beforeEach(function() {
+						htmlElem.setAttribute('lang', 'fr');
 						elem = fixture('language');
-					});
-
-					it('should have language of "fr-CA"', function() {
-						expect(elem.language).to.equal('fr-ca');
-						expect(elem.$$('.d2l-file-uploader-drop-zone > div > span:first-child').innerHTML).to.equal('Glissez-déposez ou&nbsp;');
-					});
-				});
-
-				describe('language fallback', function() {
-					beforeEach(function() {
-						elem = fixture('language-fallback');
 					});
 
 					it('should have language of "fr"', function() {
 						expect(elem.language).to.equal('fr');
 						expect(elem.$$('.d2l-file-uploader-drop-zone > div > span:first-child').innerHTML).to.equal('Glissez-déposez ou&nbsp;');
 					});
+
 				});
 
 				describe('feedback', function() {
