@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "postinstall": "polymer install --variants",
-    "lint": "npm run lint:wc && npm run lint:html",
-    "lint:html": "eslint *.html demo/*.html test/*.html",
-    "lint:wc": "polymer lint",
-    "test": "npm run lint && polymer test --skip-plugin sauce"
+    "test:lint": "npm run test:lint:wc && npm run test:lint:js",
+    "test:lint:js": "eslint *.html",
+    "test:lint:wc": "polymer lint -i *.html",
+    "test": "npm run test:lint && polymer test --skip-plugin sauce"
   },
   "repository": {
     "type": "git",
