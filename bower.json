@@ -4,42 +4,33 @@
   "main": "d2l-file-uploader.html",
   "license": "Apache-2.0",
   "ignore": [
+    "demo",
+    "test",
     ".editorconfig",
-    ".eslintrc",
+    ".eslintrc.json",
     ".gitignore",
     ".travis.yml",
     "package.json",
-    "wct.config.json",
-    "test"
+    "polymer.json",
+    "wct.config.json"
   ],
   "dependencies": {
-    "d2l-colors": "^2.4.0 || ^3.1.0",
+    "d2l-colors": "^3.1.2",
     "d2l-localize-behavior": "^1.0.0",
-    "d2l-offscreen": "^3.0.1 || ^2.2.5",
-    "polymer": "Polymer/polymer#^1.9.3 || ^2.0.2"
+    "d2l-offscreen": "^3.0.3",
+    "polymer": "1 - 2"
   },
   "devDependencies": {
-    "d2l-typography": "^6.0.0 || ^5.4.0",
-    "iron-component-page": "PolymerElements/iron-component-page#1 - 2",
-    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#1 - 2",
+    "d2l-typography": "^6.0.0",
+    "iron-component-page": "^2.0.0",
+    "iron-demo-helpers": "^2.0.0",
     "iron-test-helpers": "^2.0.0",
-    "web-component-tester": "^6.0.0",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.5"
+    "web-component-tester": "^6.0.0"
   },
   "variants": {
     "1.x": {
       "dependencies": {
-        "d2l-colors": "^2.4.0",
-        "d2l-offscreen": "^2.2.5",
-        "polymer": "Polymer/polymer#^1.9.3"
-      },
-      "devDependencies": {
-        "d2l-typography": "^5.4.0",
-        "iron-component-page": "PolymerElements/iron-component-page#^1.1.9",
-        "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.2.6",
-        "iron-test-helpers": "^1.4.1",
-        "web-component-tester": "^6.0.0",
-        "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.24"
+        "polymer": "^1.9.3"
       },
       "resolutions": {
         "webcomponentsjs": "^v0.7.24"
