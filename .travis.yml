@@ -1,11 +1,18 @@
 language: node_js
 node_js: node
-script:
-- npm run test:lint
-- polymer test --skip-plugin local
 addons:
-  jwt:
-    secure: P650Af+HQc1c/qBYaJgV7OT6U6ojCFgZ69qAk0bOWj7vnPw+uZj1wYdRXyYhgLpvFJYaJrs8EHQfhXB79ryP/K11qtK2A/O29Q4yiUDGRrsinsNOz/Hw/q9KdqAvoe4rs3iuaavNQ5h7+45ckRl3ooiLlvxi+qYYa+i59A7jkoy+0cNEucubIS4KwkECH3CJ5+dFQHnNLGid21y/W1YfNGAZc4FStC7YcHjiFkAsf6v3oaPZKEwGTfVz0VzZa/dfMuWlJJxjwRw4TxJWNZvZeaaUKo/ShdKSf0xbuaKFbDTJBtMiujvZIYo+VQxP/sqAVZqM1hUyXuipOa9ux4HRfGZkz64+FHhsgV5lS2ixmbXptynjh0sj3Bxq0SaTt+c4QwE+Q1sVeGJRTVyWDuI6ibvPe2daMZ/RKHrVhgosUJF4UL3Sj+Qag/oxB3RF3ub+6z6k+vZOtVseh+djJX7OQHxPs+7ccWpAI5zX8ntg4V8yfr9BiljZ2dg4/uE7OX0CAkNjM9/1cN0Zup+dYIhLO1usfiB6BNLR3L5SR6XWGd4/bFuIUlU0NLKIfouUgbztyamOo+20qCZlLk4ZgHgWzx72/9P3bKkdVQE3+mxy+gMl6b3/aopsdmdUOuLmN+s/HUpOPj+MDPH2+phczeYTjt0r/KT5nXjztyxdk/hwHIU=
+  chrome: stable
+script:
+- npm run lint
+- |
+  if [ $TRAVIS_PULL_REQUEST != false ] && [ $TRAVIS_SECURE_ENV_VARS == true ]; then
+    echo "Pull request with secure environment variables, running Sauce tests...";
+    npm run test:polymer:sauce || travis_terminate 1;
+  else
+    echo "Not a pull request and/or no secure environment variables, running headless tests...";
+    npm run test:polymer:local || travis_terminate 1;
+  fi
 env:
   global:
-    SAUCE_USERNAME: Desire2Learn
+  - SAUCE_USERNAME: Desire2Learn
+  - secure: dSqGOEPNGxnA3o9eZubz8XaFM/JaxBm7U+FIIgSspSHAUxmdDS9oEuwv8cWQsTkP7+Gv50n//tAoWpD9mjbvs2gfwiDJG4ulA/JHms7+WBt0GP+/LunC1s2QJmQXAbO11amB/n+qU7CrvLgpXFyWPeD5wekEpOWXbLnh29txtjrjbJMiT+1q9j1leeu0pQF45voW+bBZyWUULB0Yd0FyOBgps2SPc1pUyYWDyCX5BjZ81qh0+p9R68pQpoXtz90IVfzsJrZYnB/FNSZx6vuJYeBB0VPJXIuJiMjTWof1MccUHasopikA1zS2RB0P5GY+PGuhUdRbocqv2iFLyg+0sdQkHjoHoD0GzUzlFA9royyOk+76l6AWF5BYlaT80cw7jcROIksD7W5uiXj4swpahEeiA7Tnin7KcyPTCWAMAUc7jis/ACGyycgUl1dQ6Kyhid35raZ1hdVQmKrVlWQfXGBGlMjXEuxgvTOVX6EHyNqLTfA1dd7gNeIOkYJZO/SDlahPHgzjC6K5FB5I5gbHZKoDZySFf0qBW1OL6nOR5FsHi5ZaqnPBWoo8ZopX5qlL+UqquJfUM3icIwwUT9R4KTCvDCmXfdoicFRjvikZDLvhSgBScgFdab/g4ZbLCtqo2o4pJ28t5Lb/7olOKCscxYF9RxNXpHc5K0hZjHq7pWU=

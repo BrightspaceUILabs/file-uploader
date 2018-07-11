@@ -311,7 +311,7 @@
 
 							var event = new CustomEvent('dragend');
 							event.dataTransfer = { items: items };
-							document.dispatchEvent( event );
+							document.dispatchEvent(event);
 
 							expect(removeSpy.calledWith(0)).to.be.true;
 							expect(removeSpy.calledWith(1)).to.be.true;
@@ -323,7 +323,7 @@
 							var event = new CustomEvent('dragend');
 							event.dataTransfer = { clearData: function() {} };
 							var removeSpy = sinon.spy(event.dataTransfer, 'clearData');
-							document.dispatchEvent( event );
+							document.dispatchEvent(event);
 
 							expect(removeSpy.calledOnce).to.be.true;
 
@@ -346,12 +346,12 @@
 								event.dataTransfer = { items: [item1, item2] };
 
 								elem.addEventListener('d2l-file-uploader-files-added', function(evt) {
-									expect( evt.detail.files.length ).to.equal(2);
-									expect( evt.detail.files[0] ).to.equal(file1);
-									expect( evt.detail.files[1] ).to.equal(file2);
+									expect(evt.detail.files.length).to.equal(2);
+									expect(evt.detail.files[0]).to.equal(file1);
+									expect(evt.detail.files[1]).to.equal(file2);
 									done();
 								});
-								document.dispatchEvent( event );
+								document.dispatchEvent(event);
 
 							});
 
@@ -365,11 +365,11 @@
 								event.dataTransfer = { items: [item1, item2] };
 
 								elem.addEventListener('d2l-file-uploader-files-added', function(evt) {
-									expect( evt.detail.files.length ).to.equal(1);
-									expect( evt.detail.files[0] ).to.equal(file1);
+									expect(evt.detail.files.length).to.equal(1);
+									expect(evt.detail.files[0]).to.equal(file1);
 									done();
 								});
-								document.dispatchEvent( event );
+								document.dispatchEvent(event);
 
 							});
 
@@ -377,14 +377,14 @@
 								elem.multiple = false;
 								var event = new CustomEvent('drop');
 								event.dataTransfer = { items: [{}, {}] };
-								document.dispatchEvent( event );
+								document.dispatchEvent(event);
 								expect(elem.feedback).to.equal('Choose one file to upload');
 							});
 
 							it('should not go into error state for multi-file uploaders', function() {
 								var event = new CustomEvent('drop');
 								event.dataTransfer = { items: [{}, {}] };
-								document.dispatchEvent( event );
+								document.dispatchEvent(event);
 								expect(elem.feedback).to.be.null;
 							});
 
@@ -401,12 +401,12 @@
 								event.dataTransfer = { files: [file1, file2] };
 
 								elem.addEventListener('d2l-file-uploader-files-added', function(evt) {
-									expect( evt.detail.files.length ).to.equal(2);
-									expect( evt.detail.files[0] ).to.equal(file1);
-									expect( evt.detail.files[1] ).to.equal(file2);
+									expect(evt.detail.files.length).to.equal(2);
+									expect(evt.detail.files[0]).to.equal(file1);
+									expect(evt.detail.files[1]).to.equal(file2);
 									done();
 								});
-								document.dispatchEvent( event );
+								document.dispatchEvent(event);
 
 							});
 
@@ -414,14 +414,14 @@
 								elem.multiple = false;
 								var event = new CustomEvent('drop');
 								event.dataTransfer = { files: [{}, {}] };
-								document.dispatchEvent( event );
+								document.dispatchEvent(event);
 								expect(elem.feedback).to.equal('Choose one file to upload');
 							});
 
 							it('should not go into error state for multi-file uploaders', function() {
 								var event = new CustomEvent('drop');
 								event.dataTransfer = { files: [{}, {}] };
-								document.dispatchEvent( event );
+								document.dispatchEvent(event);
 								expect(elem.feedback).to.be.null;
 							});
 
@@ -437,13 +437,13 @@
 							var file2 = {};
 
 							elem.addEventListener('d2l-file-uploader-files-added', function(evt) {
-								expect( evt.detail.files.length ).to.equal(2);
-								expect( evt.detail.files[0] ).to.equal(file1);
-								expect( evt.detail.files[1] ).to.equal(file2);
+								expect(evt.detail.files.length).to.equal(2);
+								expect(evt.detail.files[0]).to.equal(file1);
+								expect(evt.detail.files[1]).to.equal(file2);
 								done();
 							});
 
-							elem._fileSelectHandler( { target: { files: [file1, file2] } } );
+							elem._fileSelectHandler({ target: { files: [file1, file2] } });
 
 						});
 
