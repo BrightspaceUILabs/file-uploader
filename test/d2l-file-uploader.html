@@ -3,9 +3,10 @@
 	<head>
 		<meta charset="utf-8">
 		<title>d2l-file-uploader tests</title>
-		<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-		<script src="../../web-component-tester/browser.js"></script>
-		<link rel="import" href="../d2l-file-uploader.html">
+		<script src="../../@babel/polyfill/browser.js"></script>
+		<script src="../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+		<script src="../../wct-browser-legacy/browser.js"></script>
+		<script type="module" src="../d2l-file-uploader.js"></script>
 	</head>
 	<body>
 		<test-fixture id="single">
@@ -33,425 +34,426 @@
 				<d2l-file-uploader feedback="terrible error" feedback-type="error"></d2l-file-uploader>
 			</template>
 		</test-fixture>
-		<script>
-			describe('d2l-file-uploader', function() {
+		<script type="module">
+import '../d2l-file-uploader.js';
+describe('d2l-file-uploader', function() {
 
-				var elem, htmlElem;
+	var elem, htmlElem;
 
-				beforeEach(function() {
-					htmlElem = window.document.getElementsByTagName('html')[0];
-					htmlElem.removeAttribute('lang');
+	beforeEach(function() {
+		htmlElem = window.document.getElementsByTagName('html')[0];
+		htmlElem.removeAttribute('lang');
+	});
+
+	describe('basic', function() {
+
+		beforeEach(function() {
+			elem = fixture('single');
+		});
+
+		it('should instantiate the element', function() {
+			expect(elem.is).to.equal('d2l-file-uploader');
+		});
+
+		it('should default "language" to "en"', function() {
+			expect(elem.language).to.equal('en');
+		});
+
+	});
+
+	describe('multiple', function() {
+
+		describe('multiple-false', function() {
+
+			beforeEach(function() {
+				elem = fixture('single');
+			});
+
+			it('should default "multiple" to false', function() {
+				expect(elem.multiple).to.be.false;
+				expect(elem.hasAttribute('multiple')).to.be.false;
+				expect(elem.$$('input').multiple).to.be.false;
+			});
+
+			it('should reflect "multiple" property change to attribute and input', function() {
+				elem.multiple = true;
+				expect(elem.hasAttribute('multiple')).to.be.true;
+				expect(elem.$$('input').multiple).to.be.true;
+			});
+
+			it('should reflect "multiple" attribute change to property and input', function() {
+				elem.setAttribute('multiple', 'multiple');
+				expect(elem.multiple).to.be.true;
+				expect(elem.$$('input').multiple).to.be.true;
+			});
+
+		});
+
+		describe('multiple-true', function() {
+
+			beforeEach(function() {
+				elem = fixture('multiple');
+			});
+
+			it('should default "multiple" to true', function() {
+				expect(elem.multiple).to.be.true;
+				expect(elem.hasAttribute('multiple')).to.be.true;
+				expect(elem.$$('input').multiple).to.be.true;
+			});
+
+			it('should reflect "multiple" property change to attribute and input', function() {
+				elem.multiple = false;
+				expect(elem.hasAttribute('multiple')).to.be.false;
+				expect(elem.$$('input').multiple).to.be.false;
+			});
+
+			it('should reflect "multiple" attribute change to property and input', function() {
+				elem.removeAttribute('multiple');
+				expect(elem.multiple).to.be.false;
+				expect(elem.$$('input').multiple).to.be.false;
+			});
+
+		});
+
+	});
+
+	describe('label', function() {
+
+		beforeEach(function() {
+			elem = fixture('label');
+		});
+
+		it('should have the "label" set', function() {
+			expect(elem.label).to.equal('file uploader label');
+			expect(elem.getAttribute('label')).to.equal('file uploader label');
+		});
+
+		it('should apply label to offscreen text', function() {
+			expect(elem.$$('#d2l-file-uploader-offscreen').innerText)
+				.to.equal('file uploader label');
+		});
+
+		it('should associate offscreen text with input', function() {
+			expect(elem.$$('input').getAttribute('aria-describedby'))
+				.to.equal('d2l-file-uploader-offscreen');
+		});
+
+	});
+
+	describe('language', function() {
+
+		beforeEach(function() {
+			htmlElem.setAttribute('lang', 'fr');
+			elem = fixture('language');
+		});
+
+		it('should have language of "fr"', function() {
+			expect(elem.language).to.equal('fr');
+			expect(elem.$$('.d2l-file-uploader-drop-zone > div > span:first-child').innerHTML).to.equal('Glisser-déposer ou&nbsp;');
+		});
+
+	});
+
+	describe('feedback', function() {
+
+		describe('no feedback', function() {
+
+			beforeEach(function() {
+				elem = fixture('single');
+			});
+
+			it('should default "feedback-type" to "warning"', function() {
+				expect(elem.feedbackType).to.equal('warning');
+				expect(elem.getAttribute('feedback-type')).to.equal('warning');
+			});
+
+			it('should default "feedback" to undefined', function() {
+				expect(elem.feedback).to.be.undefined;
+				expect(elem.hasAttribute('feedback')).to.be.false;
+			});
+
+			it('should reflect "feedback-type" property change to attribute', function() {
+				elem.feedbackType = 'error';
+				expect(elem.getAttribute('feedback-type')).to.be.equal('error');
+			});
+
+			it('should reflect "feedback" property change to attribute', function() {
+				elem.feedback = 'oh no';
+				expect(elem.getAttribute('feedback')).to.equal('oh no');
+			});
+
+			it('should reflect "feedback-type" attribute change to property', function() {
+				elem.setAttribute('feedback-type', 'error');
+				expect(elem.feedbackType).to.equal('error');
+			});
+
+			it('should reflect "feedback" attribute change to property', function() {
+				elem.setAttribute('feedback', 'oh no');
+				expect(elem.feedback).to.equal('oh no');
+			});
+
+			it('should fire "feedback-changed" event when "feedback" property changes', function(done) {
+				elem.addEventListener('feedback-changed', function(evt) {
+					expect(evt.detail.value).to.equal('oh no');
+					done();
+				});
+				elem.feedback = 'oh no';
+			});
+
+			it('should fire "feedback-changed" event when "feedback" attribute changes', function(done) {
+				elem.addEventListener('feedback-changed', function(evt) {
+					expect(evt.detail.value).to.equal('oh no');
+					done();
+				});
+				elem.setAttribute('feedback', 'oh no');
+			});
+
+		});
+
+		describe('has feedback', function() {
+
+			beforeEach(function() {
+				elem = fixture('feedback');
+			});
+
+			it('should default "feedback-type" to "error"', function() {
+				expect(elem.feedbackType).to.be.equal('error');
+				expect(elem.getAttribute('feedback-type')).to.equal('error');
+			});
+
+			it('should default "feedback" to "terrible error"', function() {
+				expect(elem.feedback).to.equal('terrible error');
+				expect(elem.getAttribute('feedback')).to.equal('terrible error');
+			});
+
+			it('should reflect "feedback-type" property change to attribute', function() {
+				elem.feedbackType = 'warning';
+				expect(elem.getAttribute('feedback-type')).to.equal('warning');
+			});
+
+			it('should reflect "feedback" property change to attribute', function() {
+				elem.feedback = 'oh no';
+				expect(elem.getAttribute('feedback')).to.equal('oh no');
+			});
+
+			it('should reflect "feedback" property removal to attribute', function() {
+				elem.feedback = null;
+				expect(elem.hasAttribute('feedback')).to.be.false;
+			});
+
+			it('should reflect "feedback-type" attribute change to property', function() {
+				elem.setAttribute('feedback-type', 'warning');
+				expect(elem.feedbackType).to.equal('warning');
+			});
+
+			it('should reflect "feedback-type" attribute removal to property', function() {
+				elem.removeAttribute('feedback-type');
+				expect(elem.feedbackType).to.be.null;
+			});
+
+			it('should reflect "feedback" attribute change to property', function() {
+				elem.setAttribute('feedback', 'oh no');
+				expect(elem.feedback).to.equal('oh no');
+			});
+
+			it('should reflect "feedback" attribute removal to property', function() {
+				elem.removeAttribute('feedback');
+				expect(elem.feedback).to.be.null;
+			});
+
+			it('should fire "feedback-changed" event when "feedback" property changes', function(done) {
+				elem.addEventListener('feedback-changed', function(evt) {
+					expect(evt.detail.value).to.equal('new feedback');
+					done();
+				});
+				elem.feedback = 'new feedback';
+			});
+
+			it('should fire "feedback-changed" event when "feedback" property is removed', function(done) {
+				elem.addEventListener('feedback-changed', function(evt) {
+					expect(evt.detail.value).to.be.null;
+					done();
+				});
+				elem.feedback = null;
+			});
+
+			it('should fire "feedback-changed" event when "feedback" attribute changes', function(done) {
+				elem.addEventListener('feedback-changed', function(evt) {
+					expect(evt.detail.value).to.equal('new feedback');
+					done();
+				});
+				elem.setAttribute('feedback', 'new feedback');
+			});
+
+			it('should fire "feedback-changed" event when "feedback" attribute is removed', function(done) {
+				elem.addEventListener('feedback-changed', function(evt) {
+					expect(evt.detail.value).to.be.null;
+					done();
+				});
+				elem.removeAttribute('feedback');
+			});
+
+		});
+
+	});
+
+	describe('file uploading', function() {
+
+		beforeEach(function() {
+			elem = fixture('multiple');
+		});
+
+		describe('drag end', function() {
+
+			it('should remove items from item list on drag-end (DataTransferItemList)', function() {
+
+				var items = [{}, {}];
+				items.remove = function() {};
+				var removeSpy = sinon.spy(items, 'remove');
+
+				var event = new CustomEvent('dragend');
+				event.dataTransfer = { items: items };
+				document.dispatchEvent(event);
+
+				expect(removeSpy.calledWith(0)).to.be.true;
+				expect(removeSpy.calledWith(1)).to.be.true;
+
+			});
+
+			it('should remove items from file list on drag-end (DataTransfer)', function() {
+
+				var event = new CustomEvent('dragend');
+				event.dataTransfer = { clearData: function() {} };
+				var removeSpy = sinon.spy(event.dataTransfer, 'clearData');
+				document.dispatchEvent(event);
+
+				expect(removeSpy.calledOnce).to.be.true;
+
+			});
+
+		});
+
+		describe('drop', function() {
+
+			describe('DataTransferItemList interface', function() {
+
+				it('should fire "d2l-file-uploader-files-added" event when files are dropped', function(done) {
+
+					var file1 = {};
+					var file2 = {};
+					var item1 = { kind: 'file', getAsFile: function() { return file1; } };
+					var item2 = { kind: 'file', getAsFile: function() { return file2; } };
+
+					var event = new CustomEvent('drop');
+					event.dataTransfer = { items: [item1, item2] };
+
+					elem.addEventListener('d2l-file-uploader-files-added', function(evt) {
+						expect(evt.detail.files.length).to.equal(2);
+						expect(evt.detail.files[0]).to.equal(file1);
+						expect(evt.detail.files[1]).to.equal(file2);
+						done();
+					});
+					document.dispatchEvent(event);
+
 				});
 
-				describe('basic', function() {
+				it('should ignore files that do not have "kind" of "file"', function(done) {
 
-					beforeEach(function() {
-						elem = fixture('single');
-					});
+					var file1 = {};
+					var item1 = { kind: 'file', getAsFile: function() { return file1; } };
+					var item2 = { kind: 'imposter' };
 
-					it('should instantiate the element', function() {
-						expect(elem.is).to.equal('d2l-file-uploader');
-					});
+					var event = new CustomEvent('drop');
+					event.dataTransfer = { items: [item1, item2] };
 
-					it('should default "language" to "en"', function() {
-						expect(elem.language).to.equal('en');
+					elem.addEventListener('d2l-file-uploader-files-added', function(evt) {
+						expect(evt.detail.files.length).to.equal(1);
+						expect(evt.detail.files[0]).to.equal(file1);
+						done();
 					});
+					document.dispatchEvent(event);
 
 				});
 
-				describe('multiple', function() {
-
-					describe('multiple-false', function() {
-
-						beforeEach(function() {
-							elem = fixture('single');
-						});
-
-						it('should default "multiple" to false', function() {
-							expect(elem.multiple).to.be.false;
-							expect(elem.hasAttribute('multiple')).to.be.false;
-							expect(elem.$$('input').multiple).to.be.false;
-						});
-
-						it('should reflect "multiple" property change to attribute and input', function() {
-							elem.multiple = true;
-							expect(elem.hasAttribute('multiple')).to.be.true;
-							expect(elem.$$('input').multiple).to.be.true;
-						});
-
-						it('should reflect "multiple" attribute change to property and input', function() {
-							elem.setAttribute('multiple', 'multiple');
-							expect(elem.multiple).to.be.true;
-							expect(elem.$$('input').multiple).to.be.true;
-						});
-
-					});
-
-					describe('multiple-true', function() {
-
-						beforeEach(function() {
-							elem = fixture('multiple');
-						});
-
-						it('should default "multiple" to true', function() {
-							expect(elem.multiple).to.be.true;
-							expect(elem.hasAttribute('multiple')).to.be.true;
-							expect(elem.$$('input').multiple).to.be.true;
-						});
-
-						it('should reflect "multiple" property change to attribute and input', function() {
-							elem.multiple = false;
-							expect(elem.hasAttribute('multiple')).to.be.false;
-							expect(elem.$$('input').multiple).to.be.false;
-						});
-
-						it('should reflect "multiple" attribute change to property and input', function() {
-							elem.removeAttribute('multiple');
-							expect(elem.multiple).to.be.false;
-							expect(elem.$$('input').multiple).to.be.false;
-						});
-
-					});
-
+				it('should go into error state for single-file uploaders', function() {
+					elem.multiple = false;
+					var event = new CustomEvent('drop');
+					event.dataTransfer = { items: [{}, {}] };
+					document.dispatchEvent(event);
+					expect(elem.feedback).to.equal('Choose one file to upload');
 				});
 
-				describe('label', function() {
-
-					beforeEach(function() {
-						elem = fixture('label');
-					});
-
-					it('should have the "label" set', function() {
-						expect(elem.label).to.equal('file uploader label');
-						expect(elem.getAttribute('label')).to.equal('file uploader label');
-					});
-
-					it('should apply label to offscreen text', function() {
-						expect(elem.$$('#d2l-file-uploader-offscreen').innerText)
-							.to.equal('file uploader label');
-					});
-
-					it('should associate offscreen text with input', function() {
-						expect(elem.$$('input').getAttribute('aria-describedby'))
-							.to.equal('d2l-file-uploader-offscreen');
-					});
-
-				});
-
-				describe('language', function() {
-
-					beforeEach(function() {
-						htmlElem.setAttribute('lang', 'fr');
-						elem = fixture('language');
-					});
-
-					it('should have language of "fr"', function() {
-						expect(elem.language).to.equal('fr');
-						expect(elem.$$('.d2l-file-uploader-drop-zone > div > span:first-child').innerHTML).to.equal('Glisser-déposer ou&nbsp;');
-					});
-
-				});
-
-				describe('feedback', function() {
-
-					describe('no feedback', function() {
-
-						beforeEach(function() {
-							elem = fixture('single');
-						});
-
-						it('should default "feedback-type" to "warning"', function() {
-							expect(elem.feedbackType).to.equal('warning');
-							expect(elem.getAttribute('feedback-type')).to.equal('warning');
-						});
-
-						it('should default "feedback" to undefined', function() {
-							expect(elem.feedback).to.be.undefined;
-							expect(elem.hasAttribute('feedback')).to.be.false;
-						});
-
-						it('should reflect "feedback-type" property change to attribute', function() {
-							elem.feedbackType = 'error';
-							expect(elem.getAttribute('feedback-type')).to.be.equal('error');
-						});
-
-						it('should reflect "feedback" property change to attribute', function() {
-							elem.feedback = 'oh no';
-							expect(elem.getAttribute('feedback')).to.equal('oh no');
-						});
-
-						it('should reflect "feedback-type" attribute change to property', function() {
-							elem.setAttribute('feedback-type', 'error');
-							expect(elem.feedbackType).to.equal('error');
-						});
-
-						it('should reflect "feedback" attribute change to property', function() {
-							elem.setAttribute('feedback', 'oh no');
-							expect(elem.feedback).to.equal('oh no');
-						});
-
-						it('should fire "feedback-changed" event when "feedback" property changes', function(done) {
-							elem.addEventListener('feedback-changed', function(evt) {
-								expect(evt.detail.value).to.equal('oh no');
-								done();
-							});
-							elem.feedback = 'oh no';
-						});
-
-						it('should fire "feedback-changed" event when "feedback" attribute changes', function(done) {
-							elem.addEventListener('feedback-changed', function(evt) {
-								expect(evt.detail.value).to.equal('oh no');
-								done();
-							});
-							elem.setAttribute('feedback', 'oh no');
-						});
-
-					});
-
-					describe('has feedback', function() {
-
-						beforeEach(function() {
-							elem = fixture('feedback');
-						});
-
-						it('should default "feedback-type" to "error"', function() {
-							expect(elem.feedbackType).to.be.equal('error');
-							expect(elem.getAttribute('feedback-type')).to.equal('error');
-						});
-
-						it('should default "feedback" to "terrible error"', function() {
-							expect(elem.feedback).to.equal('terrible error');
-							expect(elem.getAttribute('feedback')).to.equal('terrible error');
-						});
-
-						it('should reflect "feedback-type" property change to attribute', function() {
-							elem.feedbackType = 'warning';
-							expect(elem.getAttribute('feedback-type')).to.equal('warning');
-						});
-
-						it('should reflect "feedback" property change to attribute', function() {
-							elem.feedback = 'oh no';
-							expect(elem.getAttribute('feedback')).to.equal('oh no');
-						});
-
-						it('should reflect "feedback" property removal to attribute', function() {
-							elem.feedback = null;
-							expect(elem.hasAttribute('feedback')).to.be.false;
-						});
-
-						it('should reflect "feedback-type" attribute change to property', function() {
-							elem.setAttribute('feedback-type', 'warning');
-							expect(elem.feedbackType).to.equal('warning');
-						});
-
-						it('should reflect "feedback-type" attribute removal to property', function() {
-							elem.removeAttribute('feedback-type');
-							expect(elem.feedbackType).to.be.null;
-						});
-
-						it('should reflect "feedback" attribute change to property', function() {
-							elem.setAttribute('feedback', 'oh no');
-							expect(elem.feedback).to.equal('oh no');
-						});
-
-						it('should reflect "feedback" attribute removal to property', function() {
-							elem.removeAttribute('feedback');
-							expect(elem.feedback).to.be.null;
-						});
-
-						it('should fire "feedback-changed" event when "feedback" property changes', function(done) {
-							elem.addEventListener('feedback-changed', function(evt) {
-								expect(evt.detail.value).to.equal('new feedback');
-								done();
-							});
-							elem.feedback = 'new feedback';
-						});
-
-						it('should fire "feedback-changed" event when "feedback" property is removed', function(done) {
-							elem.addEventListener('feedback-changed', function(evt) {
-								expect(evt.detail.value).to.be.null;
-								done();
-							});
-							elem.feedback = null;
-						});
-
-						it('should fire "feedback-changed" event when "feedback" attribute changes', function(done) {
-							elem.addEventListener('feedback-changed', function(evt) {
-								expect(evt.detail.value).to.equal('new feedback');
-								done();
-							});
-							elem.setAttribute('feedback', 'new feedback');
-						});
-
-						it('should fire "feedback-changed" event when "feedback" attribute is removed', function(done) {
-							elem.addEventListener('feedback-changed', function(evt) {
-								expect(evt.detail.value).to.be.null;
-								done();
-							});
-							elem.removeAttribute('feedback');
-						});
-
-					});
-
-				});
-
-				describe('file uploading', function() {
-
-					beforeEach(function() {
-						elem = fixture('multiple');
-					});
-
-					describe('drag end', function() {
-
-						it('should remove items from item list on drag-end (DataTransferItemList)', function() {
-
-							var items = [{}, {}];
-							items.remove = function() {};
-							var removeSpy = sinon.spy(items, 'remove');
-
-							var event = new CustomEvent('dragend');
-							event.dataTransfer = { items: items };
-							document.dispatchEvent(event);
-
-							expect(removeSpy.calledWith(0)).to.be.true;
-							expect(removeSpy.calledWith(1)).to.be.true;
-
-						});
-
-						it('should remove items from file list on drag-end (DataTransfer)', function() {
-
-							var event = new CustomEvent('dragend');
-							event.dataTransfer = { clearData: function() {} };
-							var removeSpy = sinon.spy(event.dataTransfer, 'clearData');
-							document.dispatchEvent(event);
-
-							expect(removeSpy.calledOnce).to.be.true;
-
-						});
-
-					});
-
-					describe('drop', function() {
-
-						describe('DataTransferItemList interface', function() {
-
-							it('should fire "d2l-file-uploader-files-added" event when files are dropped', function(done) {
-
-								var file1 = {};
-								var file2 = {};
-								var item1 = { kind: 'file', getAsFile: function() { return file1; } };
-								var item2 = { kind: 'file', getAsFile: function() { return file2; } };
-
-								var event = new CustomEvent('drop');
-								event.dataTransfer = { items: [item1, item2] };
-
-								elem.addEventListener('d2l-file-uploader-files-added', function(evt) {
-									expect(evt.detail.files.length).to.equal(2);
-									expect(evt.detail.files[0]).to.equal(file1);
-									expect(evt.detail.files[1]).to.equal(file2);
-									done();
-								});
-								document.dispatchEvent(event);
-
-							});
-
-							it('should ignore files that do not have "kind" of "file"', function(done) {
-
-								var file1 = {};
-								var item1 = { kind: 'file', getAsFile: function() { return file1; } };
-								var item2 = { kind: 'imposter' };
-
-								var event = new CustomEvent('drop');
-								event.dataTransfer = { items: [item1, item2] };
-
-								elem.addEventListener('d2l-file-uploader-files-added', function(evt) {
-									expect(evt.detail.files.length).to.equal(1);
-									expect(evt.detail.files[0]).to.equal(file1);
-									done();
-								});
-								document.dispatchEvent(event);
-
-							});
-
-							it('should go into error state for single-file uploaders', function() {
-								elem.multiple = false;
-								var event = new CustomEvent('drop');
-								event.dataTransfer = { items: [{}, {}] };
-								document.dispatchEvent(event);
-								expect(elem.feedback).to.equal('Choose one file to upload');
-							});
-
-							it('should not go into error state for multi-file uploaders', function() {
-								var event = new CustomEvent('drop');
-								event.dataTransfer = { items: [{}, {}] };
-								document.dispatchEvent(event);
-								expect(elem.feedback).to.be.null;
-							});
-
-						});
-
-						describe('DataTransfer interface', function() {
-
-							it('should fire "d2l-file-uploader-files-added" event when files are dropped', function(done) {
-
-								var file1 = {};
-								var file2 = {};
-
-								var event = new CustomEvent('drop');
-								event.dataTransfer = { files: [file1, file2] };
-
-								elem.addEventListener('d2l-file-uploader-files-added', function(evt) {
-									expect(evt.detail.files.length).to.equal(2);
-									expect(evt.detail.files[0]).to.equal(file1);
-									expect(evt.detail.files[1]).to.equal(file2);
-									done();
-								});
-								document.dispatchEvent(event);
-
-							});
-
-							it('should go into error state for single-file uploaders', function() {
-								elem.multiple = false;
-								var event = new CustomEvent('drop');
-								event.dataTransfer = { files: [{}, {}] };
-								document.dispatchEvent(event);
-								expect(elem.feedback).to.equal('Choose one file to upload');
-							});
-
-							it('should not go into error state for multi-file uploaders', function() {
-								var event = new CustomEvent('drop');
-								event.dataTransfer = { files: [{}, {}] };
-								document.dispatchEvent(event);
-								expect(elem.feedback).to.be.null;
-							});
-
-						});
-
-					});
-
-					describe('input change', function() {
-
-						it('should fire "d2l-file-uploader-files-added" event when files are uploaded via input', function(done) {
-
-							var file1 = {};
-							var file2 = {};
-
-							elem.addEventListener('d2l-file-uploader-files-added', function(evt) {
-								expect(evt.detail.files.length).to.equal(2);
-								expect(evt.detail.files[0]).to.equal(file1);
-								expect(evt.detail.files[1]).to.equal(file2);
-								done();
-							});
-
-							elem._fileSelectHandler({ target: { files: [file1, file2] } });
-
-						});
-
-					});
-
+				it('should not go into error state for multi-file uploaders', function() {
+					var event = new CustomEvent('drop');
+					event.dataTransfer = { items: [{}, {}] };
+					document.dispatchEvent(event);
+					expect(elem.feedback).to.be.null;
 				});
 
 			});
-		</script>
+
+			describe('DataTransfer interface', function() {
+
+				it('should fire "d2l-file-uploader-files-added" event when files are dropped', function(done) {
+
+					var file1 = {};
+					var file2 = {};
+
+					var event = new CustomEvent('drop');
+					event.dataTransfer = { files: [file1, file2] };
+
+					elem.addEventListener('d2l-file-uploader-files-added', function(evt) {
+						expect(evt.detail.files.length).to.equal(2);
+						expect(evt.detail.files[0]).to.equal(file1);
+						expect(evt.detail.files[1]).to.equal(file2);
+						done();
+					});
+					document.dispatchEvent(event);
+
+				});
+
+				it('should go into error state for single-file uploaders', function() {
+					elem.multiple = false;
+					var event = new CustomEvent('drop');
+					event.dataTransfer = { files: [{}, {}] };
+					document.dispatchEvent(event);
+					expect(elem.feedback).to.equal('Choose one file to upload');
+				});
+
+				it('should not go into error state for multi-file uploaders', function() {
+					var event = new CustomEvent('drop');
+					event.dataTransfer = { files: [{}, {}] };
+					document.dispatchEvent(event);
+					expect(elem.feedback).to.be.null;
+				});
+
+			});
+
+		});
+
+		describe('input change', function() {
+
+			it('should fire "d2l-file-uploader-files-added" event when files are uploaded via input', function(done) {
+
+				var file1 = {};
+				var file2 = {};
+
+				elem.addEventListener('d2l-file-uploader-files-added', function(evt) {
+					expect(evt.detail.files.length).to.equal(2);
+					expect(evt.detail.files[0]).to.equal(file1);
+					expect(evt.detail.files[1]).to.equal(file2);
+					done();
+				});
+
+				elem._fileSelectHandler({ target: { files: [file1, file2] } });
+
+			});
+
+		});
+
+	});
+
+});
+</script>
 	</body>
 </html>
