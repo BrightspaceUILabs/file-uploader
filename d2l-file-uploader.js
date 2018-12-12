@@ -96,7 +96,7 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-file-uploader">
 				margin-bottom: 1.5rem;
 				padding: 0.7rem 1rem 0.7rem;
 			}
-			:host-context([dir="rtl"]) > .d2l-file-uploader-feedback {
+			:host(:dir(rtl)) > .d2l-file-uploader-feedback {
 				border-left-width: 1px;
 				border-left-color: var(--d2l-color-mica);
 				border-right-width: 0.5rem;
