@@ -7,7 +7,7 @@
 
 ![screenshot of file uploader](/screenshots/file-uploader.gif?raw=true)
 
-For further information on this and other Brightspace UI components, see the docs at [ui.developers.brightspace.com](http://ui.developers.brightspace.com).
+For further information on this and other components, refer to [The Brightspace UI Guide](https://github.com/BrightspaceUI/guide/wiki).
 
 ## Installation
 `d2l-file-uploader` can be installed from [Bower][bower-url]:
