@@ -30,7 +30,7 @@
     "polymer-cli": "^1.9.2",
     "wct-browser-legacy": "^1.0.1"
   },
-  "version": "1.6.0",
+  "version": "1.7.0",
   "resolutions": {
     "inherits": "2.0.3",
     "samsam": "1.1.3",
