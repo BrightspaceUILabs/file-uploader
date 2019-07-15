@@ -59,6 +59,12 @@ describe('d2l-file-uploader', function() {
 			expect(elem.language).to.equal('en');
 		});
 
+		it('should accept focus', function() {
+			expect(document.activeElement).to.not.equal(elem);
+			elem.focus();
+			expect(document.activeElement).to.equal(elem);
+		});
+
 	});
 
 	describe('multiple', function() {
