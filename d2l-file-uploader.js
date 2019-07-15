@@ -11,6 +11,7 @@
 import '@polymer/polymer/polymer-legacy.js';
 
 import 'd2l-colors/d2l-colors.js';
+import 'd2l-polymer-behaviors/d2l-focusable-behavior.js';
 import 'd2l-offscreen/d2l-offscreen-shared-styles.js';
 import './localize-behavior.js';
 import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
@@ -171,7 +172,7 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-file-uploader">
 				<span class="d2l-file-uploader-input-container">
 					<span id="d2l-file-uploader-offscreen">[[label]]</span>
 					<label class="d2l-file-uploader-browse-label">
-						<input class="d2l-file-uploader-input" type="file" aria-describedby="d2l-file-uploader-offscreen" multiple="[[multiple]]" on-change="_fileSelectHandler" on-focus="__onInputFocus" on-blur="__onInputBlur">
+						<input class="d2l-file-uploader-input d2l-focusable" type="file" aria-describedby="d2l-file-uploader-offscreen" multiple="[[multiple]]" on-change="_fileSelectHandler" on-focus="__onInputFocus" on-blur="__onInputBlur">
 						<span class="d2l-file-uploader-browse">[[localize('browse')]]</span>
 						<span class="d2l-file-uploader-browse-files">[[localize('browse_files')]]</span>
 					</label>
@@ -180,7 +181,7 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-file-uploader">
 		</div>
 	</template>
 
-	
+
 
 </dom-module>`;
 
@@ -189,7 +190,8 @@ Polymer({
 	is: 'd2l-file-uploader',
 
 	behaviors: [
-		D2L.PolymerBehaviors.FileUploader.LocalizeBehavior
+		D2L.PolymerBehaviors.FileUploader.LocalizeBehavior,
+		D2L.PolymerBehaviors.FocusableBehavior
 	],
 
 	properties: {
