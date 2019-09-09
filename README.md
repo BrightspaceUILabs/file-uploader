@@ -32,7 +32,7 @@ Include the [webcomponents.js](https://www.webcomponents.org/polyfills/) "lite" 
 It's important to always provide an accessible label which describes the purpose of the uploader using the `label` attribute. The label will be hidden visually but associated with the upload input for those using assistive technologies such as a screen reader.
 
 ```html
-<d2l-file-uploader label="profile picture"></d2l-file-uploader>
+<d2l-labs-file-uploader label="profile picture"></d2l-labs-file-uploader>
 ```
 
 ### Multi-file Uploads
@@ -40,7 +40,7 @@ It's important to always provide an accessible label which describes the purpose
 To allow for multiple files to be uploaded, add the `multiple` attribute:
 
 ```html
-<d2l-file-uploader multiple ...></d2l-file-uploader>
+<d2l-labs-file-uploader multiple ...></d2l-labs-file-uploader>
 ```
 
 ### Localization
@@ -55,9 +55,9 @@ If you encounter a scenario where you'd like to display feedback about the uploa
 
 The `feedback-type` defaults to "warning":
 ```html
-<d2l-file-uploader
+<d2l-labs-file-uploader
 	feedback="Sorry, we cannot upload files larger than 1GB.">
-</d2l-file-uploader>
+</d2l-labs-file-uploader>
 ```
 
 ![screenshot of file uploader in warning state](/screenshots/warning.png?raw=true)
@@ -65,9 +65,9 @@ The `feedback-type` defaults to "warning":
 But `feedback-type` can also be set to "error":
 
 ```html
-<d2l-file-uploader
+<d2l-labs-file-uploader
 	feedback="An error occurred occurred processing the upload."
-	feedback-type="error"></d2l-file-uploader>
+	feedback-type="error"></d2l-labs-file-uploader>
 ```
 
 ![screenshot of file uploader in error state](/screenshots/error.png?raw=true)
@@ -79,7 +79,7 @@ To listen for when feedback changes within the uploader, register for the `feedb
 Vanilla JavaScript:
 
 ```html
-<d2l-file-uploader id="my-uploader" ...></d2l-file-uploader>
+<d2l-labs-file-uploader id="my-uploader" ...></d2l-labs-file-uploader>
 <script>
 document.getElementById('my-uploader')
 	.addEventListener('feedback-changed', function(evt) {
@@ -94,19 +94,19 @@ From within another Polymer element you can use [Polymer's annotated event liste
 ```html
 <dom-module id="my-element">
 	<template>
-		<d2l-file-uploader on-feedback-changed="handleFeedback"></d2l-file-uploader>
+		<d2l-labs-file-uploader on-feedback-changed="handleFeedback"></d2l-labs-file-uploader>
 	</template>
 </dom-module>
 ```
 
 ### Handling Uploaded Files
 
-When the user uploads one or more files, a `d2l-file-uploader-files-added` event is fired. To listen for this event, wire up an event listener to the `<d2l-file-uploader>` element. The listener will be passed an event with an array of [File](https://developer.mozilla.org/en-US/docs/Web/API/File) objects from the [File API](https://developer.mozilla.org/en/docs/Web/API/File).
+When the user uploads one or more files, a `d2l-file-uploader-files-added` event is fired. To listen for this event, wire up an event listener to the `<d2l-labs-file-uploader>` element. The listener will be passed an event with an array of [File](https://developer.mozilla.org/en-US/docs/Web/API/File) objects from the [File API](https://developer.mozilla.org/en/docs/Web/API/File).
 
 Vanilla JavaScript:
 
 ```html
-<d2l-file-uploader id="my-uploader" ...></d2l-file-uploader>
+<d2l-labs-file-uploader id="my-uploader" ...></d2l-labs-file-uploader>
 <script>
 document.getElementById('my-uploader')
 	.addEventListener('d2l-file-uploader-files-added', function(evt) {
@@ -121,7 +121,7 @@ From within another Polymer element you can use [Polymer's annotated event liste
 ```html
 <dom-module id="my-element">
 	<template>
-		<d2l-file-uploader on-d2l-file-uploader-files-added="handleFileAdded"></d2l-file-uploader>
+		<d2l-labs-file-uploader on-d2l-file-uploader-files-added="handleFileAdded"></d2l-labs-file-uploader>
 	</template>
 </dom-module>
 ```

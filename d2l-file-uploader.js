@@ -1,5 +1,5 @@
 /**
-`d2l-file-uploader` is a web component for uploading files.
+`d2l-labs-file-uploader` is a web component for uploading files.
 
 @demo demo/index.html
 */
@@ -17,7 +17,7 @@ import './localize-behavior.js';
 import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
 const $_documentContainer = document.createElement('template');
 
-$_documentContainer.innerHTML = `<dom-module id="d2l-file-uploader">
+$_documentContainer.innerHTML = `<dom-module id="d2l-labs-file-uploader">
 	<template strip-whitespace="">
 		<style include="d2l-offscreen-shared-styles">
 			:host {
@@ -187,7 +187,7 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-file-uploader">
 
 document.head.appendChild($_documentContainer.content);
 Polymer({
-	is: 'd2l-file-uploader',
+	is: 'd2l-labs-file-uploader',
 
 	behaviors: [
 		D2L.PolymerBehaviors.FileUploader.LocalizeBehavior,
