@@ -1,10 +1,11 @@
 {
+  "name": "@brightspace-ui-labs/file-uploader",
+  "version": "1.8.0",
   "description": "Polymer-based web component for D2L file uploader",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/BrightspaceUI/file-uploader.git"
+  "repository": "https://github.com/BrightspaceUI/file-uploader.git",
+  "publishConfig": {
+    "access": "public"
   },
-  "name": "d2l-file-uploader",
   "scripts": {
     "lint": "npm run lint:wc && npm run lint:js",
     "lint:js": "eslint . --ext .js,.html test/**/*.js test/**/*.html demo/**/*.js demo/**/*.html",
@@ -31,7 +32,6 @@
     "polymer-cli": "^1.9.2",
     "wct-browser-legacy": "^1.0.1"
   },
-  "version": "1.8.0",
   "resolutions": {
     "inherits": "2.0.3",
     "samsam": "1.1.3",

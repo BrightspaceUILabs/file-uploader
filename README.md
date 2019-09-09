@@ -1,7 +1,10 @@
 # file-uploader
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/BrightspaceUI/file-uploader)
-[![Bower version][bower-image]][bower-url]
-[![Build status][ci-image]][ci-url]
+
+[![NPM version](https://img.shields.io/npm/v/@brightspace-ui-labs/file-uploader.svg)](https://www.npmjs.org/package/@brightspace-ui-labs/file-uploader)
+[![NPM downloads](https://img.shields.io/npm/dt/@brightspace-ui-labs/file-uploader.svg)](https://www.npmjs.com/package/@brightspace-ui-labs/file-uploader)
+[![Greenkeeper badge](https://badges.greenkeeper.io/BrightspaceUILabs/file-uploader.svg)](https://greenkeeper.io/)
+[![Build status](https://travis-ci.com/BrightspaceUILabs/pfile-uploader.svg?branch=master)](https://travis-ci.com/BrightspaceUILabs/file-uploader)
+
 > Note: this is a ["labs" component](https://github.com/BrightspaceUI/guide/wiki/Component-Tiers). While functional, these tasks are prerequisites to promotion to BrightspaceUI "official" status:
 >
 > - [ ] [Design organization buy-in](https://github.com/BrightspaceUI/guide/wiki/Before-you-build#working-with-design)
@@ -23,20 +26,21 @@
 For further information on this and other components, refer to [The Brightspace UI Guide](https://github.com/BrightspaceUI/guide/wiki).
 
 ## Installation
-`d2l-file-uploader` can be installed from [Bower][bower-url]:
+
+To install from NPM:
 
 ```shell
-bower install d2l-file-uploader
+npm install @brightspace-ui-labs/file-uploader
 ```
 
 ## Usage
 
-Include the [webcomponents.js](https://www.webcomponents.org/polyfills/) "lite" polyfill (for browsers who don't natively support web components), then import `d2l-file-uploader.html`:
+Include the [webcomponents.js](http://webcomponents.org/polyfills/) polyfill loader (for browsers who don't natively support web components), then include `d2l-file-uploader.js`:
 
 ```html
 <head>
-	<script src="../webcomponentsjs/webcomponents-lite.js"></script>
-	<link rel="import" href="../d2l-file-uploader/d2l-file-uploader.html">
+  <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+  <script type="module" src="node_modules/@brightspace-ui/page-load-progress/d2l-page-load-progress.js"></script>
 </head>
 ```
 
@@ -172,11 +176,6 @@ To lint AND run local unit tests:
 ```shell
 npm test
 ```
-
-[bower-url]: http://bower.io/search/?q=d2l-file-uploader
-[bower-image]: https://badge.fury.io/bo/d2l-file-uploader.svg
-[ci-url]: https://travis-ci.org/BrightspaceUI/file-uploader
-[ci-image]: https://travis-ci.org/BrightspaceUI/file-uploader.svg
 
 ## Versioning & Releasing
 
