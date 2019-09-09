@@ -1,5 +1,5 @@
 # file-uploader
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/BrightspaceUI/file-uploader)
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/BrightspaceUI/file-uploader) [![Greenkeeper badge](https://badges.greenkeeper.io/BrightspaceUILabs/file-uploader.svg)](https://greenkeeper.io/)
 [![Bower version][bower-image]][bower-url]
 [![Build status][ci-image]][ci-url]
 
