@@ -10,7 +10,7 @@
 */
 import '@polymer/polymer/polymer-legacy.js';
 
-import 'd2l-colors/d2l-colors.js';
+import '@brightspace-ui/core/components/colors/colors.js';
 import 'd2l-polymer-behaviors/d2l-focusable-behavior.js';
 import 'd2l-offscreen/d2l-offscreen-shared-styles.js';
 import './localize-behavior.js';
