@@ -3,35 +3,35 @@
 	<head>
 		<meta charset="utf-8">
 		<title>d2l-file-uploader tests</title>
-		<script src="../../@babel/polyfill/browser.js"></script>
-		<script src="../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
-		<script src="../../wct-browser-legacy/browser.js"></script>
+		<script src="/node_modules/@babel/polyfill/browser.js"></script>
+		<script src="/node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+		<script src="/node_modules/wct-browser-legacy/browser.js"></script>
 		<script type="module" src="../d2l-file-uploader.js"></script>
 	</head>
 	<body>
 		<test-fixture id="single">
 			<template>
-				<d2l-file-uploader></d2l-file-uploader>
+				<d2l-labs-file-uploader></d2l-labs-file-uploader>
 			</template>
 		</test-fixture>
 		<test-fixture id="multiple">
 			<template>
-				<d2l-file-uploader multiple></d2l-file-uploader>
+				<d2l-labs-file-uploader multiple></d2l-labs-file-uploader>
 			</template>
 		</test-fixture>
 		<test-fixture id="label">
 			<template>
-				<d2l-file-uploader label="file uploader label"></d2l-file-uploader>
+				<d2l-labs-file-uploader label="file uploader label"></d2l-labs-file-uploader>
 			</template>
 		</test-fixture>
 		<test-fixture id="language">
 			<template>
-				<d2l-file-uploader></d2l-file-uploader>
+				<d2l-labs-file-uploader></d2l-labs-file-uploader>
 			</template>
 		</test-fixture>
 		<test-fixture id="feedback">
 			<template>
-				<d2l-file-uploader feedback="terrible error" feedback-type="error"></d2l-file-uploader>
+				<d2l-labs-file-uploader feedback="terrible error" feedback-type="error"></d2l-labs-file-uploader>
 			</template>
 		</test-fixture>
 		<script type="module">
@@ -52,7 +52,7 @@ describe('d2l-file-uploader', function() {
 		});
 
 		it('should instantiate the element', function() {
-			expect(elem.is).to.equal('d2l-file-uploader');
+			expect(elem.is).to.equal('d2l-labs-file-uploader');
 		});
 
 		it('should default "language" to "en"', function() {

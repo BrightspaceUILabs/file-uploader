@@ -1,7 +1,23 @@
 # file-uploader
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/BrightspaceUI/file-uploader)
-[![Bower version][bower-image]][bower-url]
-[![Build status][ci-image]][ci-url]
+
+[![NPM version](https://img.shields.io/npm/v/@brightspace-ui-labs/file-uploader.svg)](https://www.npmjs.org/package/@brightspace-ui-labs/file-uploader)
+[![NPM downloads](https://img.shields.io/npm/dt/@brightspace-ui-labs/file-uploader.svg)](https://www.npmjs.com/package/@brightspace-ui-labs/file-uploader)
+[![Greenkeeper badge](https://badges.greenkeeper.io/BrightspaceUILabs/file-uploader.svg)](https://greenkeeper.io/)
+[![Build status](https://travis-ci.com/BrightspaceUILabs/pfile-uploader.svg?branch=master)](https://travis-ci.com/BrightspaceUILabs/file-uploader)
+
+> Note: this is a ["labs" component](https://github.com/BrightspaceUI/guide/wiki/Component-Tiers). While functional, these tasks are prerequisites to promotion to BrightspaceUI "official" status:
+>
+> - [ ] [Design organization buy-in](https://github.com/BrightspaceUI/guide/wiki/Before-you-build#working-with-design)
+> - [ ] [design.d2l entry](http://design.d2l/)
+> - [ ] [Architectural sign-off](https://github.com/BrightspaceUI/guide/wiki/Before-you-build#web-component-architecture)
+> - [x] [Continuous integration](https://github.com/BrightspaceUI/guide/wiki/Testing#testing-continuously-with-travis-ci)
+> - [x] [Cross-browser testing](https://github.com/BrightspaceUI/guide/wiki/Testing#cross-browser-testing-with-sauce-labs)
+> - [x] [Unit tests](https://github.com/BrightspaceUI/guide/wiki/Testing#testing-with-polymer-test) (if applicable)
+> - [ ] [Accessibility tests](https://github.com/BrightspaceUI/guide/wiki/Testing#automated-accessibility-testing-with-axe)
+> - [ ] [Visual diff tests](https://github.com/BrightspaceUI/visual-diff)
+> - [ ] [Localization](https://github.com/BrightspaceUI/guide/wiki/Localization) with Serge (if applicable)
+> - [x] Demo page
+> - [x] README documentation
 
 [Polymer](https://www.polymer-project.org) component for uploading files with drag and drop capability. This component does not perform the actual uploading work, it simply provides visual cues and exposes an event when files have been uploaded.
 
@@ -10,20 +26,21 @@
 For further information on this and other components, refer to [The Brightspace UI Guide](https://github.com/BrightspaceUI/guide/wiki).
 
 ## Installation
-`d2l-file-uploader` can be installed from [Bower][bower-url]:
+
+To install from NPM:
 
 ```shell
-bower install d2l-file-uploader
+npm install @brightspace-ui-labs/file-uploader
 ```
 
 ## Usage
 
-Include the [webcomponents.js](https://www.webcomponents.org/polyfills/) "lite" polyfill (for browsers who don't natively support web components), then import `d2l-file-uploader.html`:
+Include the [webcomponents.js](http://webcomponents.org/polyfills/) polyfill loader (for browsers who don't natively support web components), then include `d2l-file-uploader.js`:
 
 ```html
 <head>
-	<script src="../webcomponentsjs/webcomponents-lite.js"></script>
-	<link rel="import" href="../d2l-file-uploader/d2l-file-uploader.html">
+  <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+  <script type="module" src="node_modules/@brightspace-ui/page-load-progress/d2l-page-load-progress.js"></script>
 </head>
 ```
 
@@ -32,7 +49,7 @@ Include the [webcomponents.js](https://www.webcomponents.org/polyfills/) "lite" 
 It's important to always provide an accessible label which describes the purpose of the uploader using the `label` attribute. The label will be hidden visually but associated with the upload input for those using assistive technologies such as a screen reader.
 
 ```html
-<d2l-file-uploader label="profile picture"></d2l-file-uploader>
+<d2l-labs-file-uploader label="profile picture"></d2l-labs-file-uploader>
 ```
 
 ### Multi-file Uploads
@@ -40,7 +57,7 @@ It's important to always provide an accessible label which describes the purpose
 To allow for multiple files to be uploaded, add the `multiple` attribute:
 
 ```html
-<d2l-file-uploader multiple ...></d2l-file-uploader>
+<d2l-labs-file-uploader multiple ...></d2l-labs-file-uploader>
 ```
 
 ### Localization
@@ -55,9 +72,9 @@ If you encounter a scenario where you'd like to display feedback about the uploa
 
 The `feedback-type` defaults to "warning":
 ```html
-<d2l-file-uploader
+<d2l-labs-file-uploader
 	feedback="Sorry, we cannot upload files larger than 1GB.">
-</d2l-file-uploader>
+</d2l-labs-file-uploader>
 ```
 
 ![screenshot of file uploader in warning state](/screenshots/warning.png?raw=true)
@@ -65,9 +82,9 @@ The `feedback-type` defaults to "warning":
 But `feedback-type` can also be set to "error":
 
 ```html
-<d2l-file-uploader
+<d2l-labs-file-uploader
 	feedback="An error occurred occurred processing the upload."
-	feedback-type="error"></d2l-file-uploader>
+	feedback-type="error"></d2l-labs-file-uploader>
 ```
 
 ![screenshot of file uploader in error state](/screenshots/error.png?raw=true)
@@ -79,7 +96,7 @@ To listen for when feedback changes within the uploader, register for the `feedb
 Vanilla JavaScript:
 
 ```html
-<d2l-file-uploader id="my-uploader" ...></d2l-file-uploader>
+<d2l-labs-file-uploader id="my-uploader" ...></d2l-labs-file-uploader>
 <script>
 document.getElementById('my-uploader')
 	.addEventListener('feedback-changed', function(evt) {
@@ -94,19 +111,19 @@ From within another Polymer element you can use [Polymer's annotated event liste
 ```html
 <dom-module id="my-element">
 	<template>
-		<d2l-file-uploader on-feedback-changed="handleFeedback"></d2l-file-uploader>
+		<d2l-labs-file-uploader on-feedback-changed="handleFeedback"></d2l-labs-file-uploader>
 	</template>
 </dom-module>
 ```
 
 ### Handling Uploaded Files
 
-When the user uploads one or more files, a `d2l-file-uploader-files-added` event is fired. To listen for this event, wire up an event listener to the `<d2l-file-uploader>` element. The listener will be passed an event with an array of [File](https://developer.mozilla.org/en-US/docs/Web/API/File) objects from the [File API](https://developer.mozilla.org/en/docs/Web/API/File).
+When the user uploads one or more files, a `d2l-file-uploader-files-added` event is fired. To listen for this event, wire up an event listener to the `<d2l-labs-file-uploader>` element. The listener will be passed an event with an array of [File](https://developer.mozilla.org/en-US/docs/Web/API/File) objects from the [File API](https://developer.mozilla.org/en/docs/Web/API/File).
 
 Vanilla JavaScript:
 
 ```html
-<d2l-file-uploader id="my-uploader" ...></d2l-file-uploader>
+<d2l-labs-file-uploader id="my-uploader" ...></d2l-labs-file-uploader>
 <script>
 document.getElementById('my-uploader')
 	.addEventListener('d2l-file-uploader-files-added', function(evt) {
@@ -121,7 +138,7 @@ From within another Polymer element you can use [Polymer's annotated event liste
 ```html
 <dom-module id="my-element">
 	<template>
-		<d2l-file-uploader on-d2l-file-uploader-files-added="handleFileAdded"></d2l-file-uploader>
+		<d2l-labs-file-uploader on-d2l-file-uploader-files-added="handleFileAdded"></d2l-labs-file-uploader>
 	</template>
 </dom-module>
 ```
@@ -159,11 +176,6 @@ To lint AND run local unit tests:
 ```shell
 npm test
 ```
-
-[bower-url]: http://bower.io/search/?q=d2l-file-uploader
-[bower-image]: https://badge.fury.io/bo/d2l-file-uploader.svg
-[ci-url]: https://travis-ci.org/BrightspaceUI/file-uploader
-[ci-image]: https://travis-ci.org/BrightspaceUI/file-uploader.svg
 
 ## Versioning & Releasing
 
