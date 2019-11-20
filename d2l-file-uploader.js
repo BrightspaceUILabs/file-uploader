@@ -270,6 +270,7 @@ Polymer({
 			files[i] = event.target.files[i];
 		}
 		this._files = files;
+		event.target.value = '';
 	},
 
 	__onDragOver: function(event) {
