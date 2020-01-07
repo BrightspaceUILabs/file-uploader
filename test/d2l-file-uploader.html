@@ -153,9 +153,12 @@ describe('d2l-file-uploader', function() {
 			elem = fixture('language');
 		});
 
-		it('should have language of "fr"', function() {
-			expect(elem.language).to.equal('fr');
-			expect(elem.$$('.d2l-file-uploader-drop-zone > div > span:first-child').innerHTML).to.equal('Glisser-déposer ou&nbsp;');
+		it('should have language of "fr"', function(done) {
+			requestAnimationFrame(function() {
+				expect(elem.language).to.equal('fr');
+				expect(elem.$$('.d2l-file-uploader-drop-zone > div > span:first-child').innerHTML).to.equal('Glisser-déposer ou&nbsp;');
+				done();
+			});
 		});
 
 	});
