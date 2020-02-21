@@ -37,7 +37,7 @@
   },
   "main": "d2l-file-uploader.js",
   "dependencies": {
-    "@brightspace-ui/core": "^1",
+    "@brightspace-ui/core": "^1.31.0",
     "@polymer/polymer": "^3",
     "d2l-localize-behavior": "BrightspaceUI/localize-behavior#semver:^2",
     "d2l-offscreen": "BrightspaceUI/offscreen#semver:^4"
