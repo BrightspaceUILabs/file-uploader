@@ -2,7 +2,7 @@
 
 [![NPM version](https://img.shields.io/npm/v/@brightspace-ui-labs/file-uploader.svg)](https://www.npmjs.org/package/@brightspace-ui-labs/file-uploader)
 [![NPM downloads](https://img.shields.io/npm/dt/@brightspace-ui-labs/file-uploader.svg)](https://www.npmjs.com/package/@brightspace-ui-labs/file-uploader)
-[![Greenkeeper badge](https://badges.greenkeeper.io/BrightspaceUILabs/file-uploader.svg)](https://greenkeeper.io/)
+[![Dependabot badge](https://flat.badgen.net/dependabot/BrightspaceUILabs/file-uploader?icon=dependabot)](https://app.dependabot.com/)
 [![Build status](https://travis-ci.com/BrightspaceUILabs/pfile-uploader.svg?branch=master)](https://travis-ci.com/BrightspaceUILabs/file-uploader)
 
 > Note: this is a ["labs" component](https://github.com/BrightspaceUI/guide/wiki/Component-Tiers). While functional, these tasks are prerequisites to promotion to BrightspaceUI "official" status:
