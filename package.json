@@ -22,7 +22,7 @@
     "babel-eslint": "^10",
     "d2l-polymer-behaviors": "Brightspace/d2l-polymer-behaviors-ui#semver:^2",
     "eslint": "^6",
-    "eslint-config-brightspace": "^0.6",
+    "eslint-config-brightspace": "^0.7",
     "eslint-plugin-html": "^6",
     "eslint-plugin-sort-class-members": "^1",
     "frau-ci": "^1",
