@@ -21,6 +21,8 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-labs-file-uploader">
 	<template strip-whitespace="">
 		<style include="d2l-offscreen-shared-styles">
 			:host {
+				--d2l-file-uploader-drop-zone-border: 2px dashed var(--d2l-color-ferrite);
+				--d2l-file-uploader-drop-zone-padding: 1.5rem;
 				box-sizing: border-box;
 				display: block;
 				max-width: 27rem;
@@ -33,9 +35,9 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-labs-file-uploader">
 			}
 
 			.d2l-file-uploader-drop-zone {
-				border: 2px dashed var(--d2l-color-ferrite);
+				border: var(--d2l-file-uploader-drop-zone-border);
 				border-radius: 0.3rem;
-				padding: 1.5rem;
+				padding: var(--d2l-file-uploader-drop-zone-padding);
 				text-align: center;
 			}
 
