@@ -346,7 +346,7 @@ Polymer({
 	_fileChangeHandler: function(files) {
 		var evt = new CustomEvent(
 			'd2l-file-uploader-files-added',
-			{detail: {files: files}}
+			{ detail: { files: files } }
 		);
 		this.dispatchEvent(evt);
 	}
