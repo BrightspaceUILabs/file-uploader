@@ -40,7 +40,7 @@ Include the [webcomponents.js](http://webcomponents.org/polyfills/) polyfill loa
 ```html
 <head>
   <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
-  <script type="module" src="node_modules/@brightspace-ui/page-load-progress/d2l-page-load-progress.js"></script>
+  <script type="module" src="node_modules/@brightspace-ui-labs/file-uploader/d2l-file-uploader.js"></script>
 </head>
 ```
 
