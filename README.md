@@ -33,11 +33,8 @@ npm install @brightspace-ui-labs/file-uploader
 
 ## Usage
 
-Include the [webcomponents.js](http://webcomponents.org/polyfills/) polyfill loader (for browsers who don't natively support web components), then include `d2l-file-uploader.js`:
-
 ```html
 <head>
-  <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
   <script type="module" src="node_modules/@brightspace-ui-labs/file-uploader/d2l-file-uploader.js"></script>
 </head>
 ```

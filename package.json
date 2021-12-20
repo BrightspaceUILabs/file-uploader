@@ -20,7 +20,6 @@
     "@babel/core": "^7",
     "@babel/eslint-parser": "^7",
     "@babel/polyfill": "^7",
-    "@webcomponents/webcomponentsjs": "^2",
     "d2l-polymer-behaviors": "Brightspace/d2l-polymer-behaviors-ui#semver:^2",
     "eslint": "^8",
     "eslint-config-brightspace": "^0.16",
