@@ -27,6 +27,7 @@ For further information on this and other components, refer to [The Brightspace 
 
 To install from NPM:
 
+
 ```shell
 npm install @brightspace-ui-labs/file-uploader
 ```
