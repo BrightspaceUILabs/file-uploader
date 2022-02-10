@@ -11,15 +11,15 @@
 import '@polymer/polymer/polymer-legacy.js';
 
 import '@brightspace-ui/core/components/colors/colors.js';
+import '@brightspace-ui/core/components/offscreen/offscreen.js';
 import 'd2l-polymer-behaviors/d2l-focusable-behavior.js';
-import 'd2l-offscreen/d2l-offscreen-shared-styles.js';
 import './localize-behavior.js';
 import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
 const $_documentContainer = document.createElement('template');
 
 $_documentContainer.innerHTML = `<dom-module id="d2l-labs-file-uploader">
 	<template strip-whitespace="">
-		<style include="d2l-offscreen-shared-styles">
+		<style>
 			:host {
 				box-sizing: border-box;
 				display: block;
@@ -50,10 +50,6 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-labs-file-uploader">
 
 			:host([_file-drag-over]) svg path {
 				fill: var(--d2l-color-celestine);
-			}
-
-			#d2l-file-uploader-offscreen {
-				@apply --d2l-offscreen;
 			}
 
 			.d2l-file-uploader-input {
@@ -170,7 +166,7 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-labs-file-uploader">
 			<div>
 				<span>[[localize('file_upload_text')]]&nbsp;</span>
 				<span class="d2l-file-uploader-input-container">
-					<span id="d2l-file-uploader-offscreen">[[label]]</span>
+					<d2l-offscreen id="d2l-file-uploader-offscreen">[[label]]</d2l-offscreen>
 					<label class="d2l-file-uploader-browse-label">
 						<input class="d2l-file-uploader-input d2l-focusable" type="file" aria-describedby="d2l-file-uploader-offscreen" multiple="[[multiple]]" on-change="_fileSelectHandler" on-focus="__onInputFocus" on-blur="__onInputBlur">
 						<span class="d2l-file-uploader-browse">[[localize('browse')]]</span>
