@@ -38,7 +38,6 @@
   "dependencies": {
     "@brightspace-ui/core": "^1",
     "@polymer/polymer": "^3",
-    "d2l-localize-behavior": "BrightspaceUI/localize-behavior#semver:^2",
-    "d2l-offscreen": "BrightspaceUI/offscreen#semver:^4"
+    "d2l-localize-behavior": "BrightspaceUI/localize-behavior#semver:^2"
   }
 }
