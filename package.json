@@ -1,6 +1,6 @@
 {
   "name": "@brightspace-ui-labs/file-uploader",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "Polymer-based web component for D2L file uploader",
   "repository": "https://github.com/BrightspaceUI/file-uploader.git",
   "publishConfig": {
@@ -38,7 +38,6 @@
   "dependencies": {
     "@brightspace-ui/core": "^2",
     "@polymer/polymer": "^3",
-    "d2l-localize-behavior": "BrightspaceUI/localize-behavior#semver:^2",
-    "d2l-offscreen": "BrightspaceUI/offscreen#semver:^5"
+    "d2l-localize-behavior": "BrightspaceUI/localize-behavior#semver:^2"
   }
 }

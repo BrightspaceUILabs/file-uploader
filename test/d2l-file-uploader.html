@@ -134,7 +134,7 @@ describe('d2l-file-uploader', function() {
 		});
 
 		it('should apply label to offscreen text', function() {
-			expect(elem.$$('#d2l-file-uploader-offscreen').innerText)
+			expect(elem.$$('#d2l-file-uploader-offscreen').innerHTML)
 				.to.equal('file uploader label');
 		});
 
