@@ -22,7 +22,7 @@
     "@babel/polyfill": "^7",
     "d2l-polymer-behaviors": "Brightspace/d2l-polymer-behaviors-ui#semver:^3",
     "eslint": "^8",
-    "eslint-config-brightspace": "^0.16",
+    "eslint-config-brightspace": "^0.17",
     "eslint-plugin-html": "^6",
     "eslint-plugin-sort-class-members": "^1",
     "polymer-cli": "^1",
