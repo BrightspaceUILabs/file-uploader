@@ -1,4 +1,4 @@
-# file-uploader
+# @brightspace-ui-labs/file-uploader
 
 [![NPM version](https://img.shields.io/npm/v/@brightspace-ui-labs/file-uploader.svg)](https://www.npmjs.org/package/@brightspace-ui-labs/file-uploader)
 [![NPM downloads](https://img.shields.io/npm/dt/@brightspace-ui-labs/file-uploader.svg)](https://www.npmjs.com/package/@brightspace-ui-labs/file-uploader)
@@ -21,8 +21,6 @@
 
 ![screenshot of file uploader](/screenshots/file-uploader.gif?raw=true)
 
-For further information on this and other components, refer to [The Brightspace UI Guide](https://github.com/BrightspaceUI/guide/wiki).
-
 ## Installation
 
 To install from NPM:
@@ -35,7 +33,7 @@ npm install @brightspace-ui-labs/file-uploader
 
 ```html
 <head>
-  <script type="module" src="node_modules/@brightspace-ui-labs/file-uploader/d2l-file-uploader.js"></script>
+  <script type="module" src="@brightspace-ui-labs/file-uploader/d2l-file-uploader.js"></script>
 </head>
 ```
 
@@ -142,34 +140,29 @@ From within another Polymer element you can use [Polymer's annotated event liste
 
 After cloning the repo, run `npm install` to install dependencies.
 
-If you don't have it already, install the [Polymer CLI](https://www.polymer-project.org/2.0/docs/tools/polymer-cli) globally:
+### Linting
 
 ```shell
-npm install -g polymer-cli
-```
-
-To start a [local web server](https://www.polymer-project.org/2.0/docs/tools/polymer-cli-commands#serve) that hosts the demo page and tests:
-
-```shell
-polymer serve
-```
-
-To lint ([eslint](http://eslint.org/) and [Polymer lint](https://www.polymer-project.org/2.0/docs/tools/polymer-cli-commands#lint)):
-
-```shell
+# eslint
 npm run lint
 ```
 
-To run unit tests locally using [Polymer test](https://www.polymer-project.org/2.0/docs/tools/polymer-cli-commands#tests):
+### Testing
 
 ```shell
-polymer test --skip-plugin sauce
+# lint & run headless unit tests
+npm test
+
+# unit tests only
+npm run test:headless
 ```
 
-To lint AND run local unit tests:
+### Running the demos
+
+To start a [@web/dev-server](https://modern-web.dev/docs/dev-server/overview/) that hosts the demo page and tests:
 
 ```shell
-npm test
+npm start
 ```
 
 ## Versioning & Releasing

@@ -16,7 +16,7 @@ import sv from './lang/sv.js';
 import tr from './lang/tr.js';
 import zhcn from './lang/zh-cn.js';
 import zhtw from './lang/zh-tw.js';
-import 'd2l-localize-behavior/d2l-localize-behavior.js';
+import '@brightspace-ui/localize-behavior/d2l-localize-behavior.js';
 window.D2L = window.D2L || {};
 window.D2L.PolymerBehaviors = window.D2L.PolymerBehaviors || {};
 window.D2L.PolymerBehaviors.FileUploader = window.D2L.PolymerBehaviors.FileUploader || {};
