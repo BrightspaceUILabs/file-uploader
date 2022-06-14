@@ -12,7 +12,7 @@ import '@polymer/polymer/polymer-legacy.js';
 
 import '@brightspace-ui/core/components/colors/colors.js';
 import '@brightspace-ui/core/components/offscreen/offscreen.js';
-import 'd2l-polymer-behaviors/d2l-focusable-behavior.js';
+import '@brightspace-ui/polymer-behaviors/d2l-focusable-behavior.js';
 import './localize-behavior.js';
 import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
 const $_documentContainer = document.createElement('template');

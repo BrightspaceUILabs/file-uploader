@@ -1,3 +1,3 @@
 {
-  "extends": "brightspace/wct-polymer-3-config"
+	"extends": "brightspace/open-wc-testing-config"
 }
