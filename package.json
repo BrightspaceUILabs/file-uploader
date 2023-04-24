@@ -19,7 +19,7 @@
     "@babel/eslint-parser": "^7",
     "@open-wc/testing": "^3",
     "@web/dev-server": "^0.1",
-    "@web/test-runner": "^0.13",
+    "@web/test-runner": "^0.16",
     "eslint": "^8",
     "eslint-config-brightspace": "^0.17",
     "eslint-plugin-html": "^6",
