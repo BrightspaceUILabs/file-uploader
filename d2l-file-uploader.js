@@ -136,7 +136,7 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-labs-file-uploader">
 
 				.d2l-file-uploader-browse-label {
 					background-color: var(--d2l-color-celestine);
-					border: 1px solid;
+					border-style: none;
 					border-radius: 0.3rem;
 					border-color: var(--d2l-color-celestine-minus-1);
 					color: #ffffff;
@@ -152,7 +152,7 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-labs-file-uploader">
 					text-decoration: none;
 				}
 				.d2l-file-uploader-browse-label-focus {
-					box-shadow: 0 0 0 4px rgba(0, 111, 191, 0.3);
+					box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--d2l-color-celestine);
 				}
 
 			}
