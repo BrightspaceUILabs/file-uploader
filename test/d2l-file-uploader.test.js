@@ -1,15 +1,10 @@
 import '../d2l-file-uploader.js';
-import { expect, fixture, html, oneEvent } from '@open-wc/testing';
+import { expect, fixture, html, oneEvent } from '@brightspace-ui/testing';
 import sinon from 'sinon';
 
 describe('d2l-file-uploader', () => {
 
-	let elem, htmlElem;
-
-	beforeEach(() => {
-		htmlElem = window.document.getElementsByTagName('html')[0];
-		htmlElem.removeAttribute('lang');
-	});
+	let elem;
 
 	describe('basic', () => {
 
@@ -115,8 +110,7 @@ describe('d2l-file-uploader', () => {
 	describe('language', () => {
 
 		beforeEach(async() => {
-			htmlElem.setAttribute('lang', 'fr');
-			elem = await fixture(html`<d2l-labs-file-uploader></d2l-labs-file-uploader>`);
+			elem = await fixture(html`<d2l-labs-file-uploader></d2l-labs-file-uploader>`, { lang: 'fr' });
 			await new Promise(resolve => { requestAnimationFrame(resolve); });
 		});
 

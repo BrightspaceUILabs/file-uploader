@@ -10,16 +10,15 @@
     "lint": "eslint . --ext .js,.html",
     "start": "web-dev-server --app-index demo/index.html --node-resolve --open --watch",
     "test": "npm run lint && npm run test:headless",
-    "test:headless": "web-test-runner --files ./test/*.test.js --node-resolve"
+    "test:headless": "d2l-test-runner"
   },
   "author": "D2L Corporation",
   "license": "Apache-2.0",
   "devDependencies": {
     "@babel/core": "^7",
     "@babel/eslint-parser": "^7",
-    "@open-wc/testing": "^3",
+    "@brightspace-ui/testing": "^0.34",
     "@web/dev-server": "^0.2",
-    "@web/test-runner": "^0.13",
     "eslint": "^8",
     "eslint-config-brightspace": "^0.17",
     "eslint-plugin-html": "^6",
