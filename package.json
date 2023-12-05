@@ -1,6 +1,6 @@
 {
   "name": "@brightspace-ui-labs/file-uploader",
-  "version": "3.3.2",
+  "version": "3.4.0",
   "description": "Polymer-based web component for D2L file uploader",
   "repository": "https://github.com/BrightspaceUI/file-uploader.git",
   "publishConfig": {
