@@ -1,8 +1,8 @@
 /* eslint quotes: 0 */
 
 export default {
-	"file_upload_text": "Drag and drop or",
+	"file_upload_text": "Glisser-déposer ou",
 	"browse": "parcourir",
-	"browse_files": "Browse Files",
+	"browse_files": "Parcourir les fichiers",
 	"choose_one_file_to_upload": "Choisir un fichier à téléverser"
 };
