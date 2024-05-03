@@ -34,9 +34,9 @@
     "/lang"
   ],
   "dependencies": {
-    "@brightspace-ui/core": "^2",
+    "@brightspace-ui/core": "^3",
     "@brightspace-ui/localize-behavior": "^2",
-    "@brightspace-ui/polymer-behaviors": "^3",
+    "@brightspace-ui/polymer-behaviors": "^4",
     "@polymer/polymer": "^3"
   }
 }
