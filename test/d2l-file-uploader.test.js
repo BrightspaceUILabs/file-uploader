@@ -1,5 +1,6 @@
 import '../d2l-file-uploader.js';
 import { expect, fixture, html, oneEvent } from '@brightspace-ui/testing';
+import fr from '../lang/fr.js';
 import sinon from 'sinon';
 
 describe('d2l-file-uploader', () => {
@@ -10,14 +11,6 @@ describe('d2l-file-uploader', () => {
 
 		beforeEach(async() => {
 			elem = await fixture(html`<d2l-labs-file-uploader></d2l-labs-file-uploader>`);
-		});
-
-		it('should instantiate the element', () => {
-			expect(elem.is).to.equal('d2l-labs-file-uploader');
-		});
-
-		it('should default "language" to "en"', () => {
-			expect(elem.language).to.equal('en');
 		});
 
 		it('should accept focus', () => {
@@ -39,19 +32,21 @@ describe('d2l-file-uploader', () => {
 			it('should default "multiple" to false', () => {
 				expect(elem.multiple).to.be.false;
 				expect(elem.hasAttribute('multiple')).to.be.false;
-				expect(elem.$$('input').multiple).to.be.false;
+				expect(elem.shadowRoot.querySelector('input').multiple).to.be.false;
 			});
 
-			it('should reflect "multiple" property change to attribute and input', () => {
+			it('should reflect "multiple" property change to attribute and input', async() => {
 				elem.multiple = true;
+				await elem.updateComplete;
 				expect(elem.hasAttribute('multiple')).to.be.true;
-				expect(elem.$$('input').multiple).to.be.true;
+				expect(elem.shadowRoot.querySelector('input').multiple).to.be.true;
 			});
 
-			it('should reflect "multiple" attribute change to property and input', () => {
+			it('should reflect "multiple" attribute change to property and input', async() => {
 				elem.setAttribute('multiple', 'multiple');
+				await elem.updateComplete;
 				expect(elem.multiple).to.be.true;
-				expect(elem.$$('input').multiple).to.be.true;
+				expect(elem.shadowRoot.querySelector('input').multiple).to.be.true;
 			});
 
 		});
@@ -65,19 +60,21 @@ describe('d2l-file-uploader', () => {
 			it('should default "multiple" to true', () => {
 				expect(elem.multiple).to.be.true;
 				expect(elem.hasAttribute('multiple')).to.be.true;
-				expect(elem.$$('input').multiple).to.be.true;
+				expect(elem.shadowRoot.querySelector('input').multiple).to.be.true;
 			});
 
-			it('should reflect "multiple" property change to attribute and input', () => {
+			it('should reflect "multiple" property change to attribute and input', async() => {
 				elem.multiple = false;
+				await elem.updateComplete;
 				expect(elem.hasAttribute('multiple')).to.be.false;
-				expect(elem.$$('input').multiple).to.be.false;
+				expect(elem.shadowRoot.querySelector('input').multiple).to.be.false;
 			});
 
-			it('should reflect "multiple" attribute change to property and input', () => {
+			it('should reflect "multiple" attribute change to property and input', async() => {
 				elem.removeAttribute('multiple');
+				await elem.updateComplete;
 				expect(elem.multiple).to.be.false;
-				expect(elem.$$('input').multiple).to.be.false;
+				expect(elem.shadowRoot.querySelector('input').multiple).to.be.false;
 			});
 
 		});
@@ -96,12 +93,12 @@ describe('d2l-file-uploader', () => {
 		});
 
 		it('should apply label to offscreen text', () => {
-			expect(elem.$$('#d2l-file-uploader-offscreen').innerHTML)
+			expect(elem.shadowRoot.querySelector('#d2l-file-uploader-offscreen').textContent)
 				.to.equal('file uploader label');
 		});
 
 		it('should associate offscreen text with input', () => {
-			expect(elem.$$('input').getAttribute('aria-describedby'))
+			expect(elem.shadowRoot.querySelector('input').getAttribute('aria-describedby'))
 				.to.equal('d2l-file-uploader-offscreen');
 		});
 
@@ -115,8 +112,7 @@ describe('d2l-file-uploader', () => {
 		});
 
 		it('should have language of "fr"', () => {
-			expect(elem.language).to.equal('fr');
-			expect(elem.$$('.d2l-file-uploader-drop-zone > div > span:first-child').innerHTML).to.equal('Glisser-déposer ou&nbsp;');
+			expect(elem.localize('file_upload_text')).to.equal(fr.file_upload_text);
 		});
 
 	});
@@ -139,23 +135,27 @@ describe('d2l-file-uploader', () => {
 				expect(elem.hasAttribute('feedback')).to.be.false;
 			});
 
-			it('should reflect "feedback-type" property change to attribute', () => {
+			it('should reflect "feedback-type" property change to attribute', async() => {
 				elem.feedbackType = 'error';
+				await elem.updateComplete;
 				expect(elem.getAttribute('feedback-type')).to.be.equal('error');
 			});
 
-			it('should reflect "feedback" property change to attribute', () => {
+			it('should reflect "feedback" property change to attribute', async() => {
 				elem.feedback = 'oh no';
+				await elem.updateComplete;
 				expect(elem.getAttribute('feedback')).to.equal('oh no');
 			});
 
-			it('should reflect "feedback-type" attribute change to property', () => {
+			it('should reflect "feedback-type" attribute change to property', async() => {
 				elem.setAttribute('feedback-type', 'error');
+				await elem.updateComplete;
 				expect(elem.feedbackType).to.equal('error');
 			});
 
-			it('should reflect "feedback" attribute change to property', () => {
+			it('should reflect "feedback" attribute change to property', async() => {
 				elem.setAttribute('feedback', 'oh no');
+				await elem.updateComplete;
 				expect(elem.feedback).to.equal('oh no');
 			});
 
@@ -183,38 +183,45 @@ describe('d2l-file-uploader', () => {
 				expect(elem.getAttribute('feedback')).to.equal('terrible error');
 			});
 
-			it('should reflect "feedback-type" property change to attribute', () => {
+			it('should reflect "feedback-type" property change to attribute', async() => {
 				elem.feedbackType = 'warning';
+				await elem.updateComplete;
 				expect(elem.getAttribute('feedback-type')).to.equal('warning');
 			});
 
-			it('should reflect "feedback" property change to attribute', () => {
+			it('should reflect "feedback" property change to attribute', async() => {
 				elem.feedback = 'oh no';
+				await elem.updateComplete;
 				expect(elem.getAttribute('feedback')).to.equal('oh no');
 			});
 
-			it('should reflect "feedback" property removal to attribute', () => {
+			it('should reflect "feedback" property removal to attribute', async() => {
 				elem.feedback = null;
+				await elem.updateComplete;
 				expect(elem.hasAttribute('feedback')).to.be.false;
 			});
 
-			it('should reflect "feedback-type" attribute change to property', () => {
+			it('should reflect "feedback-type" attribute change to property', async() => {
 				elem.setAttribute('feedback-type', 'warning');
+				await elem.updateComplete;
 				expect(elem.feedbackType).to.equal('warning');
 			});
 
-			it('should reflect "feedback-type" attribute removal to property', () => {
+			it('should reflect "feedback-type" attribute removal to property', async() => {
 				elem.removeAttribute('feedback-type');
+				await elem.updateComplete;
 				expect(elem.feedbackType).to.be.null;
 			});
 
-			it('should reflect "feedback" attribute change to property', () => {
+			it('should reflect "feedback" attribute change to property', async() => {
 				elem.setAttribute('feedback', 'oh no');
+				await elem.updateComplete;
 				expect(elem.feedback).to.equal('oh no');
 			});
 
-			it('should reflect "feedback" attribute removal to property', () => {
+			it('should reflect "feedback" attribute removal to property', async() => {
 				elem.removeAttribute('feedback');
+				await elem.updateComplete;
 				expect(elem.feedback).to.be.null;
 			});
 

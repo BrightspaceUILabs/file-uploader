@@ -1,6 +1,7 @@
 {
   "name": "@brightspace-ui-labs/file-uploader",
   "version": "4.0.0",
+  "type": "module",
   "description": "Polymer-based web component for D2L file uploader",
   "repository": "https://github.com/BrightspaceUILabs/file-uploader.git",
   "publishConfig": {
@@ -19,12 +20,8 @@
     "@babel/eslint-parser": "^7",
     "@brightspace-ui/testing": "^1",
     "@web/dev-server": "^0.2",
-    "eslint": "^8",
-    "eslint-config-brightspace": "^0.17",
-    "eslint-plugin-html": "^6",
-    "eslint-plugin-import": "^2",
-    "eslint-plugin-lit": "^1",
-    "eslint-plugin-sort-class-members": "^1",
+    "eslint": "^9",
+    "eslint-config-brightspace": "^2",
     "sinon": "^14"
   },
   "files": [
@@ -36,7 +33,6 @@
   "dependencies": {
     "@brightspace-ui/core": "^3",
     "@brightspace-ui/localize-behavior": "^2",
-    "@brightspace-ui/polymer-behaviors": "^4",
-    "@polymer/polymer": "^3"
+    "lit": "^3"
   }
 }

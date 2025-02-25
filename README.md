@@ -10,14 +10,14 @@
 > - [ ] [Architectural sign-off](https://github.com/BrightspaceUI/guide/wiki/Before-you-build#web-component-architecture)
 > - [x] [Continuous integration](https://github.com/BrightspaceUI/guide/wiki/Testing#testing-continuously-with-travis-ci)
 > - [x] [Cross-browser testing](https://github.com/BrightspaceUI/guide/wiki/Testing#cross-browser-testing-with-sauce-labs)
-> - [x] [Unit tests](https://github.com/BrightspaceUI/guide/wiki/Testing#testing-with-polymer-test) (if applicable)
+> - [x] [Unit tests](https://daylight.d2l.dev/developing/testing/tools/) (if applicable)
 > - [ ] [Accessibility tests](https://github.com/BrightspaceUI/guide/wiki/Testing#automated-accessibility-testing-with-axe)
 > - [ ] [Visual diff tests](https://github.com/BrightspaceUI/visual-diff)
 > - [ ] [Localization](https://github.com/BrightspaceUI/guide/wiki/Localization) with Serge (if applicable)
 > - [x] Demo page
 > - [x] README documentation
 
-[Polymer](https://www.polymer-project.org) component for uploading files with drag and drop capability. This component does not perform the actual uploading work, it simply provides visual cues and exposes an event when files have been uploaded.
+Lit component for uploading files with drag and drop capability. This component does not perform the actual uploading work, it simply provides visual cues and exposes an event when files have been uploaded.
 
 ![screenshot of file uploader](/screenshots/file-uploader.gif?raw=true)
 
@@ -99,16 +99,6 @@ document.getElementById('my-uploader')
 </script>
 ```
 
-From within another Polymer element you can use [Polymer's annotated event listeners](https://www.polymer-project.org/2.0/docs/devguide/events#annotated-listeners):
-
-```html
-<dom-module id="my-element">
-	<template>
-		<d2l-labs-file-uploader on-feedback-changed="handleFeedback"></d2l-labs-file-uploader>
-	</template>
-</dom-module>
-```
-
 ### Handling Uploaded Files
 
 When the user uploads one or more files, a `d2l-file-uploader-files-added` event is fired. To listen for this event, wire up an event listener to the `<d2l-labs-file-uploader>` element. The listener will be passed an event with an array of [File](https://developer.mozilla.org/en-US/docs/Web/API/File) objects from the [File API](https://developer.mozilla.org/en/docs/Web/API/File).
@@ -124,16 +114,6 @@ document.getElementById('my-uploader')
 		console.log(files);
 	});
 </script>
-```
-
-From within another Polymer element you can use [Polymer's annotated event listeners](https://www.polymer-project.org/2.0/docs/devguide/events#annotated-listeners):
-
-```html
-<dom-module id="my-element">
-	<template>
-		<d2l-labs-file-uploader on-d2l-file-uploader-files-added="handleFileAdded"></d2l-labs-file-uploader>
-	</template>
-</dom-module>
 ```
 
 ## Developing, Testing and Contributing
