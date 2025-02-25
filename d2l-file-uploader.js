@@ -33,7 +33,7 @@ class FileUploader extends FocusMixin(LocalizeMixin(LitElement)) {
 			 * Whether a file is currently being dragged over the document.
 			 */
 			_fileDragOver: { type: Boolean, attribute: '_file-drag-over', reflect: true },
-			_inputFocus: { type:Boolean }
+			_inputFocus: { type: Boolean }
 		};
 	}
 
@@ -211,8 +211,8 @@ class FileUploader extends FocusMixin(LocalizeMixin(LitElement)) {
 
 	render() {
 		const labelClasses = {
-			'd2l-file-uploader-browse-label':true,
-			'd2l-file-uploader-browse-label-focus':this._inputFocus,
+			'd2l-file-uploader-browse-label': true,
+			'd2l-file-uploader-browse-label-focus': this._inputFocus,
 		};
 		return html`
 			<div class="d2l-file-uploader-feedback" role="alert">${this.feedback}</div>
