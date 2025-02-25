@@ -1,17 +1,9 @@
-import '@brightspace-ui/localize-behavior/d2l-localize-behavior.js';
-window.D2L = window.D2L || {};
-window.D2L.PolymerBehaviors = window.D2L.PolymerBehaviors || {};
-window.D2L.PolymerBehaviors.FileUploader = window.D2L.PolymerBehaviors.FileUploader || {};
+import { LocalizeDynamicMixin } from '@brightspace-ui/core/mixins/localize-dynamic-mixin.js';
 
-/** @polymerBehavior D2L.PolymerBehaviors.FileUploader.LocalizeBehavior */
-D2L.PolymerBehaviors.FileUploader.LocalizeBehaviorImpl = {
-	localizeConfig: {
-		importFunc: async lang => (await import(`./lang/${lang}.js`)).default
+export const LocalizeMixin = (superclass) => class extends LocalizeDynamicMixin(superclass) {
+	static get localizeConfig() {
+		return {
+			importFunc: async lang => (await import(`./lang/${lang}.js`)).default
+		};
 	}
 };
-
-/** @polymerBehavior D2L.PolymerBehaviors.FileUploader.LocalizeBehavior */
-D2L.PolymerBehaviors.FileUploader.LocalizeBehavior = [
-	D2L.PolymerBehaviors.LocalizeBehavior,
-	D2L.PolymerBehaviors.FileUploader.LocalizeBehaviorImpl
-];
