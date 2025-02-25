@@ -3,6 +3,7 @@ import '@brightspace-ui/core/components/offscreen/offscreen.js';
 import { css, html, LitElement } from 'lit';
 import { FocusMixin } from '@brightspace-ui/core/mixins/focus/focus-mixin.js';
 import { LocalizeMixin } from './localize-behavior.js';
+import { classMap } from 'lit/directives/class-map.js';
 
 class FileUploader extends FocusMixin(LocalizeMixin(LitElement)) {
 	static get properties() {
@@ -31,7 +32,8 @@ class FileUploader extends FocusMixin(LocalizeMixin(LitElement)) {
 			/**
 			 * Whether a file is currently being dragged over the document.
 			 */
-			_fileDragOver: { type: Boolean, attribute: '_file-drag-over', reflect: true }
+			_fileDragOver: { type: Boolean, attribute: '_file-drag-over', reflect: true },
+			_inputFocus: { type:Boolean }
 		};
 	}
 
@@ -208,8 +210,11 @@ class FileUploader extends FocusMixin(LocalizeMixin(LitElement)) {
 	}
 
 	render() {
+		const labelClasses = {
+			'd2l-file-uploader-browse-label':true,
+			'd2l-file-uploader-browse-label-focus':this._inputFocus,
+		}
 		return html`
-
 			<div class="d2l-file-uploader-feedback" role="alert">${this.feedback}</div>
 			<div class="d2l-file-uploader-drop-zone">
 				<svg width="78" height="78" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 78 78" class="d2l-file-uploader-icon">
@@ -220,7 +225,7 @@ class FileUploader extends FocusMixin(LocalizeMixin(LitElement)) {
 					<span>${this.localize('file_upload_text')}&nbsp;</span>
 					<span class="d2l-file-uploader-input-container">
 						<d2l-offscreen id="d2l-file-uploader-offscreen">${this.label}</d2l-offscreen>
-						<label class="d2l-file-uploader-browse-label">
+						<label class="${classMap(labelClasses)}">
 							<input class="d2l-file-uploader-input d2l-focusable" type="file" aria-describedby="d2l-file-uploader-offscreen" ?multiple=${this.multiple} @change=${this._fileSelectHandler} @focus=${this.__onInputFocus} @blur=${this.__onInputBlur}>
 							<span class="d2l-file-uploader-browse">${this.localize('browse')}</span>
 							<span class="d2l-file-uploader-browse-files">${this.localize('browse_files')}</span>
@@ -307,11 +312,11 @@ class FileUploader extends FocusMixin(LocalizeMixin(LitElement)) {
 	}
 
 	__onInputBlur() {
-		this.shadowRoot.querySelector('.d2l-file-uploader-browse-label').classList.remove('d2l-file-uploader-browse-label-focus');
+		this._inputFocus = false;
 	}
 
 	__onInputFocus() {
-		this.shadowRoot.querySelector('.d2l-file-uploader-browse-label').classList.add('d2l-file-uploader-browse-label-focus');
+		this._inputFocus = true;
 	}
 
 	_fileChangeHandler(files) {
