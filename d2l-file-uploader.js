@@ -1,9 +1,9 @@
 import '@brightspace-ui/core/components/colors/colors.js';
 import '@brightspace-ui/core/components/offscreen/offscreen.js';
 import { css, html, LitElement } from 'lit';
+import { classMap } from 'lit/directives/class-map.js';
 import { FocusMixin } from '@brightspace-ui/core/mixins/focus/focus-mixin.js';
 import { LocalizeMixin } from './localize-behavior.js';
-import { classMap } from 'lit/directives/class-map.js';
 
 class FileUploader extends FocusMixin(LocalizeMixin(LitElement)) {
 	static get properties() {
@@ -213,7 +213,7 @@ class FileUploader extends FocusMixin(LocalizeMixin(LitElement)) {
 		const labelClasses = {
 			'd2l-file-uploader-browse-label':true,
 			'd2l-file-uploader-browse-label-focus':this._inputFocus,
-		}
+		};
 		return html`
 			<div class="d2l-file-uploader-feedback" role="alert">${this.feedback}</div>
 			<div class="d2l-file-uploader-drop-zone">
